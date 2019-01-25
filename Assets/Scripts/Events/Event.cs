@@ -1,22 +1,22 @@
 ﻿using UnityEngine;
 
-public enum EventType
+public enum GameEventType
 {
     EVENT_NULL,
 }
 
-public class Event
+public class GameEvent
 {
-    public Event(EventType e_type)
+    public GameEvent(GameEventType e_type)
     {
         event_type = e_type;
     }
 
-    public EventType Type()
+    public GameEventType Type()
     {
         return event_type;
     }
 
-    private EventType event_type = EventType.EVENT_NULL;
+    private GameEventType event_type = GameEventType.EVENT_NULL;
 }
 
