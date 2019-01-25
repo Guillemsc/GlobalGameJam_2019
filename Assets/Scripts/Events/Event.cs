@@ -7,7 +7,8 @@ public enum GameEventType
     EVENT_PLAYER_ADDED,
     EVENT_PLAYER_REMOVED,
 
-    EVENT_GAMEPADS_CHANGED,
+    EVENT_GAMEPAD_ADDED,
+    EVENT_GAMEPAD_REMOVED,
 }
 
 public class GameEvent

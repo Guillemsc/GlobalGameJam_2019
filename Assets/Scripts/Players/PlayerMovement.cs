@@ -6,12 +6,12 @@ public class PlayerMovement : MonoBehaviour
 {
     private void Awake()
     {
-        InitPlayer();
+        
     }
 
-    private void InitPlayer()
+    public void SetPlayer(Player pl)
     {
-        player = gameObject.GetComponent<Player>();
+        player = pl;
     }
 
     Player player = null;

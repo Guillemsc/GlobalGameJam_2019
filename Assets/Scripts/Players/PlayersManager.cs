@@ -9,30 +9,62 @@ public class PlayersManager : Singleton<PlayersManager>
         InitInstance(this);
     }
 
-    public Player AddPlayer()
+    private void Awake()
     {
-        Player ret = new Player();
+        EventManager.Instance.Suscribe(GameEventType.EVENT_GAMEPAD_ADDED, OnEvent);
+        EventManager.Instance.Suscribe(GameEventType.EVENT_GAMEPAD_REMOVED, OnEvent);
 
-        ret.SetPlayerId(max_player_id++);
-
-        players.Add(ret);
-
-        UpdatePlayersIndex();
-
-        EventPlayerAdded ev = new EventPlayerAdded(ret);
-        EventManager.Instance.SendEvent(ev);
-
-        return ret;
+        AddPlayer();
+        AddPlayer();
+        AddPlayer();
     }
 
-    public void RemovePlayer(Player pl)
+    private void OnEvent(GameEvent ev)
     {
-        players.Remove(pl);
+        switch(ev.Type())
+        {
+            case GameEventType.EVENT_GAMEPAD_ADDED:
+                {
+                    EventGamepadAdded c_ev = (EventGamepadAdded)ev;
 
-        UpdatePlayersIndex();
+                    Player pl = GetPlayerByIndex(c_ev.gamepad.GetGamepadIndex());
 
-        EventPlayerRemoved ev = new EventPlayerRemoved(pl);
+                    if(pl != null)
+                        pl.SetAssignedGamepad(c_ev.gamepad);
+                    
+                    break;
+                }
+            case GameEventType.EVENT_GAMEPAD_REMOVED:
+                {
+                    EventGamepadRemoved c_ev = (EventGamepadRemoved)ev;
+
+                    Player pl = GetPlayerByIndex(c_ev.gamepad.GetGamepadIndex());
+
+                    if (pl != null)
+                        pl.SetAssignedGamepad(null);
+
+                    break;
+                }
+        }
+    }
+
+    public Player AddPlayer()
+    {
+        Player player = new Player();
+
+        player.SetPlayerIndex(players.Count);
+
+        players.Add(player);
+
+        EventPlayerAdded ev = new EventPlayerAdded(player);
         EventManager.Instance.SendEvent(ev);
+
+        return player;
+    }
+
+    public void RemovePlayers()
+    {
+        players.Clear();
     }
 
     public int GetPlayersCount()
@@ -52,28 +84,5 @@ public class PlayersManager : Singleton<PlayersManager>
         return ret;
     }
 
-    public Player GetPlayerById(int id)
-    {
-        Player ret = null;
-
-        for (int i = 0; i < players.Count; ++i)
-        {
-            if(players[i].GetPlayerId() == id)
-            {
-                ret = players[i];
-                break;
-            }
-        }
-
-        return ret;
-    }
-
-    private void UpdatePlayersIndex()
-    {
-        for(int i = 0; i < players.Count; ++i)
-            players[i].SetPlayerIndex(i);
-    }
-
     private List<Player> players = new List<Player>();
-    private int max_player_id = 0;
 }
