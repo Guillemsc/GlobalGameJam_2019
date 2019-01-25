@@ -17,7 +17,7 @@ public class ControllerConnected : MonoBehaviour
         int i = 0;
         foreach (GameObject c in controllers)
         {
-            players[i] = PlayersManager.Instance.GetPlayerById(i);
+            players[i] = PlayersManager.Instance.GetPlayerByIndex(i);
             controller[i] = c.GetComponent<RectTransform>();
             i++;
         }
