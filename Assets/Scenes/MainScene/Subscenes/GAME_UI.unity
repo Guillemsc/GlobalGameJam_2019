@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 1182131407}
   - component: {fileID: 1182131406}
   m_Layer: 0
-  m_Name: Panel
+  m_Name: ScorePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -420,12 +420,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182131404}
   m_CullTransparentMesh: 0
+--- !u!1 &1534809742 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4977202556985203327, guid: 0ded680009b5aea48ae71019015b7371,
+    type: 3}
+  m_PrefabInstance: {fileID: 4977202555827227889}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1534809743 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4977202556985203326, guid: 0ded680009b5aea48ae71019015b7371,
     type: 3}
   m_PrefabInstance: {fileID: 4977202555827227889}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1534809744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534809742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaf1e319170b0b845862b57b374615aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1792303061
 PrefabInstance:
   m_ObjectHideFlags: 0
