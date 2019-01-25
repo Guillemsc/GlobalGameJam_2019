@@ -286,8 +286,8 @@ MonoBehaviour:
     loadMethod: 0
   - scene:
       editorAssetGUID: 47e492624c2c06f4fbf754fe6481215c
-      name: OBJECTS_2
-      _path: Assets/Scenes/MainScene/Subscenes/OBJECTS_2.unity
+      name: MISC
+      _path: Assets/Scenes/MainScene/Subscenes/MISC.unity
     loadInEditor: 1
     loadMethod: 0
   - scene:
