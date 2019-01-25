@@ -13,9 +13,11 @@ public class PlayersManager : Singleton<PlayersManager>
     {
         Player ret = new Player();
 
-        ret.SetPlayerIndex(players.Count);
+        ret.SetPlayerId(max_player_id++);
 
         players.Add(ret);
+
+        UpdatePlayersIndex();
 
         EventPlayerAdded ev = new EventPlayerAdded(ret);
         EventManager.Instance.SendEvent(ev);
@@ -25,10 +27,12 @@ public class PlayersManager : Singleton<PlayersManager>
 
     public void RemovePlayer(Player pl)
     {
+        players.Remove(pl);
+
+        UpdatePlayersIndex();
+
         EventPlayerRemoved ev = new EventPlayerRemoved(pl);
         EventManager.Instance.SendEvent(ev);
-
-        players.Remove(pl);
     }
 
     public int GetPlayersCount()
@@ -48,5 +52,28 @@ public class PlayersManager : Singleton<PlayersManager>
         return ret;
     }
 
-    List<Player> players = new List<Player>();
+    public Player GetPlayerById(int id)
+    {
+        Player ret = null;
+
+        for (int i = 0; i < players.Count; ++i)
+        {
+            if(players[i].GetPlayerId() == id)
+            {
+                ret = players[i];
+                break;
+            }
+        }
+
+        return ret;
+    }
+
+    private void UpdatePlayersIndex()
+    {
+        for(int i = 0; i < players.Count; ++i)
+            players[i].SetPlayerIndex(i);
+    }
+
+    private List<Player> players = new List<Player>();
+    private int max_player_id = 0;
 }
