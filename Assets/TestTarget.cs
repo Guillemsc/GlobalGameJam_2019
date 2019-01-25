@@ -9,7 +9,7 @@ public class TestTarget : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        group.AddTarget(this.transform);
+        group.AddTarget(this.transform, 0);
     }
 
     // Update is called once per frame
