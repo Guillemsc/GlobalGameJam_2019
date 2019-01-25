@@ -19,6 +19,19 @@ public class PlayersManager : Singleton<PlayersManager>
         AddPlayer();
     }
 
+    private void Update()
+    {
+        for(int i = 0; i < players.Count; ++i)
+        {
+            if(players[i].GetKeyA())
+            {
+                int r = 0;
+
+
+            }
+        }
+    }
+
     private void OnEvent(GameEvent ev)
     {
         switch(ev.Type())

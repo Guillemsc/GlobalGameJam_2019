@@ -12,5 +12,10 @@ public class PlayerStats : MonoBehaviour
             gameObject.name = "Player: " + player.GetPlayerIndex();
     }
 
+    public Player GetPlayer()
+    {
+        return player;
+    }
+
     private Player player = null;
 }

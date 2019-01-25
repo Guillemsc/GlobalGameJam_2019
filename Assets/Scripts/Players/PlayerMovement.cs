@@ -6,13 +6,25 @@ public class PlayerMovement : MonoBehaviour
 {
     private void Awake()
     {
-        
+        InitPlayer();
     }
 
-    public void SetPlayer(Player pl)
+    private void InitPlayer()
     {
-        player = pl;
+        stats = gameObject.GetComponent<PlayerStats>();
     }
 
-    Player player = null;
+    private void PlayerInput()
+    {
+        Player player = stats.GetPlayer();
+
+        if (player.HasGamepad())
+        {
+
+        }
+    }
+
+    private PlayerStats stats = null;
+
+    private Vector2Int input = Vector2Int.zero;
 }
