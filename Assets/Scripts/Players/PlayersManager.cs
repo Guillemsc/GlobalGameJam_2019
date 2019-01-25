@@ -17,11 +17,17 @@ public class PlayersManager : Singleton<PlayersManager>
 
         players.Add(ret);
 
+        EventPlayerAdded ev = new EventPlayerAdded(ret);
+        EventManager.Instance.SendEvent(ev);
+
         return ret;
     }
 
     public void RemovePlayer(Player pl)
     {
+        EventPlayerRemoved ev = new EventPlayerRemoved(pl);
+        EventManager.Instance.SendEvent(ev);
+
         players.Remove(pl);
     }
 
