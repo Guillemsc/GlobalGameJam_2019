@@ -10,7 +10,9 @@ public class SpawnManager : Singleton<SpawnManager>
     private GameObject HousePrefab;
 
     [SerializeField]
-    private Vector2[] HousePositions;
+    private GameObject[] HousePositions;
+    [SerializeField]
+    private GameObject[] HouseEndPositions;
 
     SpawnManager()
     {
@@ -23,9 +25,12 @@ public class SpawnManager : Singleton<SpawnManager>
         for (int i = 0; i < num_players; ++i)
         {
             Player player = PlayersManager.Instance.GetPlayerByIndex(i);
-            Vector2 spawnposition = HousePositions[i];
+            Vector2 spawnposition = HousePositions[i].GetComponent<Transform>().position;
 
-            Instantiate(HousePrefab, spawnposition, Quaternion.identity);
+            GameObject house = Instantiate(HousePrefab, spawnposition, Quaternion.identity);
+            house.GetComponent<House>().SetEndPosition(HouseEndPositions[i].GetComponent<Transform>().position);
+
+
             Instantiate(PlayerPrefab, spawnposition, Quaternion.identity);
 
         }
