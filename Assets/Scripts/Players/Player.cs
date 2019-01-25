@@ -2,26 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player
 {
     public void SetPlayerIndex(int index)
     {
         player_index = index;
     }
 
-    public void SetPlayerId(int id)
-    {
-        player_id = id;
-    }
-
     public int GetPlayerIndex()
     {
         return player_index;
-    }
-
-    public int GetPlayerId()
-    {
-        return player_id;
     }
 
     public void SetAssignedGamepad(Gamepad gp)
@@ -34,8 +24,18 @@ public class Player : MonoBehaviour
         return assigned_gamepad;
     }
 
-    private int player_index = 0;
-    private int player_id = 0;
+    public bool LeftStickUp()
+    {
+        bool ret = false;
 
+        if(assigned_gamepad != null)
+        {
+
+        }
+
+        return ret;
+    }
+
+    private int player_index = 0;
     private Gamepad assigned_gamepad = null;
 }
