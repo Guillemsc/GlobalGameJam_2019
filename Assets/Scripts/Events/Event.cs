@@ -3,6 +3,9 @@
 public enum GameEventType
 {
     EVENT_NULL,
+
+    EVENT_PLAYER_ADDED,
+    EVENT_PLAYER_REMOVED,
 }
 
 public class GameEvent
