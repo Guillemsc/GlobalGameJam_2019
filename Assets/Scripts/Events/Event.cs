@@ -12,6 +12,7 @@ public enum GameEventType
     EVENT_GAMEPAD_REMOVED,
 
     EVENT_ADD_SCORE,
+    EVENT_SUBSTRACT_SCORE,
 }
 
 public class GameEvent
