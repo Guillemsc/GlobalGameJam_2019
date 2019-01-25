@@ -9,10 +9,21 @@ public class Player : MonoBehaviour
         player_index = index;
     }
 
+    public void SetPlayerId(int id)
+    {
+        player_id = id;
+    }
+
     public int GetPlayerIndex()
     {
         return player_index;
     }
 
+    public int GetPlayerId()
+    {
+        return player_id;
+    }
+
     private int player_index = 0;
+    private int player_id = 0;
 }
