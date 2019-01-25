@@ -17,12 +17,6 @@ public class Event
         return event_type;
     }
 
-    /*public class LevelUnload
-    {
-        public Level to_unload = null;
-    }
-    public LevelUnload level_unload = new LevelUnload();*/
-
     private EventType event_type = EventType.EVENT_NULL;
 }
 
