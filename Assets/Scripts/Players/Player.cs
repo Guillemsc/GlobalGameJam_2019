@@ -24,6 +24,18 @@ public class Player : MonoBehaviour
         return player_id;
     }
 
+    public void SetAssignedGamepad(Gamepad gp)
+    {
+        assigned_gamepad = gp;
+    }
+
+    public Gamepad GetAssignedGamepad()
+    {
+        return assigned_gamepad;
+    }
+
     private int player_index = 0;
     private int player_id = 0;
+
+    private Gamepad assigned_gamepad = null;
 }

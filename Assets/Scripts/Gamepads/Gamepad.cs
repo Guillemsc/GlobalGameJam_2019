@@ -9,17 +9,21 @@ public class Gamepad
         gamepad_name = name;
     }
 
+    public string GetGamepadName()
+    {
+        return gamepad_name;
+    }
+
     public void SetGamepadIndex(int index)
     {
         gamepad_index = index;
     }
 
-    public void SetGamepadId(int id)
+    public int GetGamepadIndex()
     {
-        gamepad_id = id;
+        return gamepad_index;
     }
 
     private string gamepad_name = "";
     private int gamepad_index = 0;
-    private int gamepad_id = 0;
 }
