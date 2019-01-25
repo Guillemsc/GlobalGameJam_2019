@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2106036143252936363}
   - component: {fileID: 5656543615660405188}
-  - component: {fileID: 5644029216522469887}
+  - component: {fileID: 2125159514425268828}
   m_Layer: 0
   m_Name: HouseTest
   m_TagString: Untagged
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5644029216522469887
+--- !u!114 &2125159514425268828
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,6 +89,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4758925300936782175}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20a6a1be73d974a41b2bf1cbf84eea1a, type: 3}
+  m_Script: {fileID: 11500000, guid: e8d7bd0bc15781743ab982b779b83c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
