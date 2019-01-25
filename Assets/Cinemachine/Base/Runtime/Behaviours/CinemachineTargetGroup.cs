@@ -81,6 +81,26 @@ namespace Cinemachine
         [Tooltip("The target objects, together with their weights and radii, that will contribute to the group's average position, orientation, and size.")]
         public Target[] m_Targets = new Target[0];
 
+        public  void AddTarget(Transform trans, float radius = 1, float weight = 1) 
+        {
+            // Create a new array to contain all items
+            Target[] temp = m_Targets;
+            int size = m_Targets.Length + 1;
+            m_Targets = new Target[size];
+
+            temp.CopyTo(m_Targets, 0);
+
+            // Create the new target
+            Target new_target;
+            new_target.target = trans;
+            new_target.weight = weight;
+            new_target.radius = radius;
+
+            // Add new target to the array
+            m_Targets[size - 1] = new_target;
+        }
+
+
         /// Cache of the last valid radius
         private float m_lastRadius = 0;
 
