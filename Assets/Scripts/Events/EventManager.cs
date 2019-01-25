@@ -10,7 +10,7 @@ public class EventManager : Singleton<EventManager>
         InitInstance(this);
     }
 
-    public void SendEvent(Event ev)
+    public void SendEvent(GameEvent ev)
     {
         if (ev != null)
         {
@@ -24,7 +24,7 @@ public class EventManager : Singleton<EventManager>
         }
     }
 
-    public void Suscribe(EventType type, OnEventDel callback)
+    public void Suscribe(GameEventType type, OnEventDel callback)
     {
         if (event_delegates.ContainsKey(type))
         {
@@ -38,7 +38,7 @@ public class EventManager : Singleton<EventManager>
         }
     }
 
-    public void UnSuscribe(OnEventDel del, EventType type)
+    public void UnSuscribe(OnEventDel del, GameEventType type)
     {
         if (event_delegates.ContainsKey(type))
         {
@@ -46,7 +46,7 @@ public class EventManager : Singleton<EventManager>
         }
     }
 
-    public delegate void OnEventDel(Event ev);
+    public delegate void OnEventDel(GameEvent ev);
 
-    Dictionary<EventType, OnEventDel> event_delegates = new Dictionary<EventType, OnEventDel>();
+    Dictionary<GameEventType, OnEventDel> event_delegates = new Dictionary<GameEventType, OnEventDel>();
 }
