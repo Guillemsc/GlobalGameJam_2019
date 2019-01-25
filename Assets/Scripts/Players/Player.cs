@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
         player_index = index;
     }
 
-    int GetPlayerIndex()
+    public int GetPlayerIndex()
     {
         return player_index;
     }
