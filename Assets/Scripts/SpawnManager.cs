@@ -4,24 +4,37 @@ using UnityEngine;
 
 public class SpawnManager : Singleton<SpawnManager>
 {
-    public GameObject PlayerPrefab;
+    [SerializeField]
+    private GameObject PlayerPrefab;
+    [SerializeField]
+    private GameObject HousePrefab;
 
+    [SerializeField]
+    private Vector2[] HousePositions;
 
     SpawnManager()
     {
         InitInstance(this);
     }
 
-    public void SpawnPlayer(Vector2  spawn_position) //, Player player)
+    public void SpawnPlayer()
     {
-        Instantiate(PlayerPrefab, spawn_position, Quaternion.identity);
+        int num_players = PlayersManager.Instance.GetPlayersCount();
+        for (int i = 0; i < num_players; ++i)
+        {
+            Player player = PlayersManager.Instance.GetPlayerByIndex(i);
+            Vector2 spawnposition = HousePositions[i];
+
+            Instantiate(HousePrefab, spawnposition, Quaternion.identity);
+            Instantiate(PlayerPrefab, spawnposition, Quaternion.identity);
+
+        }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            Instance.SpawnPlayer(new Vector2(1, 1));
-        }
+        if (Input.GetKeyDown(KeyCode.A)) SpawnPlayer();
+        if (Input.GetKeyDown(KeyCode.S)) PlayersManager.Instance.AddPlayer();
+        Debug.Log(PlayersManager.Instance.GetPlayersCount());
     }
 }
