@@ -338,7 +338,7 @@ MonoBehaviour:
   panel_before_match: {fileID: 0}
   map: {fileID: 0}
   map_center: {x: 0, y: 0, z: 0}
-  time_before_match_starts: 6
+  time_before_match_starts: 1
   time_match: 300
 --- !u!4 &1111497117
 Transform:

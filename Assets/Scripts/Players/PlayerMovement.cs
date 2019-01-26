@@ -59,12 +59,14 @@ public class PlayerMovement : MonoBehaviour
             movement_angle = Utils.AngleFromTwoPoints(new Vector2(0, 0), input);
 
             input_magnitude = input.sqrMagnitude;
+
+            Debug.Log(input);
         }
     }
 
     private void MovePlayer()
     {
-        if (input.x > joystick_dead_val || input.x < -joystick_dead_val)
+        if (input_magnitude > joystick_dead_val)
         {
             float dt_acceleration = player_acceleration * Time.deltaTime;
 
@@ -97,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
             rigid_body.velocity += new Vector2(deceleration_val, 0);
         }
 
-        if (input.y > joystick_dead_val || input.y < -joystick_dead_val)
+        if (input_magnitude > joystick_dead_val)
         {
             float dt_acceleration = player_acceleration * Time.deltaTime;
 

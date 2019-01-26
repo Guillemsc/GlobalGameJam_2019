@@ -58,6 +58,9 @@ public class UIEventPanel : MonoBehaviour
                 {
                     quest_active = false;
 
+                    if (gameObject == null)
+                        break;
+
                     Vector3 pos = gameObject.transform.position;
                     pos.y = -50f;
                     queue_context.PushEvent(new QueueEventPosition(gameObject, transform.position, pos, panel_move_time, panel_move_type));
