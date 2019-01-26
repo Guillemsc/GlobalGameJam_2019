@@ -64,9 +64,12 @@ public class HouseManager : Singleton<HouseManager>
 
     private void SpawnHouses()
     {
-        for(int i = 0; i < house_spawn_positions.Length; ++i)
+        DestroyHousesInstances();
+
+        for (int i = 0; i < house_spawn_positions.Length; ++i)
         {
-            SpawnHouseInstance(house_spawn_positions[i]);
+            if(house_spawn_positions[i] != null)
+                SpawnHouseInstance(house_spawn_positions[i].transform.position);
         }
 
         EventHousesSpawned ev = new EventHousesSpawned(houses);
@@ -81,24 +84,9 @@ public class HouseManager : Singleton<HouseManager>
         {
             House curr_house = houses[i];
 
-            Vector3 distance = MatchManager.Instance.GetMapCenter() - curr_house.transform.position;
-
             queue_context.PushEvent(new
-                QueueEventPosition(curr_house.gameObject, curr_house.transform.position, 
-                distance, time, EasingFunctionsType.LINEAR), true);
-        }
-    }
-
-    private void AssignPlayersToHouse(List<PlayerStats> instances)
-    {
-        for(int i = 0; i < houses.Count; ++i)
-        {
-            House curr_house = houses[i];
-
-            if(instances.Count > i)
-            {
-                curr_house.SetPlayerInstance(instances[i]);
-            }
+                QueueEventPosition(curr_house.gameObject, curr_house.transform.position,
+                MatchManager.Instance.GetMapCenter(), time, EasingFunctionsType.LINEAR), true);
         }
     }
 
@@ -133,7 +121,7 @@ public class HouseManager : Singleton<HouseManager>
     private GameObject house_prefab = null;
 
     [SerializeField]
-    private Vector3[] house_spawn_positions = null;
+    private GameObject[] house_spawn_positions = null;
 
     private List<House> houses = new List<House>();
 

@@ -60,8 +60,6 @@ public class PlayerMovement : MonoBehaviour
 
             input_magnitude = input.sqrMagnitude;
         }
-
-        Debug.Log(input);
     }
 
     private void MovePlayer()

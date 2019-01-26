@@ -24,21 +24,24 @@ public class QuestManager : Singleton<QuestManager>
     // Update is called once per frame
     void Update()
     {
-        if(timer.ReadTime() > quest_start_duration[quest_index][0] && quests[active_quest].isActiveAndEnabled == false) 
-        {            
-            active_quest = Random.Range(0, quests.Count-1);
-
-            quests[active_quest].SetActive(true);
-            quest_timer.Start();
-        }
-
-        if(quest_timer.ReadTime() > quest_start_duration[quest_index][1]) 
+        if (quests.Count > 0)
         {
-            quest_timer.Reset();
+            if (timer.ReadTime() > quest_start_duration[quest_index][0] && quests[active_quest].isActiveAndEnabled == false)
+            {
+                active_quest = Random.Range(0, quests.Count - 1);
 
-            quests[active_quest].SetActive(false);
+                quests[active_quest].SetActive(true);
+                quest_timer.Start();
+            }
 
-            quest_index++;
+            if (quest_timer.ReadTime() > quest_start_duration[quest_index][1])
+            {
+                quest_timer.Reset();
+
+                quests[active_quest].SetActive(false);
+
+                quest_index++;
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MatchManager : Singleton<MatchManager>
 {
@@ -13,6 +14,12 @@ public class MatchManager : Singleton<MatchManager>
     {
         EventManager.Instance.Suscribe(GameEventType.EVENT_MAP_LOAD, OnEvent);
         EventManager.Instance.Suscribe(GameEventType.EVENT_MAP_UNLOAD, OnEvent);
+
+        UnloadMap();
+
+        game_ui.SetActive(false);
+        Button but = temp_game_ui.GetComponentInChildren<Button>();
+        but.onClick.AddListener(TempOnButtonLoadMap);
     }
 
     private void Update()
@@ -20,6 +27,12 @@ public class MatchManager : Singleton<MatchManager>
         UpdateWaitBeforeStartMatch();
 
         UpdateMatch();
+    }
+
+    private void TempOnButtonLoadMap()
+    {
+        EventMapLoad ev = new EventMapLoad();
+        EventManager.Instance.SendEvent(ev);
     }
 
     private void OnEvent(GameEvent ev)
@@ -151,6 +164,12 @@ public class MatchManager : Singleton<MatchManager>
             EventManager.Instance.SendEvent(ev);
         }
     }
+
+    [SerializeField]
+    private GameObject game_ui = null;
+
+    [SerializeField]
+    private GameObject temp_game_ui = null;
 
     [SerializeField]
     private GameObject map = null;

@@ -52,10 +52,7 @@ public class PlayersManager : Singleton<PlayersManager>
                 {
                     EventHousesSpawned c_ev = (EventHousesSpawned)ev;
 
-                    //Player pl = GetPlayerByIndex(c_ev.gamepad.GetGamepadIndex());
-
-                    //if (pl != null)
-                    //    pl.SetAssignedGamepad(null);
+                    SpawnPlayersOnHousePositions(c_ev.houses);
 
                     break;
                 }
@@ -72,15 +69,6 @@ public class PlayersManager : Singleton<PlayersManager>
 
         EventPlayerAdded ev = new EventPlayerAdded(player);
         EventManager.Instance.SendEvent(ev);
-
-        // Temp
-        if(players.Count == 1)
-            SpawnPlayerInstance(player, new Vector2(-3, -3));
-        else if (players.Count == 2)
-            SpawnPlayerInstance(player, new Vector2(-6, -3));
-        else if (players.Count == 3)
-            SpawnPlayerInstance(player, new Vector2(-9, -3));
-
 
         return player;
     }
@@ -124,23 +112,44 @@ public class PlayersManager : Singleton<PlayersManager>
         return ret;
     }
 
-    public void SpawnPlayerInstance(Player assigned, Vector2 pos)
+    private void SpawnPlayersOnHousePositions(List<House> houses)
     {
+        for(int i = 0; i < houses.Count; ++i)
+        {
+            House curr_house = houses[i];
+
+            if(players.Count > i)
+            {
+                PlayerStats player_instance = SpawnPlayerInstance(players[i], curr_house.gameObject.transform.position);
+
+                curr_house.SetPlayerInstance(player_instance);
+            }
+        }
+    }
+
+    public PlayerStats SpawnPlayerInstance(Player assigned, Vector2 pos)
+    {
+        PlayerStats ret = null;
+
         if (assigned != null)
         {
+            DestroyPlayerInstance(assigned);
+
             GameObject new_player = Instantiate(player_prefab, pos, Quaternion.identity);
 
             if (new_player != null)
             {
-                PlayerStats stats = new_player.GetComponent<PlayerStats>();
+                ret = new_player.GetComponent<PlayerStats>();
 
-                stats.SetPlayer(assigned);
-                assigned.SetPlayerInstance(stats);
+                ret.SetPlayer(assigned);
+                assigned.SetPlayerInstance(ret);
 
-                EventPlayerSpawned ev = new EventPlayerSpawned(stats);
+                EventPlayerSpawned ev = new EventPlayerSpawned(ret);
                 EventManager.Instance.SendEvent(ev);
             }
         }
+
+        return ret;
     }
 
     public void DestroyPlayersInstances()
@@ -149,17 +158,20 @@ public class PlayersManager : Singleton<PlayersManager>
         {
             Player curr_player = players[i];
 
-            PlayerStats instance = curr_player.GetPlayerInstance();
+            DestroyPlayerInstance(curr_player);
+        }
+    }
 
-            if (instance != null)
-            {
-                EventPlayerDeSpawned ev = new EventPlayerDeSpawned(instance);
-                EventManager.Instance.SendEvent(ev);
+    public void DestroyPlayerInstance(Player player)
+    {
+        PlayerStats instance = player.GetPlayerInstance();
 
-                Destroy(instance.gameObject);
-            }
-            
-            curr_player.SetPlayerInstance(null);
+        if (instance != null)
+        {
+            EventPlayerDeSpawned ev = new EventPlayerDeSpawned(instance);
+            EventManager.Instance.SendEvent(ev);
+
+            Destroy(instance.gameObject);
         }
     }
 
