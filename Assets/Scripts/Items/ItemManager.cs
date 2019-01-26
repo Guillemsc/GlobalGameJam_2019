@@ -95,17 +95,45 @@ public class ItemManager : Singleton<ItemManager>
 
                 if(closest_item != null)
                 {
-                    player_ins.SetGrabbedItem(closest_item);
-
-                    closest_item.SetGrabbedBy(player_ins);
+                    StartGrabbingItem(player_ins, closest_item);
                 }
             }
         }
     }
 
-    private void StartGrabbingItem()
+    private void StartGrabbingItem(PlayerStats ins, Item it)
     {
+        if(ins != null && it != null)
+        {
+            if(!it.GetIsGrabbed() && !ins.GetHasGrabbedItem())
+            {
+                ins.SetGrabbedItem(it);
+                it.SetGrabbedBy(ins);
 
+                EventItemGrabbed ev = new EventItemGrabbed(it, ins);
+                EventManager.Instance.SendEvent(ev);
+            }
+        }
+    }
+
+    private void StopGrabbingItem(PlayerStats ins)
+    {
+        if(ins != null)
+        {
+            Item grabbed_item = ins.GetGrabbedItem();
+
+            if (grabbed_item != null)
+            {
+                grabbed_item.transform.parent = null;
+
+                grabbed_item.SetGrabbedBy(null);
+            }
+
+            ins.SetGrabbedItem(null);
+
+            EventItemDropped ev = new EventItemDropped(grabbed_item, ins);
+            EventManager.Instance.SendEvent(ev);
+        }
     }
 
     [SerializeField]
@@ -114,5 +142,5 @@ public class ItemManager : Singleton<ItemManager>
     [SerializeField]
     private List<Item> items_prefabs = null;
 
-    private List<Item> item_instances = null;
+    private List<Item> item_instances = new List<Item>();
 }

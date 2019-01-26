@@ -269,7 +269,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec19f3daa538fb47a4e6b9b72d36d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items_prefabs: []
+  min_item_distance_to_grab: 0
+  items_prefabs:
+  - {fileID: 2122329228090594447, guid: 0b8caf977a0fb7e499d69a6a9f6fcf4a, type: 3}
+  - {fileID: 2122329228090594447, guid: 0b8caf977a0fb7e499d69a6a9f6fcf4a, type: 3}
 --- !u!4 &691029266
 Transform:
   m_ObjectHideFlags: 0

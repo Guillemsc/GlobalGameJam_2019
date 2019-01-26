@@ -25,6 +25,9 @@ public enum GameEventType
     EVENT_MAP_UNLOAD,
     EVENT_MATCH_START,
     EVENT_MATCH_FINISH,
+
+    EVENT_ITEM_GRABBED,
+    EVENT_ITEM_DROPPED,
 }
 
 public class GameEvent

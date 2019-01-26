@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        if (input_magnitude > joystick_dead_val)
+        if (input_magnitude > stats.GetJoystickDeadVal())
         {
             float dt_acceleration = player_acceleration * Time.deltaTime;
 
@@ -97,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
             rigid_body.velocity += new Vector2(deceleration_val, 0);
         }
 
-        if (input_magnitude > joystick_dead_val)
+        if (input_magnitude > stats.GetJoystickDeadVal())
         {
             float dt_acceleration = player_acceleration * Time.deltaTime;
 
@@ -156,9 +156,6 @@ public class PlayerMovement : MonoBehaviour
             rigid_body.velocity = new Vector2(rigid_body.velocity.x, player_max_speed * vel_norm.y);
         }       
     }
-
-    [SerializeField]
-    private float joystick_dead_val = 0.0f;
 
     [SerializeField]
     private float player_max_speed = 0.0f;

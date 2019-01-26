@@ -17,6 +17,11 @@ public class PlayerStats : MonoBehaviour
         return player;
     }
 
+    public float GetJoystickDeadVal()
+    {
+        return joystick_dead_val;
+    }
+
     public void SetGrabbedItem(Item item)
     {
         grabbed_item = item;
@@ -31,6 +36,9 @@ public class PlayerStats : MonoBehaviour
     {
         return grabbed_item != null;
     }
+
+    [SerializeField]
+    private float joystick_dead_val = 0.0f;
 
     private Player player = null;
 
