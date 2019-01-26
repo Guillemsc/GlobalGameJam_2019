@@ -52,6 +52,7 @@ public class MatchManager : Singleton<MatchManager>
                     StartWaitBeforStartingMatch();
 
                     temp_game_ui.SetActive(false);
+                    game_ui.SetActive(true);
 
                     break;
                 }
