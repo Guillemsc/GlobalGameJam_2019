@@ -59,8 +59,6 @@ public class PlayerMovement : MonoBehaviour
             movement_angle = Utils.AngleFromTwoPoints(new Vector2(0, 0), input);
 
             input_magnitude = input.sqrMagnitude;
-
-            Debug.Log(input);
         }
     }
 

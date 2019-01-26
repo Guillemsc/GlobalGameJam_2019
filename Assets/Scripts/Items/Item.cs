@@ -5,6 +5,7 @@ using UnityEngine;
 public enum ItemType
 {
     ITEM_MAGNET,
+    ITEM_GUN,
 }
 
 public class Item : MonoBehaviour
@@ -38,7 +39,12 @@ public class Item : MonoBehaviour
 
     private void CustomOnTriggerEnter2D(Collider2D coll)
     {
-        coll.gameObject.GetComponent<PlayerStats>();
+        if (!GetIsGrabbed())
+        {
+            PlayerStats ps = coll.gameObject.GetComponent<PlayerStats>();
+
+
+        }
     }
 
     public virtual void OnPlayerGrab(PlayerStats player)

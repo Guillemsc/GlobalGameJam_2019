@@ -26,11 +26,93 @@ public class ItemManager : Singleton<ItemManager>
         return items_prefabs;
     }
 
+    public Item GetItemPrefabByItemType(ItemType type)
+    {
+        Item ret = null;
+
+        for(int i = 0; i < items_prefabs.Count; ++i)
+        {
+            if(items_prefabs[i].Type() == type)
+            {
+                ret = items_prefabs[i];
+                break;
+            }
+        }
+
+        return ret;
+    }
+
     public int GetItemsCount()
     {
         return items_prefabs.Count;
     }
 
+    public void AddToItemsInstances(Item it)
+    {
+        if(it != null)
+        {
+            item_instances.Add(it);
+        }
+    }
+
+    public void RemoveFromitemsInstances(Item it)
+    {
+        if (it != null)
+        {
+            item_instances.Remove(it);
+        }
+    }
+
+    public void PlayerTryGrabItem(PlayerStats player_ins)
+    {
+        if (player_ins != null)
+        {
+            if (!player_ins.GetHasGrabbedItem())
+            {
+                Item closest_item = null;
+                float closest_item_distance = float.MaxValue;
+
+                for (int i = 0; i < item_instances.Count; ++i)
+                {
+                    Item curr_item = item_instances[i];
+
+                    if (!curr_item.GetIsGrabbed())
+                    {
+                        float dist = Vector2.Distance(curr_item.gameObject.transform.position, player_ins.gameObject.transform.position);
+
+                        dist = Mathf.Abs(dist);
+
+                        if (dist <= min_item_distance_to_grab)
+                        {
+                            if (dist < closest_item_distance)
+                            {
+                                closest_item = curr_item;
+                                closest_item_distance = dist;
+                            }
+                        }
+                    }
+                }
+
+                if(closest_item != null)
+                {
+                    player_ins.SetGrabbedItem(closest_item);
+
+                    closest_item.SetGrabbedBy(player_ins);
+                }
+            }
+        }
+    }
+
+    private void StartGrabbingItem()
+    {
+
+    }
+
     [SerializeField]
-    List<Item> items_prefabs = null;
+    private float min_item_distance_to_grab = 0.0f;
+
+    [SerializeField]
+    private List<Item> items_prefabs = null;
+
+    private List<Item> item_instances = null;
 }
