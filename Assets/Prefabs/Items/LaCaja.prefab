@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 3213815772300070246}
   m_LocalRotation: {x: 0, y: 0, z: -0.38268343, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.616, y: 1.616, z: 1.616}
   m_Children: []
   m_Father: {fileID: 4502116564511833152}
   m_RootOrder: 0
@@ -67,8 +67,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: f9bb58f5cd5d74e6f8b342a51fa10128, type: 3}
+  m_SortingOrder: 6
+  m_Sprite: {fileID: 21300000, guid: bee74fe22071e1f4ebf09fb168c46d07, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -142,5 +142,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   base_sprite: {fileID: 0}
   hidden_sprite: {fileID: 21300000, guid: cfbf07a9e9ab74c57addb9487483be25, type: 3}
+  sr: {fileID: 0}
+  destroyed: 0
   type: 2
   points_to_give: 30
+  points_destroyed: 0
+  points_gain: 50
