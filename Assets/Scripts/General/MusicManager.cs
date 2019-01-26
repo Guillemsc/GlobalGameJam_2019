@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicManager : MonoBehaviour
+public class MusicManager : Singleton<MusicManager>
 {
     AudioSource audio_source;
+
+    MusicManager()
+    {
+        InitInstance(this);
+    }
 
     private void Start()
     {
         audio_source = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayMusic()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            audio_source.Play();
-        }
+        audio_source.Play();
     }
 }
