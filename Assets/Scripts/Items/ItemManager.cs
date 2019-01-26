@@ -21,9 +21,14 @@ public class ItemManager : Singleton<ItemManager>
         
     }
 
-    List<Item> GetItemsPrefabs()
+    public List<Item> GetItemsPrefabs()
     {
         return items_prefabs;
+    }
+
+    public int GetItemsCount()
+    {
+        return items_prefabs.Count;
     }
 
     [SerializeField]

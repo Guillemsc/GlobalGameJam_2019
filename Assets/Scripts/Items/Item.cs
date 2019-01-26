@@ -34,6 +34,21 @@ public class Item : MonoBehaviour
         return grabbed_by != null;
     }
 
+    public virtual void OnPlayerGrab(PlayerStats player)
+    {
+
+    }
+
+    public virtual void OnPlayerGrabbed()
+    {
+
+    }
+
+    public virtual void OnPlayerThrows()
+    {
+
+    }
+
     private ItemType type = new ItemType();
     private PlayerStats grabbed_by = null;
 }
