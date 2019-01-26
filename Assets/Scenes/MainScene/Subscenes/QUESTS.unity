@@ -297,7 +297,7 @@ MonoBehaviour:
   quest_start_duration:
   - {x: 10, y: 10}
   - {x: 30, y: 15}
-  - {x: 30, y: 15}
+  - {x: 50, y: 30}
   quests:
   - {fileID: 1453765818}
   - {fileID: 117612074}
