@@ -84,9 +84,26 @@ public class HouseManager : Singleton<HouseManager>
         {
             House curr_house = houses[i];
 
-            queue_context.PushEvent(new
-                QueueEventPosition(curr_house.gameObject, curr_house.transform.position,
-                MatchManager.Instance.GetMapCenter(), time, EasingFunctionsType.LINEAR), true);
+            if (house_end_positions.Length > i)
+            {
+                GameObject end_pos = house_end_positions[i];
+
+                if (end_pos != null)
+                {
+                    end_pos.transform.position = new Vector3(end_pos.transform.position.x, end_pos.transform.position.y,
+                        -5);
+
+                    GameObject line_renderer = Instantiate(line_renderer_prefab, Vector3.zero, Quaternion.identity);
+                    line_renderer.gameObject.transform.parent = curr_house.gameObject.transform;
+                    LineRenderer lr = line_renderer.GetComponent<LineRenderer>();
+                    lr.SetPosition(0, curr_house.gameObject.transform.position);
+                    lr.SetPosition(1, end_pos.transform.position);
+
+                    queue_context.PushEvent(new
+                        QueueEventPosition(curr_house.gameObject, curr_house.transform.position,
+                        end_pos.transform.position, time, EasingFunctionsType.LINEAR), true);
+                }
+            }
         }
     }
 
@@ -121,7 +138,13 @@ public class HouseManager : Singleton<HouseManager>
     private GameObject house_prefab = null;
 
     [SerializeField]
+    private GameObject line_renderer_prefab = null;
+
+    [SerializeField]
     private GameObject[] house_spawn_positions = null;
+
+    [SerializeField]
+    private GameObject[] house_end_positions = null;
 
     private List<House> houses = new List<House>();
 

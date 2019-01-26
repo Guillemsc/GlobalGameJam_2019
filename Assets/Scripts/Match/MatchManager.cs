@@ -17,9 +17,7 @@ public class MatchManager : Singleton<MatchManager>
 
         UnloadMap();
 
-        game_ui.SetActive(false);
-        Button but = temp_game_ui.GetComponentInChildren<Button>();
-        but.onClick.AddListener(TempOnButtonLoadMap);
+        InitUI();
     }
 
     private void Update()
@@ -27,6 +25,14 @@ public class MatchManager : Singleton<MatchManager>
         UpdateWaitBeforeStartMatch();
 
         UpdateMatch();
+    }
+
+    private void InitUI()
+    {
+        game_ui.SetActive(false);
+
+        Button but = temp_game_ui.GetComponentInChildren<Button>();
+        but.onClick.AddListener(TempOnButtonLoadMap);
     }
 
     private void TempOnButtonLoadMap()
@@ -44,6 +50,8 @@ public class MatchManager : Singleton<MatchManager>
                     LoadMap();
 
                     StartWaitBeforStartingMatch();
+
+                    temp_game_ui.SetActive(false);
 
                     break;
                 }
