@@ -13,9 +13,11 @@ public class Item : MonoBehaviour
 {
     public Sprite base_sprite = null; 
     public Sprite hidden_sprite;
-    private SpriteRenderer sr;
+    [HideInInspector]
+    public SpriteRenderer sr;
 
-    private bool destroyed = false;
+    [HideInInspector]
+    public bool destroyed = false;
 
     public void BaseStart() {
         sr = GetComponentInChildren<SpriteRenderer>();
