@@ -70,15 +70,6 @@ public class PlayersManager : Singleton<PlayersManager>
         EventPlayerAdded ev = new EventPlayerAdded(player);
         EventManager.Instance.SendEvent(ev);
 
-        //// Temp
-        //if(players.Count == 1)
-        //    SpawnPlayerInstance(player, new Vector2(-3, -3));
-        //else if (players.Count == 2)
-        //    SpawnPlayerInstance(player, new Vector2(-6, -3));
-        //else if (players.Count == 3)
-        //    SpawnPlayerInstance(player, new Vector2(-9, -3));
-
-
         return player;
     }
 
@@ -142,6 +133,8 @@ public class PlayersManager : Singleton<PlayersManager>
 
         if (assigned != null)
         {
+            DestroyPlayerInstance(assigned);
+
             GameObject new_player = Instantiate(player_prefab, pos, Quaternion.identity);
 
             if (new_player != null)
@@ -165,17 +158,20 @@ public class PlayersManager : Singleton<PlayersManager>
         {
             Player curr_player = players[i];
 
-            PlayerStats instance = curr_player.GetPlayerInstance();
+            DestroyPlayerInstance(curr_player);
+        }
+    }
 
-            if (instance != null)
-            {
-                EventPlayerDeSpawned ev = new EventPlayerDeSpawned(instance);
-                EventManager.Instance.SendEvent(ev);
+    public void DestroyPlayerInstance(Player player)
+    {
+        PlayerStats instance = player.GetPlayerInstance();
 
-                Destroy(instance.gameObject);
-            }
-            
-            curr_player.SetPlayerInstance(null);
+        if (instance != null)
+        {
+            EventPlayerDeSpawned ev = new EventPlayerDeSpawned(instance);
+            EventManager.Instance.SendEvent(ev);
+
+            Destroy(instance.gameObject);
         }
     }
 
