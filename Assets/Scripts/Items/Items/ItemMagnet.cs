@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class ItemMagnet : Item
 {
-    bool magnet_used = false;
-    bool degradated = false;
+    List<PlayerStats> collided_go;
 
     private void Awake()
     {
         InitCone();
+        collided_go = new List<PlayerStats>();
     }
 
     private void InitCone()
     {
         CollisionDetector cd = gameObject.GetComponentInChildren<CollisionDetector>();
-        cd.SuscribeOnTriggerStay2D(CustomOnTriggerStay2D);
+        cd.SuscribeOnTriggerEnter2D(CustomOnTriggerEnter2D);
+        cd.SuscribeOnTriggerExit2D(CustomOnTriggerExit2D);
     }
 
     public override void OnPlayerGrab(PlayerStats player)
@@ -25,31 +26,36 @@ public class ItemMagnet : Item
 
     public override void OnPlayerUses()
     {
-        Debug.Log("used item");
-        magnet_used = true;
+        if (collided_go.Count > 0 && !destroyed)
+        {
+            PlayerStats ps = collided_go[0];
+
+            PlayerStats thief = GetGrabbedBy();
+            Item item_to_get = ps.GetGrabbedItem();
+
+            ItemManager.Instance.StopGrabbingItem(thief);
+            ItemManager.Instance.StopGrabbingItem(ps);
+            ItemManager.Instance.StartGrabbingItem(thief, item_to_get);
+
+            GetComponentInChildren<SpriteRenderer>().color = Color.red;
+
+            GetComponent<AudioSource>().Play();
+        }
     }
 
-    private void CustomOnTriggerStay2D(Collider2D coll)
+    private void CustomOnTriggerEnter2D(Collider2D coll)
     {
-        if (!degradated)
-        {
-            PlayerStats ps = coll.GetComponent<PlayerStats>();
+        PlayerStats ps = coll.GetComponent<PlayerStats>();
 
-            if (ps != null && magnet_used)
-            {
-                // Degradar item
-                PlayerStats thief = GetGrabbedBy();
-                Item item_to_get = ps.GetGrabbedItem();
+        if (ps != null)
+            collided_go.Add(ps);
+    }
 
-                ItemManager.Instance.StopGrabbingItem(thief);
-                ItemManager.Instance.StopGrabbingItem(ps);
-                ItemManager.Instance.StartGrabbingItem(thief, item_to_get);
+    private void CustomOnTriggerExit2D(Collider2D coll)
+    {
+        PlayerStats ps = coll.GetComponent<PlayerStats>();
 
-                degradated = true;
-                magnet_used = false;
-
-                GetComponentInChildren<SpriteRenderer>().color = Color.red;
-            }
-        }
+        if (ps != null)
+            collided_go.Remove(ps);
     }
 }

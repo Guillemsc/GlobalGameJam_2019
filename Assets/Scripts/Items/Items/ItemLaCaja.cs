@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemLaCaja: Item {
+
+    PlayerStats last_player = null;
+
+    public int points_gain = 50;
+
     private void Awake() {
 
     }
@@ -15,5 +20,17 @@ public class ItemLaCaja: Item {
     // Update is called once per frame
     void Update() {
 
+    }
+
+    public override void OnPlayerGrab(PlayerStats player) 
+    {
+        destroyed = false;
+        sr.color = Color.white;
+
+        if(last_player != player) 
+        {
+            points_to_give += points_gain;
+            last_player = player;
+        }
     }
 }

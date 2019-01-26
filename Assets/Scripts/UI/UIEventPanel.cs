@@ -58,7 +58,7 @@ public class UIEventPanel : MonoBehaviour
                 {
                     quest_active = false;
 
-                    if (gameObject == null)
+                    if (this == null)
                         break;
 
                     Vector3 pos = gameObject.transform.position;
