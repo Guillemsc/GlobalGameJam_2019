@@ -31,6 +31,32 @@ public class ItemManager : Singleton<ItemManager>
         return items_prefabs.Count;
     }
 
+    public void AddToItemsInstances(Item it)
+    {
+        if(it != null)
+        {
+            item_instances.Add(it);
+        }
+    }
+
+    public void RemoveFromitemsInstances(Item it)
+    {
+        if (it != null)
+        {
+            item_instances.Remove(it);
+        }
+    }
+
+    public void PlayerTryGrabItem(PlayerStats player_instance)
+    {
+
+    }
+
     [SerializeField]
-    List<Item> items_prefabs = null;
+    private float min_item_distance_to_grab = 0.0f;
+
+    [SerializeField]
+    private List<Item> items_prefabs = null;
+
+    private List<Item> item_instances = null;
 }
