@@ -7,5 +7,5 @@ public class EventStartQuest : GameEvent {
     {
         this.quest = quest;
     }
-    QuestType quest = QuestType.QT_NULL;
+    public QuestType quest = QuestType.QT_NULL;
 }
