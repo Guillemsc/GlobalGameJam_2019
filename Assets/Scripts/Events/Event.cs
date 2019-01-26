@@ -6,6 +6,8 @@ public enum GameEventType
 
     EVENT_PLAYER_ADDED,
     EVENT_PLAYER_REMOVED,
+    EVENT_PLAYER_SPAWNED,
+    EVENT_PLAYER_DESPAWNED,
 
     EVENT_GAMEPADS_CHANGED,
     EVENT_GAMEPAD_ADDED,
@@ -16,6 +18,11 @@ public enum GameEventType
 
     EVENT_START_QUEST,
     EVENT_END_QUEST,
+
+    EVENT_MAP_LOAD,
+    EVENT_MAP_UNLOAD,
+    EVENT_MATCH_START,
+    EVENT_MATCH_FINISH,
 }
 
 public class GameEvent

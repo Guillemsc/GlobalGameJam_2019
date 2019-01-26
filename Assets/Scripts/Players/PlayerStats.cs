@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    private void SetPlayer(Player pl)
+    public void SetPlayer(Player pl)
     {
         player = pl;
 

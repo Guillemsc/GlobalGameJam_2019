@@ -31,6 +31,16 @@ public class Player
         return assigned_gamepad;
     }
 
+    public void SetPlayerInstance(PlayerStats instance)
+    {
+        player_instance = instance;
+    }
+
+    public PlayerStats GetPlayerInstance()
+    {
+        return player_instance;
+    }
+
     public bool HasGamepad()
     {
         return assigned_gamepad != null;
@@ -282,4 +292,5 @@ public class Player
 
     private int player_index = 0;
     private Gamepad assigned_gamepad = null;
+    private PlayerStats player_instance = null;
 }
