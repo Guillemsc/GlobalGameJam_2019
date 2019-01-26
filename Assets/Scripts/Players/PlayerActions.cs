@@ -84,8 +84,11 @@ public class PlayerActions : MonoBehaviour
                 {
                     Item it = stats.GetGrabbedItem();
 
-                    if (it != null)
+                    if (it != null) 
+                    {
+                        it.OnPlayerUsesBase();
                         it.OnPlayerUses();
+                    }
                 }
             }
         }

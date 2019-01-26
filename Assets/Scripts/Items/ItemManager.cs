@@ -158,7 +158,8 @@ public class ItemManager : Singleton<ItemManager>
 
     void HiddeItems() {
         foreach(Item i in item_instances) {
-            i.SetHidden();
+            if(!i.GetIsGrabbed())
+                i.SetHidden();
                 }
     }
 
@@ -170,26 +171,6 @@ public class ItemManager : Singleton<ItemManager>
 
     public void OnEvent(GameEvent ev) {
         switch (ev.Type()) {
-            case GameEventType.EVENT_NULL:
-                break;
-            case GameEventType.EVENT_PLAYER_ADDED:
-                break;
-            case GameEventType.EVENT_PLAYER_REMOVED:
-                break;
-            case GameEventType.EVENT_PLAYER_SPAWNED:
-                break;
-            case GameEventType.EVENT_PLAYER_DESPAWNED:
-                break;
-            case GameEventType.EVENT_GAMEPADS_CHANGED:
-                break;
-            case GameEventType.EVENT_GAMEPAD_ADDED:
-                break;
-            case GameEventType.EVENT_GAMEPAD_REMOVED:
-                break;
-            case GameEventType.EVENT_ADD_SCORE:
-                break;
-            case GameEventType.EVENT_SUBSTRACT_SCORE:
-                break;
             case GameEventType.EVENT_START_QUEST: {
                     EventStartQuest start = (EventStartQuest)ev;
                     
@@ -209,24 +190,6 @@ public class ItemManager : Singleton<ItemManager>
                 }
                 break;
                 }
-            case GameEventType.EVENT_HOUSES_SPAWNED:
-                break;
-            case GameEventType.EVENT_MAP_LOAD:
-                break;
-            case GameEventType.EVENT_MAP_UNLOAD:
-                break;
-            case GameEventType.EVENT_MATCH_START:
-                break;
-            case GameEventType.EVENT_MATCH_FINISH:
-                break;
-            case GameEventType.EVENT_ITEM_GRABBED:
-                break;
-            case GameEventType.EVENT_ITEM_DROPPED:
-                break;
-            case GameEventType.EVENT_ITEM_ENTERS_HOUSE:
-                break;
-            case GameEventType.EVENT_ITEM_LEAVES_HOUSE:
-                break;
             default:
                 break;
         }
