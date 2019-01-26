@@ -92,6 +92,34 @@ public class Player
         return ret;
     }
 
+    public bool GetKeyStart(GamepadGetButtonType type = GamepadGetButtonType.WHILE)
+    {
+        bool ret = false;
+
+        if (HasGamepad())
+        {
+            string button = "START_P" + (player_index + 1).ToString();
+
+            ret = GetButtonInputByType(button, type);
+        }
+
+        return ret;
+    }
+
+    public bool GetKeyBack(GamepadGetButtonType type = GamepadGetButtonType.WHILE)
+    {
+        bool ret = false;
+
+        if (HasGamepad())
+        {
+            string button = "BACK_P" + (player_index + 1).ToString();
+
+            ret = GetButtonInputByType(button, type);
+        }
+
+        return ret;
+    }
+
     public float LeftJoystickHorizontal()
     {
         float ret = 0.0f;
