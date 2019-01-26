@@ -132,6 +132,7 @@ public class ItemManager : Singleton<ItemManager>
             if (grabbed_item != null)
             {
                 grabbed_item.OnPlayerThrows();
+                grabbed_item.OnPlayerThrowBase();
 
                 grabbed_item.transform.parent = null;
 
