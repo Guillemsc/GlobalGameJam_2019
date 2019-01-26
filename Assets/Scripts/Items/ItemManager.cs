@@ -132,5 +132,5 @@ public class ItemManager : Singleton<ItemManager>
     [SerializeField]
     private List<Item> items_prefabs = null;
 
-    private List<Item> item_instances = null;
+    private List<Item> item_instances = new List<Item>();
 }
