@@ -73,7 +73,7 @@ public class Item : MonoBehaviour
 
     public void OnPlayerGrabBase(PlayerStats player) 
     {
-        
+        SetBaseSprite();
     }
 
     public virtual void OnPlayerGrab(PlayerStats player)
