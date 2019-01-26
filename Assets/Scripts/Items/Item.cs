@@ -10,13 +10,6 @@ public enum ItemType
 
 public class Item : MonoBehaviour
 {
-    public void Init(CircleCollider2D coll)
-    {
-        circle_collider = coll;
-
-        circle_collider.isTrigger = true;
-    }
-
     public ItemType Type()
     {
         return type;
@@ -74,6 +67,4 @@ public class Item : MonoBehaviour
     private int points_to_give = 0;
 
     private PlayerStats grabbed_by = null;
-
-    private CircleCollider2D circle_collider = null;
 }
