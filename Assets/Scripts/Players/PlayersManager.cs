@@ -19,11 +19,6 @@ public class PlayersManager : Singleton<PlayersManager>
         AddPlayer();
     }
 
-    private void Update()
-    {
-
-    }
-
     private void OnEvent(GameEvent ev)
     {
         switch(ev.Type())
@@ -53,7 +48,7 @@ public class PlayersManager : Singleton<PlayersManager>
         }
     }
 
-    public Player AddPlayer()
+    private Player AddPlayer()
     {
         Player player = new Player();
 
@@ -64,10 +59,19 @@ public class PlayersManager : Singleton<PlayersManager>
         EventPlayerAdded ev = new EventPlayerAdded(player);
         EventManager.Instance.SendEvent(ev);
 
+        // Temp
+        if(players.Count == 1)
+            SpawnPlayerInstance(player, new Vector2(-3, -3));
+        //else if(players.Count == 2)
+        //    SpawnPlayerInstance(player, new Vector2(-6, -3));
+        //else if (players.Count == 3)
+        //    SpawnPlayerInstance(player, new Vector2(-9, -3));
+
+
         return player;
     }
 
-    public void RemovePlayers()
+    private void RemovePlayers()
     {
         players.Clear();
     }
@@ -88,6 +92,48 @@ public class PlayersManager : Singleton<PlayersManager>
 
         return ret;
     }
+
+    public void SpawnPlayerInstance(Player assigned, Vector2 pos)
+    {
+        if (assigned != null)
+        {
+            GameObject new_player = Instantiate(player_prefab, pos, Quaternion.identity);
+
+            if (new_player != null)
+            {
+                PlayerStats stats = new_player.GetComponent<PlayerStats>();
+
+                stats.SetPlayer(assigned);
+                assigned.SetPlayerInstance(stats);
+
+                EventPlayerSpawned ev = new EventPlayerSpawned(stats);
+                EventManager.Instance.SendEvent(ev);
+            }
+        }
+    }
+
+    public void DestroyPlayersInstances()
+    {
+        for(int i = 0; i < players.Count; ++i)
+        {
+            Player curr_player = players[i];
+
+            PlayerStats instance = curr_player.GetPlayerInstance();
+
+            if (instance != null)
+            {
+                EventPlayerDeSpawned ev = new EventPlayerDeSpawned(instance);
+                EventManager.Instance.SendEvent(ev);
+
+                Destroy(instance.gameObject);
+            }
+            
+            curr_player.SetPlayerInstance(null);
+        }
+    }
+
+    [SerializeField]
+    private GameObject player_prefab = null;
 
     private List<Player> players = new List<Player>();
 }

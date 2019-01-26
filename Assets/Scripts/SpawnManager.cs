@@ -39,7 +39,7 @@ public class SpawnManager : Singleton<SpawnManager>
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.A)) SpawnPlayer();
-        if (Input.GetKeyDown(KeyCode.S)) PlayersManager.Instance.AddPlayer();
+        //if (Input.GetKeyDown(KeyCode.S)) PlayersManager.Instance.AddPlayer();
         //Debug.Log(PlayersManager.Instance.GetPlayersCount());
     }
 }
