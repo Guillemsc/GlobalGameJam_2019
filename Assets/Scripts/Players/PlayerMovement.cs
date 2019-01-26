@@ -23,6 +23,12 @@ public class PlayerMovement : MonoBehaviour
             PlayerInput();
 
             MovePlayer();
+
+            if (rigid_body.velocity.magnitude != 0)
+                particles_object.SetActive(true);
+            else
+                particles_object.SetActive(false);
+
         }
 
         CapSpeed();
@@ -204,6 +210,9 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
     }
+
+    [SerializeField]
+    private GameObject particles_object;
 
     [SerializeField]
     private float player_max_speed = 0.0f;
