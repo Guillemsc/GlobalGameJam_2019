@@ -1654,7 +1654,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel_move_time: 1
-  panel_move_type: 4
+  panel_move_type: 3
   ev_text: {fileID: 1851991845}
   ev_time: {fileID: 1128050755}
 --- !u!1001 &4977202555827227889
