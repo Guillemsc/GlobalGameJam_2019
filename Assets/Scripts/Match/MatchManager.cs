@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MatchManager : Singleton<MatchManager>
 {
@@ -13,6 +14,12 @@ public class MatchManager : Singleton<MatchManager>
     {
         EventManager.Instance.Suscribe(GameEventType.EVENT_MAP_LOAD, OnEvent);
         EventManager.Instance.Suscribe(GameEventType.EVENT_MAP_UNLOAD, OnEvent);
+
+        UnloadMap();
+
+        game_ui.SetActive(false);
+        Button but = temp_game_ui.GetComponentInChildren<Button>();
+        but.onClick.AddListener(TempOnButtonLoadMap);
     }
 
     private void Update()
@@ -20,6 +27,12 @@ public class MatchManager : Singleton<MatchManager>
         UpdateWaitBeforeStartMatch();
 
         UpdateMatch();
+    }
+
+    private void TempOnButtonLoadMap()
+    {
+        EventMapLoad ev = new EventMapLoad();
+        EventManager.Instance.SendEvent(ev);
     }
 
     private void OnEvent(GameEvent ev)
@@ -44,12 +57,22 @@ public class MatchManager : Singleton<MatchManager>
         }
     }
 
+    public Vector3 GetMapCenter()
+    {
+        return map_center;
+    }
+
     public bool GetWaitingToStartMatch()
     {
         return wating_to_start_match;
     }
 
-    public float GetWaitingToStartMatchTime()
+    public float GetWaitingToStartMatchTotalTime()
+    {
+        return time_before_match_starts;
+    }
+
+    public float GetWaitingToStartMatchCurrTime()
     {
         return timer_before_match_starts.ReadTime();
     }
@@ -59,7 +82,12 @@ public class MatchManager : Singleton<MatchManager>
         return match_started;
     }
 
-    public float GetMatchTime()
+    public float GetTotalMatchTime()
+    {
+        return time_match;
+    }
+
+    public float GetCurrMatchTime()
     {
         return timer_match.ReadTime();
     }
@@ -138,7 +166,16 @@ public class MatchManager : Singleton<MatchManager>
     }
 
     [SerializeField]
+    private GameObject game_ui = null;
+
+    [SerializeField]
+    private GameObject temp_game_ui = null;
+
+    [SerializeField]
     private GameObject map = null;
+
+    [SerializeField]
+    private Vector3 map_center = Vector3.zero;
 
     [SerializeField]
     private float time_before_match_starts = 0.0f;
