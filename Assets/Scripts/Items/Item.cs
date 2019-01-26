@@ -6,6 +6,7 @@ public enum ItemType
 {
     ITEM_MAGNET,
     ITEM_GUN,
+    ITEM_LACAJA,
 }
 
 public class Item : MonoBehaviour

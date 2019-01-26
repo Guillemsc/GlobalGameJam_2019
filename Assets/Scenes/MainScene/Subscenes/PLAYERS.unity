@@ -184,6 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22288386495f6dd48aa7588248893bf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  house_item_radious: 0
   house_prefab: {fileID: 6784915699927619840, guid: e8b47eccb8b9ccb4fb6f07ad6977df9a,
     type: 3}
   line_renderer_prefab: {fileID: 6178697743295673411, guid: 9f4f95cf3566cca44a77b203f9628880,
@@ -274,6 +275,7 @@ MonoBehaviour:
   - {fileID: 2122329228090594447, guid: 0b8caf977a0fb7e499d69a6a9f6fcf4a, type: 3}
   - {fileID: 4065788209792710148, guid: 97fac1b4c6b54a1428d7d5bed12f470a, type: 3}
   - {fileID: 2122329228090594447, guid: 0b8caf977a0fb7e499d69a6a9f6fcf4a, type: 3}
+  - {fileID: 750653008045749470, guid: f21b0a6a12716cc4eb04100980f74db6, type: 3}
 --- !u!4 &691029266
 Transform:
   m_ObjectHideFlags: 0
