@@ -20,9 +20,9 @@ public class ControllerSelectionUI : Singleton<ControllerSelectionUI>
         if (selecting_gamepads)
         {
             UpdateControllersInput();
-        }
 
-        CheckReady();
+            CheckReady();
+        }
     }
 
     private void InitQueueEvent()
@@ -204,13 +204,60 @@ public class ControllerSelectionUI : Singleton<ControllerSelectionUI>
 
     private void CheckReady()
     {
-        if(red_ready && blue_ready && yellow_ready || Input.GetKey("a"))
+        bool ready = false;
+        bool cheating = false;
+
+        if(red_ready && blue_ready && yellow_ready)
+        {
+            ready = true;
+        }
+        else if(Input.GetKey("a"))
+        {
+            ready = true;
+            cheating = true;
+        }
+
+        if(ready)
         {
             selecting_gamepads = false;
 
             queue_context.PushEvent(new QueueEventFade(this.gameObject, 1, 0, 2, EasingFunctionsType.LINEAR));
 
             queue_context.PushEvent(new QueueEventSetActive(this.gameObject, false));
+
+            if (cheating)
+            {
+                int players_count = PlayersManager.Instance.GetPlayersCount();
+
+                for (int i = 0; i < players_count; ++i)
+                {
+                    Player curr_player = PlayersManager.Instance.GetPlayerByIndex(i);
+
+                    if (i == 0)
+                    {
+                        curr_player.SetPlayerColour(PlayerColour.RED);
+                    }
+                    else if (i == 1)
+                    {
+                        curr_player.SetPlayerColour(PlayerColour.BLUE);
+                    }
+                    else if(i == 2)
+                    {
+                        curr_player.SetPlayerColour(PlayerColour.YELLOW);
+                    }
+                }
+            }
+            else
+            {
+                if (red_player != null)
+                    red_player.SetPlayerColour(PlayerColour.RED);
+
+                if (blue_player != null)
+                    blue_player.SetPlayerColour(PlayerColour.BLUE);
+
+                if (yellow_player != null)
+                    yellow_player.SetPlayerColour(PlayerColour.YELLOW);
+            }
 
             EventMapLoad ev = new EventMapLoad();
             EventManager.Instance.SendEvent(ev);
