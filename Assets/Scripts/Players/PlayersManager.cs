@@ -21,15 +21,7 @@ public class PlayersManager : Singleton<PlayersManager>
 
     private void Update()
     {
-        for(int i = 0; i < players.Count; ++i)
-        {
-            if(players[i].DPadVertical() != 0.0f)
-            {
-                int r = 0;
 
-
-            }
-        }
     }
 
     private void OnEvent(GameEvent ev)

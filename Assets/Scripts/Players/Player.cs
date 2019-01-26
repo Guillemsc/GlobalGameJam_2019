@@ -120,6 +120,62 @@ public class Player
         return ret;
     }
 
+    public bool GetKeyRB(GamepadGetButtonType type = GamepadGetButtonType.WHILE)
+    {
+        bool ret = false;
+
+        if (HasGamepad())
+        {
+            string button = "RB_P" + (player_index + 1).ToString();
+
+            ret = GetButtonInputByType(button, type);
+        }
+
+        return ret;
+    }
+
+    public bool GetKeyLB(GamepadGetButtonType type = GamepadGetButtonType.WHILE)
+    {
+        bool ret = false;
+
+        if (HasGamepad())
+        {
+            string button = "LB_P" + (player_index + 1).ToString();
+
+            ret = GetButtonInputByType(button, type);
+        }
+
+        return ret;
+    }
+
+    public float GetKeyRT()
+    {
+        float ret = 0.0f;
+
+        if (HasGamepad())
+        {
+            string joystick = "RT_P" + (player_index + 1).ToString();
+
+            ret = Input.GetAxis(joystick);
+        }
+
+        return ret;
+    }
+
+    public float GetKeyLT()
+    {
+        float ret = 0.0f;
+
+        if (HasGamepad())
+        {
+            string joystick = "LT_P" + (player_index + 1).ToString();
+
+            ret = Input.GetAxis(joystick);
+        }
+
+        return ret;
+    }
+
     public float LeftJoystickHorizontal()
     {
         float ret = 0.0f;
