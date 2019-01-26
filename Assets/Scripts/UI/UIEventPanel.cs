@@ -5,6 +5,8 @@ using UnityEngine;
 public class UIEventPanel : MonoBehaviour
 {
     public float panel_move_time = 1f;
+    public EasingFunctionsType panel_move_type = EasingFunctionsType.BOUNCE;
+
     float y_pos = 0;
     RectTransform trans = null;
 
@@ -48,7 +50,7 @@ public class UIEventPanel : MonoBehaviour
                     ev_text.SetText(QuestManager.Instance.GetActiveQuest().description);
                     Vector3 pos = gameObject.transform.position;
                     pos.y = 0f;
-                    queue_context.PushEvent(new QueueEventPosition(gameObject, transform.position, pos, panel_move_time, EasingFunctionsType.LINEAR));
+                    queue_context.PushEvent(new QueueEventPosition(gameObject, transform.position, pos, panel_move_time, panel_move_type));
 
                     break;
                 }
@@ -58,7 +60,7 @@ public class UIEventPanel : MonoBehaviour
 
                     Vector3 pos = gameObject.transform.position;
                     pos.y = -50f;
-                    queue_context.PushEvent(new QueueEventPosition(gameObject, transform.position, pos, panel_move_time, EasingFunctionsType.LINEAR));
+                    queue_context.PushEvent(new QueueEventPosition(gameObject, transform.position, pos, panel_move_time, panel_move_type));
 
                     break;
                 }

@@ -15,6 +15,8 @@ public class MatchManager : Singleton<MatchManager>
         EventManager.Instance.Suscribe(GameEventType.EVENT_MAP_LOAD, OnEvent);
         EventManager.Instance.Suscribe(GameEventType.EVENT_MAP_UNLOAD, OnEvent);
 
+        InitQueueEvent();
+
         UnloadMap();
 
         InitUI();
@@ -31,8 +33,15 @@ public class MatchManager : Singleton<MatchManager>
     {
         game_ui.SetActive(false);
 
+        timer_before_match_text.gameObject.SetActive(false);
+
         Button but = temp_game_ui.GetComponentInChildren<Button>();
         but.onClick.AddListener(TempOnButtonLoadMap);
+    }
+
+    private void InitQueueEvent()
+    {
+        queue_context = QueueEventManager.Instance.CreateContext();
     }
 
     private void TempOnButtonLoadMap()
@@ -118,6 +127,29 @@ public class MatchManager : Singleton<MatchManager>
             wating_to_start_match = true;
 
             timer_before_match_starts.Start();
+
+            // UI Animation
+            queue_context.PushEvent(new QueueEventWaitTime(0.3f));
+
+            queue_context.PushEvent(new
+            QueueEventScale(timer_before_match_text.gameObject,
+            new Vector3(0, 0, 0), new Vector3(0, 0, 0), 0.1f, EasingFunctionsType.EXPO_IN), true);
+
+            queue_context.PushEvent(new QueueEventSetActive(timer_before_match_text.gameObject, true));
+
+            queue_context.PushEvent(new 
+                QueueEventScale(timer_before_match_text.gameObject, 
+                new Vector3(0, 0, 0), new Vector3(2, 2, 2), 0.3f, EasingFunctionsType.EXPO_IN));
+
+            queue_context.PushEvent(new QueueEventWaitTime(time_before_match_starts - 0.5f));
+
+            queue_context.PushEvent(new
+                QueueEventScale(timer_before_match_text.gameObject,
+                new Vector3(2, 2, 2), new Vector3(0, 0, 0), 0.2f, EasingFunctionsType.EXPO_OUT));
+
+            queue_context.PushEvent(new QueueEventSetActive(timer_before_match_text.gameObject, false));
+
+            // --------------
         }
     }
 
@@ -131,6 +163,16 @@ public class MatchManager : Singleton<MatchManager>
                 timer_before_match_starts.Reset();
 
                 StartMatch();
+            }
+            else
+            {
+                float left_time = time_before_match_starts - timer_before_match_starts.ReadTime();
+                int left_time_int = Mathf.RoundToInt(left_time);
+
+                if (left_time_int > 0)
+                    timer_before_match_text.text = left_time_int.ToString();
+                else
+                    timer_before_match_text.text = "Start!";
             }
         }
     }
@@ -183,6 +225,9 @@ public class MatchManager : Singleton<MatchManager>
     private GameObject temp_game_ui = null;
 
     [SerializeField]
+    TMPro.TextMeshProUGUI timer_before_match_text = null;
+
+    [SerializeField]
     private GameObject map = null;
 
     [SerializeField]
@@ -199,4 +244,6 @@ public class MatchManager : Singleton<MatchManager>
 
     private Timer timer_before_match_starts = new Timer();
     private bool wating_to_start_match = false;
+
+    private QueueEventContext queue_context = null;
 }
