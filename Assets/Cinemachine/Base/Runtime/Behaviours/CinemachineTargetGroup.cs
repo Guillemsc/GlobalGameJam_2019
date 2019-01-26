@@ -100,6 +100,20 @@ namespace Cinemachine
             m_Targets[size - 1] = new_target;
         }
 
+        public void RemoveTarget(Transform trans) 
+        {
+            Target[] tmp = new Target[m_Targets.Length - 1];
+            int j = 0;
+            for(int i = 0; i<m_Targets.Length;++i) 
+            {
+                if(m_Targets[i].target != trans) 
+                {
+                    tmp[j] = m_Targets[i];
+                    j++;
+                }
+            }
+            m_Targets = tmp;
+        }
 
         /// Cache of the last valid radius
         private float m_lastRadius = 0;
