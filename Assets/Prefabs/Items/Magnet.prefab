@@ -121,8 +121,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   base_sprite: {fileID: 0}
   hidden_sprite: {fileID: 21300000, guid: cfbf07a9e9ab74c57addb9487483be25, type: 3}
+  sr: {fileID: 0}
+  destroyed: 0
   type: 0
   points_to_give: 30
+  points_destroyed: 0
 --- !u!58 &1178905323993676396
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -302,7 +305,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 9e3eebcf405afa2479099c2df4d8d460, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
