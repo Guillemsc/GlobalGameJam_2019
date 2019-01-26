@@ -30,14 +30,14 @@ public class QuestManager : Singleton<QuestManager>
     // Update is called once per frame
     void Update()
     {
-        if (quests.Count > 0 && quest_index == quests_played)
+        if (quest_start_duration.Length > 0 && quest_index == quests_played)
         {
             if (timer.ReadTime() > quest_start_duration[quest_index].x && quests[active_quest].gameObject.activeSelf == false)
             {
-                if (quest_index == quests.Count - 1)
+                if (quest_index == quest_start_duration.Length - 1)
                     active_quest = GetQuestIDByType(QuestType.QT_LACAJA);
                 else
-                    active_quest = Random.Range(0, quests.Count - 2);
+                    active_quest = Random.Range(0, quests.Count - 1);
 
                 quests[active_quest].SetActive(true);
                 quest_timer.Start();
@@ -50,7 +50,7 @@ public class QuestManager : Singleton<QuestManager>
 
                 quests[active_quest].SetActive(false);
 
-                if(quest_index<quests.Count-1)
+                if(quest_index < quest_start_duration.Length-1)
                     quest_index++;
             }
         }

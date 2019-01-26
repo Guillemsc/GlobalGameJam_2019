@@ -142,7 +142,7 @@ public class HouseManager : Singleton<HouseManager>
 
         while(to_check.Count > 0)
         {
-            int max_points = 0;
+            int max_points = -1;
             House house_max_points = null;
 
             for(int i = 0; i < to_check.Count; ++i)
@@ -160,6 +160,10 @@ public class HouseManager : Singleton<HouseManager>
             {
                 to_check.Remove(house_max_points);
                 ret.Add(house_max_points);
+            }
+            else
+            {
+                break;
             }
         }
 

@@ -6,14 +6,42 @@ public class House : MonoBehaviour
 {
     private void Awake()
     {
-        InitCollider();
+        InitEvents();
     }
 
-    private void InitCollider()
+    private void Update()
     {
-        circle_collider = gameObject.GetComponent<CircleCollider2D>();
+        UpdateCheckItemsInside();
+    }
 
-        circle_collider.radius = HouseManager.Instance.GetHouseItemRadious();
+    private void InitEvents()
+    {
+        EventManager.Instance.Suscribe(GameEventType.EVENT_ITEM_GRABBED, OnEvent);
+        EventManager.Instance.Suscribe(GameEventType.EVENT_ITEM_DROPPED, OnEvent);
+    }
+
+    private void OnEvent(GameEvent ev)
+    {
+        switch(ev.Type())
+        {
+            case GameEventType.EVENT_ITEM_GRABBED:
+                {
+                    EventItemGrabbed r_ev = (EventItemGrabbed)ev;
+
+                    TryRemoveItem(r_ev.item);
+
+                    break;
+                }
+
+            case GameEventType.EVENT_ITEM_DROPPED:
+                {
+                    EventItemDropped r_ev = (EventItemDropped)ev;
+
+                    TryAddItem(r_ev.item);
+
+                    break;
+                }
+        }
     }
 
     public void SetPlayerInstance(PlayerStats pl)
@@ -31,24 +59,70 @@ public class House : MonoBehaviour
         return points;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private bool ItemIsInsideRadious(Item it)
     {
-        Item it = collision.gameObject.GetComponent<Item>();
+        bool ret = false;
 
         if(it != null)
         {
-            AddItem(it);
+            float dist = Vector3.Distance(it.gameObject.transform.position, gameObject.transform.position);
+
+            dist = Mathf.Abs(dist);
+
+            if (dist <= HouseManager.Instance.GetHouseItemRadious())
+            {
+                ret = true;
+            }
+        }
+
+        return ret;
+    }
+
+    private void UpdateCheckItemsInside()
+    {
+        for(int i = 0; i < items_around.Count; ++i)
+        {
+            Item curr_item = items_around[i];
+
+            if(TryRemoveItem(curr_item))
+            {
+                break;
+            }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void TryAddItem(Item it)
     {
-        Item it = collision.gameObject.GetComponent<Item>();
-
-        if (it != null)
+        if(it != null)
         {
-            RemoveItem(it);
+            if (!it.GetInHouse())
+            {
+                if (ItemIsInsideRadious(it))
+                {
+                    AddItem(it);
+                }
+            }
         }
+    }
+
+    private bool TryRemoveItem(Item it)
+    {
+        bool ret = false;
+
+        if(it != null)
+        {
+            if(it.GetHouse() == this)
+            {
+                if(it.GetIsGrabbed() || !ItemIsInsideRadious(it))
+                {
+                    RemoveItem(it);
+
+                    ret = true;
+                }
+            }
+        }
+
+        return ret;
     }
 
     private void AddItem(Item it)
@@ -65,6 +139,9 @@ public class House : MonoBehaviour
 
         if (!exists)
         {
+            it.SetHouse(this);
+            it.transform.parent = gameObject.transform;
+
             items_around.Add(it);
 
             EventItemEntersHouse ev = new EventItemEntersHouse(it, this);
@@ -80,6 +157,9 @@ public class House : MonoBehaviour
         {
             if(items_around.Remove(it))
             {
+                it.SetHouse(null);
+                it.transform.parent = null;
+
                 EventItemLeavesHouse ev = new EventItemLeavesHouse(it, this);
                 EventManager.Instance.SendEvent(ev);
             }
@@ -101,7 +181,6 @@ public class House : MonoBehaviour
     }
 
     private PlayerStats player_instance = null;
-    private CircleCollider2D circle_collider = null;
 
     private int points = 0;
 

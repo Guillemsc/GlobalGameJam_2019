@@ -6,17 +6,11 @@ public enum ItemType
 {
     ITEM_MAGNET,
     ITEM_GUN,
+    ITEM_LACAJA,
 }
 
 public class Item : MonoBehaviour
 {
-    public void Init(CircleCollider2D coll)
-    {
-        circle_collider = coll;
-
-        circle_collider.isTrigger = true;
-    }
-
     public ItemType Type()
     {
         return type;
@@ -25,16 +19,26 @@ public class Item : MonoBehaviour
     public void SetGrabbedBy(PlayerStats set)
     {
         grabbed_by = set;
-
-        //if (grabbed_by != null)
-        //    circle_collider.enabled = false;
-        //else
-        //    circle_collider.enabled = true;
     }
 
     public PlayerStats GetGrabbedBy()
     {
         return grabbed_by;
+    }
+
+    public void SetHouse(House ho)
+    {
+        house = ho;
+    }
+
+    public House GetHouse()
+    {
+        return house;
+    }
+
+    public bool GetInHouse()
+    {
+        return house != null;
     }
 
     public bool GetIsGrabbed()
@@ -74,6 +78,5 @@ public class Item : MonoBehaviour
     private int points_to_give = 0;
 
     private PlayerStats grabbed_by = null;
-
-    private CircleCollider2D circle_collider = null;
+    private House house = null;
 }

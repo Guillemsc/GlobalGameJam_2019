@@ -6,6 +6,7 @@ public enum QuestType {
     QT_LACAJA,
 
     QT_GUNS,
+    QT_SPEEDS,
 
     QT_NULL
 }

@@ -72,15 +72,15 @@ public class PlayerActions : MonoBehaviour
         {
             if (pl.HasGamepad())
             {
-                if (pl.GetKeyA())
+                if (pl.GetKeyA(GamepadGetButtonType.DOWN))
                 {
                     ItemManager.Instance.PlayerTryGrabItem(stats);
                 }
-                else if(pl.GetKeyB())
+                else if(pl.GetKeyB(GamepadGetButtonType.DOWN))
                 {
                     ItemManager.Instance.StopGrabbingItem(stats);
                 }
-                else if(pl.GetKeyRB())
+                else if(pl.GetKeyRB(GamepadGetButtonType.DOWN))
                 {
                     Item it = stats.GetGrabbedItem();
 

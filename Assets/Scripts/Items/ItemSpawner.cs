@@ -14,6 +14,8 @@ public class ItemSpawner : MonoBehaviour
 
     Item spawned_item = null;
 
+    public bool LaCaja_spawn = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,11 +32,11 @@ public class ItemSpawner : MonoBehaviour
     {
         if(timer.ReadTime() > spawn_time) 
         {
-
+            timer.Reset();
             timer.Start();
             if (spawned_item == null) 
             {
-                int rand = Random.Range(0, 99);
+                int rand = Random.Range(0, 100);
                 if (rand < spawn_chance)
                     SpawnItem();
             }
@@ -51,9 +53,14 @@ public class ItemSpawner : MonoBehaviour
             return;
         }
         
-        int item_to_spawn = Random.Range(0, num_items - 2);
+        int item_to_spawn = Random.Range(0, num_items - 1);
 
         spawned_item = Instantiate<Item>(ItemManager.Instance.GetItemsPrefabs()[item_to_spawn],transform.position,Quaternion.identity);
+        ItemManager.Instance.AddToItemsInstances(spawned_item);
+    }
+
+    void SpawnLACAJA() {
+        spawned_item = Instantiate(ItemManager.Instance.GetItemPrefabByItemType(ItemType.ITEM_LACAJA), transform.position, Quaternion.identity);
         ItemManager.Instance.AddToItemsInstances(spawned_item);
     }
 
@@ -65,6 +72,13 @@ public class ItemSpawner : MonoBehaviour
 
                     if (start.quest == QuestType.QT_GUNS) {
                         force_gun = true;
+                    }
+                    if(start.quest == QuestType.QT_LACAJA) {
+                        if(spawned_item != null) {
+                            ItemManager.Instance.RemoveFromitemsInstances(spawned_item);
+                            Destroy(spawned_item);
+                        }
+                        SpawnLACAJA();
                     }
                     break;
                 }
