@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         CapSpeed();
+
+        Flip();
     }
 
     private void InitPlayer()
@@ -182,6 +184,23 @@ public class PlayerMovement : MonoBehaviour
         {
             rigid_body.velocity = new Vector2(rigid_body.velocity.x, player_speed * vel_norm.y);
         }       
+    }
+
+    void Flip() 
+    {
+        if(rigid_body.velocity.x < -0.1f) 
+        {
+            Vector3 scale = transform.localScale;
+            scale.x = 1;
+            transform.localScale = scale;
+            
+        }
+        else if (rigid_body.velocity.x > 0.1f) 
+        {
+            Vector3 scale = transform.localScale;
+            scale.x = -1;
+            transform.localScale = scale;
+        }
     }
 
     void OnEvent(GameEvent ev) 
