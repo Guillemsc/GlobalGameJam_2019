@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  points_to_give: 0
+  points_to_give: 30
 --- !u!58 &962319977289096642
 CircleCollider2D:
   m_ObjectHideFlags: 0
