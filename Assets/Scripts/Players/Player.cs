@@ -92,6 +92,90 @@ public class Player
         return ret;
     }
 
+    public float LeftJoystickHorizontal()
+    {
+        float ret = 0.0f;
+
+        if (HasGamepad())
+        {
+            string joystick = "LEFT_JOY_HORI_P" + (player_index + 1).ToString();
+
+            ret = Input.GetAxis(joystick);
+        }
+
+        return ret;
+    }
+
+    public float LeftJoystickVertical()
+    {
+        float ret = 0.0f;
+
+        if (HasGamepad())
+        {
+            string joystick = "LEFT_JOY_VERT_P" + (player_index + 1).ToString();
+
+            ret = Input.GetAxis(joystick);
+        }
+
+        return ret;
+    }
+
+    public float RightJoystickHorizontal()
+    {
+        float ret = 0.0f;
+
+        if (HasGamepad())
+        {
+            string joystick = "RIGHT_JOY_HORI_P" + (player_index + 1).ToString();
+
+            ret = Input.GetAxis(joystick);
+        }
+
+        return ret;
+    }
+
+    public float RightJoystickVertical()
+    {
+        float ret = 0.0f;
+
+        if (HasGamepad())
+        {
+            string joystick = "RIGHT_JOY_VERT_P" + (player_index + 1).ToString();
+
+            ret = Input.GetAxis(joystick);
+        }
+
+        return ret;
+    }
+
+    public float DPadHorizontal()
+    {
+        float ret = 0.0f;
+
+        if (HasGamepad())
+        {
+            string joystick = "DPAD_HORI_P" + (player_index + 1).ToString();
+
+            ret = Input.GetAxis(joystick);
+        }
+
+        return ret;
+    }
+
+    public float DPadVertical()
+    {
+        float ret = 0.0f;
+
+        if (HasGamepad())
+        {
+            string joystick = "DPAD_VERT_P" + (player_index + 1).ToString();
+
+            ret = Input.GetAxis(joystick);
+        }
+
+        return ret;
+    }
+
     private bool GetButtonInputByType(string button_name, GamepadGetButtonType type)
     {
         bool ret = false;

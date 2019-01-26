@@ -40,6 +40,6 @@ public class SpawnManager : Singleton<SpawnManager>
     {
         if (Input.GetKeyDown(KeyCode.A)) SpawnPlayer();
         if (Input.GetKeyDown(KeyCode.S)) PlayersManager.Instance.AddPlayer();
-        Debug.Log(PlayersManager.Instance.GetPlayersCount());
+        //Debug.Log(PlayersManager.Instance.GetPlayersCount());
     }
 }

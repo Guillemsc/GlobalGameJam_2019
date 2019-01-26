@@ -23,7 +23,7 @@ public class PlayersManager : Singleton<PlayersManager>
     {
         for(int i = 0; i < players.Count; ++i)
         {
-            if(players[i].GetKeyA())
+            if(players[i].DPadVertical() != 0.0f)
             {
                 int r = 0;
 
