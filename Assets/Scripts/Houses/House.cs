@@ -14,5 +14,12 @@ public class House : MonoBehaviour
         return player_instance;
     }
 
+    public int GetPoints()
+    {
+        return points;
+    }
+
     private PlayerStats player_instance = null;
+
+    private int points = 0;
 }

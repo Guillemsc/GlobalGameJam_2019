@@ -134,6 +134,38 @@ public class HouseManager : Singleton<HouseManager>
         houses.Clear();
     }
 
+    List<House> GetHousesOrderedByPoints()
+    {
+        List<House> ret = new List<House>();
+
+        List<House> to_check = new List<House>(houses);
+
+        while(to_check.Count > 0)
+        {
+            int max_points = 0;
+            House house_max_points = null;
+
+            for(int i = 0; i < to_check.Count; ++i)
+            {
+                House curr_house = to_check[i];
+
+                if(curr_house.GetPoints() > max_points)
+                {
+                    house_max_points = curr_house;
+                    max_points = curr_house.GetPoints();
+                }
+            }
+
+            if(house_max_points != null)
+            {
+                to_check.Remove(house_max_points);
+                ret.Add(house_max_points);
+            }
+        }
+
+        return ret;
+    }
+
     [SerializeField]
     private GameObject house_prefab = null;
 
