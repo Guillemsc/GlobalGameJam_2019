@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIEventPanel : MonoBehaviour
 {
-    public float panel_move_speed = 30f;
+    public float panel_move_time = 1f;
     float y_pos = 0;
     RectTransform trans = null;
 
@@ -12,6 +12,11 @@ public class UIEventPanel : MonoBehaviour
     public UIEventTime ev_time;
 
     bool quest_active = false;
+
+    private void Awake() 
+    {
+        queue_context = QueueEventManager.Instance.CreateContext();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -25,18 +30,6 @@ public class UIEventPanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (y_pos != trans.position.y) 
-        {
-            Vector3 pos = trans.position;
-            if(y_pos > trans.position.y) 
-            {
-                pos.y -= panel_move_speed * Time.deltaTime;
-            }
-            else if (y_pos < trans.position.y) {
-                pos.y += panel_move_speed * Time.deltaTime;
-            }
-            trans.position = pos;
-        }
 
         if(quest_active) 
         {
@@ -46,20 +39,34 @@ public class UIEventPanel : MonoBehaviour
 
     void OnEvent(GameEvent ev) {
 
-        switch (ev.Type()) {
-            case GameEventType.EVENT_START_QUEST:
-                quest_active = true;
-                y_pos = 0f;
+        switch (ev.Type()) 
+        {
+            case GameEventType.EVENT_START_QUEST: 
+                {
+                    quest_active = true;
 
-                ev_text.SetText(QuestManager.Instance.GetActiveQuest().description);
-                break;
-            case GameEventType.EVENT_END_QUEST:
-                quest_active = false;
-                y_pos = -50f;
-                break;
+                    ev_text.SetText(QuestManager.Instance.GetActiveQuest().description);
+                    Vector3 pos = gameObject.transform.position;
+                    pos.y = 0f;
+                    queue_context.PushEvent(new QueueEventPosition(gameObject, transform.position, pos, panel_move_time, EasingFunctionsType.LINEAR));
+
+                    break;
+                }
+            case GameEventType.EVENT_END_QUEST: 
+                {
+                    quest_active = false;
+
+                    Vector3 pos = gameObject.transform.position;
+                    pos.y = -50f;
+                    queue_context.PushEvent(new QueueEventPosition(gameObject, transform.position, pos, panel_move_time, EasingFunctionsType.LINEAR));
+
+                    break;
+                }
             default:
                 Debug.LogError("UIEventPanel: Invalid call to OnEvent");
                 break;
         }
     }
+
+    private QueueEventContext queue_context = null;
 }
