@@ -36,14 +36,14 @@ public class ItemGun : Item
 
     public override void OnPlayerGrab(PlayerStats player)
     {
-        //base.OnPlayerGrab(player);
+        base.OnPlayerGrab(player);
     }
 
     public override void OnPlayerUses()
     {
         if (!destroyed)
         {
-            ItemManager.Instance.StopGrabbingItem(GetComponent<PlayerStats>());
+            //ItemManager.Instance.StopGrabbingItem(GetComponent<PlayerStats>());
             GetComponent<AudioSource>().Play();
 
             dir_vec = GetGrabbedBy().GetComponent<PlayerActions>().GetDirectionVector();
@@ -53,14 +53,17 @@ public class ItemGun : Item
 
     private void CustomOnTriggerEnter2D(Collider2D coll)
     {
-        PlayerStats ps = coll.GetComponent<PlayerStats>();
-
-        if (ps != null && ps != GetComponent<PlayerStats>())
+        if (is_projectile)
         {
-            ItemManager.Instance.StopGrabbingItem(ps);
-            GetComponent<AudioSource>().Play();
-            is_projectile = false;
-            dir_vec = Vector2.zero;
+            PlayerStats ps = coll.GetComponent<PlayerStats>();
+
+            if (ps != null && ps != GetComponent<PlayerStats>())
+            {
+                ItemManager.Instance.StopGrabbingItem(ps);
+                GetComponent<AudioSource>().Play();
+                is_projectile = false;
+                dir_vec = Vector2.zero;
+            }
         }
     }
 }
