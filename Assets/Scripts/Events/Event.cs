@@ -27,6 +27,7 @@ public enum GameEventType
     EVENT_MATCH_FINISH,
 
     EVENT_ITEM_GRABBED,
+    EVENT_ITEM_DROPPED,
 }
 
 public class GameEvent

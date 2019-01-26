@@ -109,6 +109,9 @@ public class ItemManager : Singleton<ItemManager>
             {
                 ins.SetGrabbedItem(it);
                 it.SetGrabbedBy(ins);
+
+                EventItemGrabbed ev = new EventItemGrabbed(it, ins);
+                EventManager.Instance.SendEvent(ev);
             }
         }
     }
@@ -120,9 +123,16 @@ public class ItemManager : Singleton<ItemManager>
             Item grabbed_item = ins.GetGrabbedItem();
 
             if (grabbed_item != null)
+            {
+                grabbed_item.transform.parent = null;
+
                 grabbed_item.SetGrabbedBy(null);
+            }
 
             ins.SetGrabbedItem(null);
+
+            EventItemDropped ev = new EventItemDropped(grabbed_item, ins);
+            EventManager.Instance.SendEvent(ev);
         }
     }
 
