@@ -55,11 +55,6 @@ public class Player
             string button = "A_P" + (player_index + 1).ToString();
 
             ret = GetButtonInputByType(button, type);
-
-            if(ret)
-            {
-                int i = 0;
-            }
         }
 
         return ret;

@@ -7,6 +7,8 @@ public class PlayerActions : MonoBehaviour
     private void Awake()
     {
         InitPlayer();
+
+        InitEvents();
     }
 
     private void Update()
@@ -40,6 +42,7 @@ public class PlayerActions : MonoBehaviour
                     if (r_ev.player == stats)
                     {
                         r_ev.item.gameObject.transform.parent = item_parent.transform;
+                        r_ev.item.gameObject.transform.localPosition = new Vector3(0, 0, 0);
                     }
 
                     break;
@@ -80,17 +83,20 @@ public class PlayerActions : MonoBehaviour
     {
         Player player = stats.GetPlayer();
 
-        input = new Vector2(0, 0);
-        input_magnitude = 0.0f;
-
-        if (player.HasGamepad())
+        if (player != null)
         {
-            input.x = player.LeftJoystickHorizontal();
-            input.y = -player.LeftJoystickVertical();
+            input = new Vector2(0, 0);
+            input_magnitude = 0.0f;
 
-            input_angle = Utils.AngleFromTwoPoints(new Vector2(0, 0), input);
+            if (player.HasGamepad())
+            {
+                input.x = player.RightJoystickHorizontal();
+                input.y = -player.RightJoystickVertical();
 
-            input_magnitude = input.sqrMagnitude;
+                input_angle = Utils.AngleFromTwoPoints(new Vector2(0, 0), input);
+
+                input_magnitude = input.sqrMagnitude;
+            }
         }
     }
 
