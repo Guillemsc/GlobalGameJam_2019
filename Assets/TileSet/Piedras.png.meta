@@ -1,12 +1,11 @@
 fileFormatVersion: 2
-guid: cc23166e6271ff0428b46667f059832b
+guid: e99957ac1285bdf4187670cfc7f10b29
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Tilesverdes_0
-    21300002: Tilesverdes_1
-    21300004: Tilesverdes_2
-    21300006: Tilesverdes_3
-    21300008: Tilesverdes_4
+    21300000: Piedras_0
+    21300002: Piedras_1
+    21300004: Piedras_2
+    21300006: Piedras_3
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -89,7 +88,47 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tilesverdes_0
+      name: Piedras_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36369775f8c7d47429417233e5ff3641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Piedras_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecbd4a4652af14640a7ee9815b0af98b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Piedras_2
       rect:
         serializedVersion: 2
         x: 0
@@ -103,13 +142,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c0b530eef756e34eafd6106e21a7cff
+      spriteID: 52f92961531c6a244b7a4df6f78b0e53
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tilesverdes_1
+      name: Piedras_3
       rect:
         serializedVersion: 2
         x: 64
@@ -123,67 +162,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60b91badf78245d42bdcdd0b7a9c6357
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tilesverdes_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bb8d7278a6ab1a1498cc9ae4d31f3412
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tilesverdes_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 00d6ed182e177f540978ae4f0c55833c
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tilesverdes_4
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: da1ace8184cd4c24f912f9b4e9ae8595
+      spriteID: a6d35f51918f4ff4bb21eaa109cadfa9
       vertices: []
       indices: 
       edges: []
@@ -191,7 +170,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: a9805cfe4bec10b439a7e079816bf116
+    spriteID: 0055f885b0c81cc4395b661769f6d0a6
     vertices: []
     indices: 
     edges: []
