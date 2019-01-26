@@ -21,19 +21,19 @@ public class SpawnManager : Singleton<SpawnManager>
 
     public void SpawnPlayer()
     {
-        int num_players = PlayersManager.Instance.GetPlayersCount();
-        for (int i = 0; i < num_players; ++i)
-        {
-            Player player = PlayersManager.Instance.GetPlayerByIndex(i);
-            Vector2 spawnposition = HousePositions[i].GetComponent<Transform>().position;
+        //int num_players = PlayersManager.Instance.GetPlayersCount();
+        //for (int i = 0; i < num_players; ++i)
+        //{
+        //    Player player = PlayersManager.Instance.GetPlayerByIndex(i);
+        //    Vector2 spawnposition = HousePositions[i].GetComponent<Transform>().position;
 
-            GameObject house = Instantiate(HousePrefab, spawnposition, Quaternion.identity);
-            house.GetComponent<House>().SetEndPosition(HouseEndPositions[i].GetComponent<Transform>().position);
+        //    GameObject house = Instantiate(HousePrefab, spawnposition, Quaternion.identity);
+        //    house.GetComponent<House>().SetEndPosition(HouseEndPositions[i].GetComponent<Transform>().position);
 
 
-            Instantiate(PlayerPrefab, spawnposition, Quaternion.identity);
+        //    Instantiate(PlayerPrefab, spawnposition, Quaternion.identity);
 
-        }
+        //}
     }
 
     private void Update()

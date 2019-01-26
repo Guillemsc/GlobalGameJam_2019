@@ -47,6 +47,20 @@ public class QueueEventContext
         }
     }
 
+    public void ClearEvents()
+    {
+        for (int i = 0; i < curr_events.Count;)
+        {
+            QueueEvent curr_event = curr_events[i];
+
+            curr_event.OnFinish();
+
+            curr_event.CallOnEventFinish();
+        }
+
+        curr_events.Clear();
+    }
+
     public void UpdateEvents()
     {
         if (curr_events.Count > 0)
