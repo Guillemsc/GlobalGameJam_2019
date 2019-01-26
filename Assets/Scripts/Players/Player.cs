@@ -9,6 +9,13 @@ public enum GamepadGetButtonType
     UP,
 }
 
+public enum PlayerColour
+{
+    RED,
+    BLUE,
+    YELLOW,
+}
+
 public class Player
 {
     public void SetPlayerIndex(int index)
@@ -19,6 +26,16 @@ public class Player
     public int GetPlayerIndex()
     {
         return player_index;
+    }
+
+    public void SetPlayerColour(PlayerColour col)
+    {
+        colour = col;
+    }
+
+    public PlayerColour GetPlayerColour()
+    {
+        return colour;
     }
 
     public void SetAssignedGamepad(Gamepad gp)
@@ -293,4 +310,5 @@ public class Player
     private int player_index = 0;
     private Gamepad assigned_gamepad = null;
     private PlayerStats player_instance = null;
+    private PlayerColour colour = new PlayerColour();
 }

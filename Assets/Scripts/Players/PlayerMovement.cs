@@ -8,12 +8,12 @@ public class PlayerMovement : MonoBehaviour
     {
         InitPlayer();
         InitRigidbody();
+        InitEvents();
     }
 
-    void Start() 
+    private void Start()
     {
-        EventManager.Instance.Suscribe(GameEventType.EVENT_START_QUEST, OnEvent);
-        EventManager.Instance.Suscribe(GameEventType.EVENT_END_QUEST, OnEvent);
+        SetMovementEnabled(false);
     }
 
     private void Update()
@@ -48,7 +48,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void InitEvents()
     {
-        
+        EventManager.Instance.Suscribe(GameEventType.EVENT_START_QUEST, OnEvent);
+        EventManager.Instance.Suscribe(GameEventType.EVENT_END_QUEST, OnEvent);
+        EventManager.Instance.Suscribe(GameEventType.EVENT_MATCH_START, OnEvent);
     }
 
     public void SetMovementEnabled(bool set)
@@ -224,6 +226,12 @@ public class PlayerMovement : MonoBehaviour
             case GameEventType.EVENT_END_QUEST:
                 speed_delta = 0f;
                 break;
+
+            case GameEventType.EVENT_MATCH_START:
+                {
+                    SetMovementEnabled(true);
+                    break;
+                }
 
             default:
                 break;
