@@ -64,6 +64,11 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
+    public Vector2 GetDirectionVector()
+    {
+        return input;
+    }
+
     private void UpdateGrabInput()
     {
         Player pl = stats.GetPlayer();
