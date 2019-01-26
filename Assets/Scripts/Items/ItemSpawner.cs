@@ -34,7 +34,7 @@ public class ItemSpawner : MonoBehaviour
             timer.Start();
             if (spawned_item == null) 
             {
-                int rand = Random.Range(0, 99);
+                int rand = Random.Range(0, 100);
                 if (rand < spawn_chance)
                     SpawnItem();
             }
@@ -51,7 +51,7 @@ public class ItemSpawner : MonoBehaviour
             return;
         }
         
-        int item_to_spawn = Random.Range(0, num_items - 2);
+        int item_to_spawn = Random.Range(0, num_items - 1);
 
         spawned_item = Instantiate<Item>(ItemManager.Instance.GetItemsPrefabs()[item_to_spawn],transform.position,Quaternion.identity);
         ItemManager.Instance.AddToItemsInstances(spawned_item);

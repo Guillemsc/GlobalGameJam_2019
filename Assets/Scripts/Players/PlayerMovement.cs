@@ -10,6 +10,12 @@ public class PlayerMovement : MonoBehaviour
         InitRigidbody();
     }
 
+    void Start() 
+    {
+        EventManager.Instance.Suscribe(GameEventType.EVENT_START_QUEST, OnEvent);
+        EventManager.Instance.Suscribe(GameEventType.EVENT_END_QUEST, OnEvent);
+    }
+
     private void Update()
     {
         PlayerInput();
@@ -135,26 +141,55 @@ public class PlayerMovement : MonoBehaviour
     {        
         Vector2 vel_norm = rigid_body.velocity.normalized;
 
-        float max_speed_x = vel_norm.x * player_max_speed;
-        float max_speed_y = vel_norm.y * player_max_speed;
+        float player_speed = player_max_speed + speed_delta;
+
+        float max_speed_x = vel_norm.x * player_speed;
+        float max_speed_y = vel_norm.y * player_speed;
 
         if (rigid_body.velocity.x > max_speed_x && max_speed_x > 0)
         {
-            rigid_body.velocity = new Vector2(player_max_speed * vel_norm.x, rigid_body.velocity.y);
+            rigid_body.velocity = new Vector2(player_speed * vel_norm.x, rigid_body.velocity.y);
         }
         else if (rigid_body.velocity.x < max_speed_x && max_speed_x < 0)
         {
-            rigid_body.velocity = new Vector2(player_max_speed * vel_norm.x, rigid_body.velocity.y);
+            rigid_body.velocity = new Vector2(player_speed * vel_norm.x, rigid_body.velocity.y);
         }
 
         if (rigid_body.velocity.y > max_speed_y && max_speed_y > 0)
         {
-            rigid_body.velocity = new Vector2(rigid_body.velocity.x, player_max_speed * vel_norm.y);
+            rigid_body.velocity = new Vector2(rigid_body.velocity.x, player_speed * vel_norm.y);
         }
         else if (rigid_body.velocity.y < max_speed_y && max_speed_y < 0)
         {
-            rigid_body.velocity = new Vector2(rigid_body.velocity.x, player_max_speed * vel_norm.y);
+            rigid_body.velocity = new Vector2(rigid_body.velocity.x, player_speed * vel_norm.y);
         }       
+    }
+
+    void OnEvent(GameEvent ev) 
+    {
+        switch (ev.Type()) {
+
+            case GameEventType.EVENT_START_QUEST: 
+                {
+                    EventStartQuest quest = (EventStartQuest)ev;
+
+                    if(quest.quest == QuestType.QT_SPEEDS) 
+                    {
+                        HouseManager.Instance.GetHousesOrderedByPoints();
+                        if (HouseManager.Instance.GetHousesOrderedByPoints()[0].GetPlayerInstance().gameObject == gameObject)
+                            speed_delta = player_max_speed * -0.5f;
+                        else if(HouseManager.Instance.GetHousesOrderedByPoints()[2].GetPlayerInstance().gameObject == gameObject)
+                            speed_delta = player_max_speed * 0.5f;
+                    }
+                    break;
+                }
+            case GameEventType.EVENT_END_QUEST:
+                speed_delta = 0f;
+                break;
+
+            default:
+                break;
+        }
     }
 
     [SerializeField]
@@ -172,4 +207,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 input = Vector2.zero;
     private float input_magnitude = 0.0f;
     private float movement_angle = 0.0f;
+
+    private float speed_delta = 0;
 }
