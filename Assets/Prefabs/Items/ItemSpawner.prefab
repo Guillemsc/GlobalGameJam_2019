@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawn_time: 10
-  spawn_chance: 70
+  spawn_chance: 15
