@@ -23,6 +23,43 @@ public class PlayerActions : MonoBehaviour
         stats = gameObject.GetComponent<PlayerStats>();
     }
 
+    private void InitEvents()
+    {
+        EventManager.Instance.Suscribe(GameEventType.EVENT_ITEM_GRABBED, OnEvent);
+        EventManager.Instance.Suscribe(GameEventType.EVENT_ITEM_DROPPED, OnEvent);
+    }
+
+    private void OnEvent(GameEvent ev)
+    {
+        switch (ev.Type())
+        {
+            case GameEventType.EVENT_ITEM_GRABBED:
+                {
+                    EventItemGrabbed r_ev = (EventItemGrabbed)ev;
+
+                    if (r_ev.player == stats)
+                    {
+                        r_ev.item.gameObject.transform.parent = item_parent.transform;
+                    }
+
+                    break;
+                }
+            case GameEventType.EVENT_ITEM_DROPPED:
+                {
+                    EventItemDropped r_ev = (EventItemDropped)ev;
+
+                    if (r_ev.player == stats)
+                    {
+
+                    }
+
+                    break;
+                }
+            default:
+                break;
+        }
+    }
+
     private void UpdateGrabInput()
     {
         Player pl = stats.GetPlayer();
@@ -61,7 +98,7 @@ public class PlayerActions : MonoBehaviour
     {
         if (input_magnitude > stats.GetJoystickDeadVal())
         {
-            item_parent.transform.eulerAngles = new Vector3(0, 0, input_angle);
+            item_pivot.transform.localEulerAngles = new Vector3(0, 0, input_angle);
         }
     }
 
