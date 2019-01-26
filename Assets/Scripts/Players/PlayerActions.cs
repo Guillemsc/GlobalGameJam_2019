@@ -80,7 +80,7 @@ public class PlayerActions : MonoBehaviour
                 {
                     ItemManager.Instance.StopGrabbingItem(stats);
                 }
-                else if(pl.GetKeyRT() != 0.0f)
+                else if(pl.GetKeyRB())
                 {
                     Item it = stats.GetGrabbedItem();
 
