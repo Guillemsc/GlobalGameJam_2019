@@ -102,7 +102,8 @@ public class Item : MonoBehaviour
     }
 
     public void OnPlayerThrowBase() {
-        
+        if (ItemManager.Instance.hidden_items)
+            SetHidden();
     }
 
     public virtual void OnPlayerThrows()
@@ -114,7 +115,7 @@ public class Item : MonoBehaviour
     private ItemType type = new ItemType();
 
     [SerializeField]
-    private int points_to_give = 0;
+    public int points_to_give = 0;
 
     [SerializeField]
     private int points_destroyed = 0;
