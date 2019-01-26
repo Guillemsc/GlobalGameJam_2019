@@ -13,6 +13,8 @@ public enum GameEventType
 
     EVENT_ADD_SCORE,
     EVENT_SUBSTRACT_SCORE,
+
+    EVENT_START_GAMEEVENT,
 }
 
 public class GameEvent
