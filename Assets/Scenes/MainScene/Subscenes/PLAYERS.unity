@@ -335,6 +335,7 @@ MonoBehaviour:
   game_ui: {fileID: 0}
   temp_game_ui: {fileID: 0}
   timer_before_match_text: {fileID: 0}
+  panel_before_match: {fileID: 0}
   map: {fileID: 0}
   map_center: {x: 0, y: 0, z: 0}
   time_before_match_starts: 6
@@ -605,6 +606,32 @@ MonoBehaviour:
       componentName: 
       componentIndex: 0
       editorLocalId: 1025708476
+      editorPrefabRelativePath: 
+      version: 1
+    _data:
+      data: []
+  - _sourceObject: {fileID: 1111497116}
+    _sourceField: panel_before_match
+    DEPRECATED_fromObject:
+      scene:
+        editorAssetGUID: 
+        name: 
+        _path: 
+      fullPath: 
+      componentName: 
+      componentIndex: 0
+      editorLocalId: 0
+      editorPrefabRelativePath: 
+      version: 0
+    _toObject:
+      scene:
+        editorAssetGUID: e1c0b28244e8b2346bb4e9ec235649b4
+        name: GAME_UI
+        _path: Assets/Scenes/MainScene/Subscenes/GAME_UI.unity
+      fullPath: /Canvas/TimeToStartMatchPanel
+      componentName: 
+      componentIndex: 0
+      editorLocalId: 1223458764
       editorPrefabRelativePath: 
       version: 1
     _data:

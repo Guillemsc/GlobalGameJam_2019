@@ -147,6 +147,8 @@ public class MatchManager : Singleton<MatchManager>
                 QueueEventScale(timer_before_match_text.gameObject,
                 new Vector3(2, 2, 2), new Vector3(0, 0, 0), 0.2f, EasingFunctionsType.EXPO_OUT));
 
+            queue_context.PushEvent(new QueueEventFade(panel_before_match, 1, 0, 0.2f, EasingFunctionsType.LINEAR), true);
+
             queue_context.PushEvent(new QueueEventSetActive(timer_before_match_text.gameObject, false));
 
             // --------------
@@ -218,6 +220,8 @@ public class MatchManager : Singleton<MatchManager>
         }
     }
 
+    // UI ----------
+
     [SerializeField]
     private GameObject game_ui = null;
 
@@ -225,10 +229,15 @@ public class MatchManager : Singleton<MatchManager>
     private GameObject temp_game_ui = null;
 
     [SerializeField]
-    TMPro.TextMeshProUGUI timer_before_match_text = null;
+    private TMPro.TextMeshProUGUI timer_before_match_text = null;
+
+    [SerializeField]
+    private GameObject panel_before_match = null;
 
     [SerializeField]
     private GameObject map = null;
+
+    // ----------
 
     [SerializeField]
     private Vector3 map_center = Vector3.zero;
