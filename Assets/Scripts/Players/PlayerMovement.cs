@@ -119,16 +119,31 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void CapSpeed()
-    {
-        float curr_speed = rigid_body.velocity.magnitude;
+    {        
+        Vector2 vel_norm = rigid_body.velocity.normalized;
 
-        if(curr_speed > player_max_speed)
+        float max_speed_x = vel_norm.x * player_max_speed;
+        float max_speed_y = vel_norm.y * player_max_speed;
+
+        Debug.Log(vel_norm);
+
+        if (rigid_body.velocity.x > max_speed_x && max_speed_x > 0)
         {
-            Vector2 vel_vector = new Vector2(Mathf.Cos(movement_angle * Mathf.Deg2Rad) * player_max_speed,
-                                             Mathf.Sin(movement_angle * Mathf.Deg2Rad) * player_max_speed);
-
-            rigid_body.velocity = vel_vector;
+            rigid_body.velocity = new Vector2(player_max_speed * vel_norm.x, rigid_body.velocity.y);
         }
+        else if (rigid_body.velocity.x < max_speed_x && max_speed_x < 0)
+        {
+            rigid_body.velocity = new Vector2(player_max_speed * vel_norm.x, rigid_body.velocity.y);
+        }
+
+        if (rigid_body.velocity.y > max_speed_y && max_speed_y > 0)
+        {
+            rigid_body.velocity = new Vector2(rigid_body.velocity.x, player_max_speed * vel_norm.y);
+        }
+        else if (rigid_body.velocity.y < max_speed_y && max_speed_y < 0)
+        {
+            rigid_body.velocity = new Vector2(rigid_body.velocity.x, player_max_speed * vel_norm.y);
+        }       
     }
 
     [SerializeField]

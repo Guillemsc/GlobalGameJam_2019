@@ -62,10 +62,10 @@ public class PlayersManager : Singleton<PlayersManager>
         // Temp
         if(players.Count == 1)
             SpawnPlayerInstance(player, new Vector2(-3, -3));
-        //else if(players.Count == 2)
-        //    SpawnPlayerInstance(player, new Vector2(-6, -3));
-        //else if (players.Count == 3)
-        //    SpawnPlayerInstance(player, new Vector2(-9, -3));
+        else if (players.Count == 2)
+            SpawnPlayerInstance(player, new Vector2(-6, -3));
+        else if (players.Count == 3)
+            SpawnPlayerInstance(player, new Vector2(-9, -3));
 
 
         return player;

@@ -141,7 +141,7 @@ MonoBehaviour:
   joystick_dead_val: 0.1
   player_max_speed: 3
   player_acceleration: 10
-  player_deceleration: 3
+  player_deceleration: 10
 --- !u!50 &4859665602390256171
 Rigidbody2D:
   serializedVersion: 4
