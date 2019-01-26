@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EventItemDropped : GameEvent
 {
-    public EventItemDropped(Item item, PlayerStats player) : base(GameEventType.EVENT_ITEM_DROPPED)
+    public EventItemDropped(Item item, PlayerStats playe) : base(GameEventType.EVENT_ITEM_DROPPED)
     {
         this.item = item;
-        this.player = player;
+        this.player = playe;
     }
 
     public Item item = null;
