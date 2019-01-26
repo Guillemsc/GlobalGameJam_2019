@@ -11,9 +11,31 @@ public enum ItemType
 
 public class Item : MonoBehaviour
 {
+    public Sprite base_sprite = null; 
+    public Sprite hidden_sprite;
+    private SpriteRenderer sr;
+
+    private bool destroyed = false;
+
+    public void BaseStart() {
+        sr = GetComponentInChildren<SpriteRenderer>();
+        if (sr != null) {
+            base_sprite = sr.sprite;
+        }
+    }
+
     public ItemType Type()
     {
         return type;
+    }
+
+    public void SetHidden() {
+
+        sr.sprite = hidden_sprite;
+    }
+
+    public void SetBaseSprite() {
+        sr.sprite = base_sprite;
     }
 
     public void SetGrabbedBy(PlayerStats set)
@@ -48,7 +70,12 @@ public class Item : MonoBehaviour
 
     public int GetPointsToGive()
     {
-        return points_to_give;
+        return (destroyed) ? (points_destroyed) : points_to_give;
+    }
+
+    public void OnPlayerGrabBase(PlayerStats player) 
+    {
+        SetBaseSprite();
     }
 
     public virtual void OnPlayerGrab(PlayerStats player)
@@ -61,9 +88,19 @@ public class Item : MonoBehaviour
 
     }
 
+    public void OnPlayerUsesBase()
+    {
+        destroyed = true;
+        sr.color = Color.red;
+    }
+
     public virtual void OnPlayerUses()
     {
 
+    }
+
+    public void OnPlayerThrowBase() {
+        
     }
 
     public virtual void OnPlayerThrows()
@@ -76,6 +113,9 @@ public class Item : MonoBehaviour
 
     [SerializeField]
     private int points_to_give = 0;
+
+    [SerializeField]
+    private int points_destroyed = 0;
 
     private PlayerStats grabbed_by = null;
     private House house = null;

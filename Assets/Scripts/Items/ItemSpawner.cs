@@ -73,10 +73,10 @@ public class ItemSpawner : MonoBehaviour
                     if (start.quest == QuestType.QT_GUNS) {
                         force_gun = true;
                     }
-                    if(start.quest == QuestType.QT_LACAJA) {
+                    if(start.quest == QuestType.QT_LACAJA && LaCaja_spawn) {
                         if(spawned_item != null) {
                             ItemManager.Instance.RemoveFromitemsInstances(spawned_item);
-                            Destroy(spawned_item);
+                            GameObject.Destroy(spawned_item);
                         }
                         SpawnLACAJA();
                     }
