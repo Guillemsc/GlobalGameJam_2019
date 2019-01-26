@@ -12,6 +12,7 @@ public class MatchManager : Singleton<MatchManager>
     private void Awake()
     {
         EventManager.Instance.Suscribe(GameEventType.EVENT_MAP_LOAD, OnEvent);
+        EventManager.Instance.Suscribe(GameEventType.EVENT_MAP_UNLOAD, OnEvent);
     }
 
     private void Update()
@@ -27,7 +28,16 @@ public class MatchManager : Singleton<MatchManager>
         {
             case GameEventType.EVENT_MAP_LOAD:
                 {
+                    LoadMap();
+
                     StartWaitBeforStartingMatch();
+
+                    break;
+                }
+
+            case GameEventType.EVENT_MAP_UNLOAD:
+                {
+                    UnloadMap();
 
                     break;
                 }
@@ -52,6 +62,16 @@ public class MatchManager : Singleton<MatchManager>
     public float GetMatchTime()
     {
         return timer_match.ReadTime();
+    }
+
+    private void LoadMap()
+    {
+        map.SetActive(true);
+    }
+
+    private void UnloadMap()
+    {
+        map.SetActive(false);
     }
 
     private void StartWaitBeforStartingMatch()

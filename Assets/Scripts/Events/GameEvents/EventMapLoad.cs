@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventMapLoad : GameEvent
+public class EventMapUnload : GameEvent
 {
-    public EventMapLoad() : base(GameEventType.EVENT_MAP_LOAD)
+    public EventMapUnload() : base(GameEventType.EVENT_MAP_UNLOAD)
     {
 
     }

@@ -20,6 +20,7 @@ public enum GameEventType
     EVENT_END_QUEST,
 
     EVENT_MAP_LOAD,
+    EVENT_MAP_UNLOAD,
     EVENT_MATCH_START,
     EVENT_MATCH_FINISH,
 }
