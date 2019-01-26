@@ -172,6 +172,9 @@ public class HouseManager : Singleton<HouseManager>
     }
 
     [SerializeField]
+    private float house_item_radious = 0.0f;
+
+    [SerializeField]
     private GameObject house_prefab = null;
 
     [SerializeField]
@@ -182,9 +185,6 @@ public class HouseManager : Singleton<HouseManager>
 
     [SerializeField]
     private GameObject[] house_end_positions = null;
-
-    [SerializeField]
-    private float house_item_radious = 0.0f;
 
     private List<House> houses = new List<House>();
 

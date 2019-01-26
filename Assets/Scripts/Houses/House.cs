@@ -64,16 +64,28 @@ public class House : MonoBehaviour
         }
 
         if (!exists)
+        {
             items_around.Add(it);
+
+            EventItemEntersHouse ev = new EventItemEntersHouse(it, this);
+            EventManager.Instance.SendEvent(ev);
+        }
 
         RecalculateHousePoints();
     }
 
     private void RemoveItem(Item it)
     {
-        items_around.Remove(it);
+        if (it != null)
+        {
+            if(items_around.Remove(it))
+            {
+                EventItemLeavesHouse ev = new EventItemLeavesHouse(it, this);
+                EventManager.Instance.SendEvent(ev);
+            }
 
-        RecalculateHousePoints();
+            RecalculateHousePoints();
+        }
     }
 
     private void RecalculateHousePoints()

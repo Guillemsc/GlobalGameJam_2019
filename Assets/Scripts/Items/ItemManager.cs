@@ -18,7 +18,7 @@ public class ItemManager : Singleton<ItemManager>
     // Update is called once per frame
     void Update()
     {
-        
+        UpdateItems();
     }
 
     public List<Item> GetItemsPrefabs()
@@ -112,6 +112,8 @@ public class ItemManager : Singleton<ItemManager>
 
                 EventItemGrabbed ev = new EventItemGrabbed(it, ins);
                 EventManager.Instance.SendEvent(ev);
+
+                it.OnPlayerGrab(ins);
             }
         }
     }
@@ -124,6 +126,8 @@ public class ItemManager : Singleton<ItemManager>
 
             if (grabbed_item != null)
             {
+                grabbed_item.OnPlayerThrows();
+
                 grabbed_item.transform.parent = null;
 
                 grabbed_item.SetGrabbedBy(null);
@@ -133,6 +137,17 @@ public class ItemManager : Singleton<ItemManager>
 
             EventItemDropped ev = new EventItemDropped(grabbed_item, ins);
             EventManager.Instance.SendEvent(ev);
+        }
+    }
+
+    private void UpdateItems()
+    {
+        for(int i = 0; i < item_instances.Count; ++i)
+        {
+            Item curr_item = item_instances[i];
+
+            if(curr_item.GetIsGrabbed())
+                curr_item.OnPlayerGrabbed();
         }
     }
 

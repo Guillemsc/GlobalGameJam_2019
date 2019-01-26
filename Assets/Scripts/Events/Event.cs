@@ -28,6 +28,8 @@ public enum GameEventType
 
     EVENT_ITEM_GRABBED,
     EVENT_ITEM_DROPPED,
+    EVENT_ITEM_ENTERS_HOUSE,
+    EVENT_ITEM_LEAVES_HOUSE,
 }
 
 public class GameEvent
