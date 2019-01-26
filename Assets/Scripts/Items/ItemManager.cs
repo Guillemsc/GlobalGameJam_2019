@@ -203,5 +203,5 @@ public class ItemManager : Singleton<ItemManager>
 
     private List<Item> item_instances = new List<Item>();
 
-    private bool hidden_items = false;
+    public bool hidden_items = false;
 }
