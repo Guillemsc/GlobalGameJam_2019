@@ -5,6 +5,8 @@ using UnityEngine;
 public enum QuestType {
     QT_LACAJA,
 
+    QT_TEST,
+
     QT_NULL
 }
 
@@ -42,8 +44,11 @@ public abstract class Quest : MonoBehaviour
     void OnDisable() 
     {
         OnDisableQuest();
+
         EventEndQuest ev = new EventEndQuest(quest_type);
-        EventManager.Instance.SendEvent(ev);
+
+        if(EventManager.Instance != null)
+            EventManager.Instance.SendEvent(ev);
     }
 
     public abstract void OnEnableQuest();

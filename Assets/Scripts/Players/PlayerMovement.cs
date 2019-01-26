@@ -138,8 +138,6 @@ public class PlayerMovement : MonoBehaviour
         float max_speed_x = vel_norm.x * player_max_speed;
         float max_speed_y = vel_norm.y * player_max_speed;
 
-        Debug.Log(vel_norm);
-
         if (rigid_body.velocity.x > max_speed_x && max_speed_x > 0)
         {
             rigid_body.velocity = new Vector2(player_max_speed * vel_norm.x, rigid_body.velocity.y);
