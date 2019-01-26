@@ -10,7 +10,7 @@ public class UIPlayerPanel : MonoBehaviour
         for(int i = 0; i < transform.childCount; i++) 
         {
             GameObject child = transform.GetChild(i).gameObject;
-            //child.GetComponent<UIPlayer>().SetPlayer(PlayersManager.Instance.GetPlayerByIndex(i)); TODO
+            //child.GetComponent<UIPlayer>().SetPlayer(PlayersManager.Instance.GetPlayerByIndex(i)); 
         }
     }
 

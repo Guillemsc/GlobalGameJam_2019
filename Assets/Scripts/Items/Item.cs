@@ -11,9 +11,29 @@ public enum ItemType
 
 public class Item : MonoBehaviour
 {
+    public Sprite base_sprite = null; 
+    public Sprite hidden_sprite;
+    private SpriteRenderer sr;
+
+    public void BaseStart() {
+        sr = GetComponentInChildren<SpriteRenderer>();
+        if (sr != null) {
+            base_sprite = sr.sprite;
+        }
+    }
+
     public ItemType Type()
     {
         return type;
+    }
+
+    public void SetHidden() {
+
+        sr.sprite = hidden_sprite;
+    }
+
+    public void SetBaseSprite() {
+        sr.sprite = base_sprite;
     }
 
     public void SetGrabbedBy(PlayerStats set)
@@ -49,6 +69,11 @@ public class Item : MonoBehaviour
     public int GetPointsToGive()
     {
         return points_to_give;
+    }
+
+    public void OnPlayerGrabBase(PlayerStats player) 
+    {
+        
     }
 
     public virtual void OnPlayerGrab(PlayerStats player)

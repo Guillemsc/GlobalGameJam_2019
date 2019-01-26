@@ -12,7 +12,8 @@ public class ItemManager : Singleton<ItemManager>
     // Start is called before the first frame update
     void Start()
     {
-        
+        EventManager.Instance.Suscribe(GameEventType.EVENT_START_QUEST, OnEvent);
+        EventManager.Instance.Suscribe(GameEventType.EVENT_END_QUEST, OnEvent);
     }
 
     // Update is called once per frame
@@ -52,6 +53,9 @@ public class ItemManager : Singleton<ItemManager>
         if(it != null)
         {
             item_instances.Add(it);
+            it.BaseStart();
+            if (hidden_items)
+                it.SetHidden();
         }
     }
 
@@ -113,6 +117,7 @@ public class ItemManager : Singleton<ItemManager>
                 EventItemGrabbed ev = new EventItemGrabbed(it, ins);
                 EventManager.Instance.SendEvent(ev);
 
+                it.OnPlayerGrabBase(ins);
                 it.OnPlayerGrab(ins);
             }
         }
@@ -151,6 +156,82 @@ public class ItemManager : Singleton<ItemManager>
         }
     }
 
+    void HiddeItems() {
+        foreach(Item i in item_instances) {
+            i.SetHidden();
+                }
+    }
+
+    void ShowItems() {
+        foreach (Item i in item_instances) {
+            i.SetBaseSprite();
+        }
+    }
+
+    public void OnEvent(GameEvent ev) {
+        switch (ev.Type()) {
+            case GameEventType.EVENT_NULL:
+                break;
+            case GameEventType.EVENT_PLAYER_ADDED:
+                break;
+            case GameEventType.EVENT_PLAYER_REMOVED:
+                break;
+            case GameEventType.EVENT_PLAYER_SPAWNED:
+                break;
+            case GameEventType.EVENT_PLAYER_DESPAWNED:
+                break;
+            case GameEventType.EVENT_GAMEPADS_CHANGED:
+                break;
+            case GameEventType.EVENT_GAMEPAD_ADDED:
+                break;
+            case GameEventType.EVENT_GAMEPAD_REMOVED:
+                break;
+            case GameEventType.EVENT_ADD_SCORE:
+                break;
+            case GameEventType.EVENT_SUBSTRACT_SCORE:
+                break;
+            case GameEventType.EVENT_START_QUEST: {
+                    EventStartQuest start = (EventStartQuest)ev;
+                    
+                    if(start.quest == QuestType.QT_HIDDEN) {
+                        hidden_items = true;
+                        HiddeItems();
+                    }
+                break;
+                }
+            case GameEventType.EVENT_END_QUEST: { 
+
+                EventEndQuest end = (EventEndQuest)ev;
+
+                if (end.quest == QuestType.QT_HIDDEN) {
+                    hidden_items = false;
+                    ShowItems();
+                }
+                break;
+                }
+            case GameEventType.EVENT_HOUSES_SPAWNED:
+                break;
+            case GameEventType.EVENT_MAP_LOAD:
+                break;
+            case GameEventType.EVENT_MAP_UNLOAD:
+                break;
+            case GameEventType.EVENT_MATCH_START:
+                break;
+            case GameEventType.EVENT_MATCH_FINISH:
+                break;
+            case GameEventType.EVENT_ITEM_GRABBED:
+                break;
+            case GameEventType.EVENT_ITEM_DROPPED:
+                break;
+            case GameEventType.EVENT_ITEM_ENTERS_HOUSE:
+                break;
+            case GameEventType.EVENT_ITEM_LEAVES_HOUSE:
+                break;
+            default:
+                break;
+        }
+    }
+
     [SerializeField]
     private float min_item_distance_to_grab = 0.0f;
 
@@ -158,4 +239,6 @@ public class ItemManager : Singleton<ItemManager>
     private List<Item> items_prefabs = null;
 
     private List<Item> item_instances = new List<Item>();
+
+    private bool hidden_items = false;
 }
