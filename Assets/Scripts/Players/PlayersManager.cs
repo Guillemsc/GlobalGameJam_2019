@@ -14,6 +14,8 @@ public class PlayersManager : Singleton<PlayersManager>
         EventManager.Instance.Suscribe(GameEventType.EVENT_GAMEPAD_ADDED, OnEvent);
         EventManager.Instance.Suscribe(GameEventType.EVENT_GAMEPAD_REMOVED, OnEvent);
 
+        EventManager.Instance.Suscribe(GameEventType.EVENT_HOUSES_SPAWNED, OnEvent);
+
         AddPlayer();
         AddPlayer();
         AddPlayer();
@@ -42,6 +44,18 @@ public class PlayersManager : Singleton<PlayersManager>
 
                     if (pl != null)
                         pl.SetAssignedGamepad(null);
+
+                    break;
+                }
+
+            case GameEventType.EVENT_HOUSES_SPAWNED:
+                {
+                    EventHousesSpawned c_ev = (EventHousesSpawned)ev;
+
+                    //Player pl = GetPlayerByIndex(c_ev.gamepad.GetGamepadIndex());
+
+                    //if (pl != null)
+                    //    pl.SetAssignedGamepad(null);
 
                     break;
                 }
