@@ -116,7 +116,7 @@ public class ItemManager : Singleton<ItemManager>
         }
     }
 
-    private void StopGrabbingItem(PlayerStats ins)
+    public void StopGrabbingItem(PlayerStats ins)
     {
         if(ins != null)
         {

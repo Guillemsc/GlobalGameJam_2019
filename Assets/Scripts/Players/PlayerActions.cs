@@ -75,6 +75,10 @@ public class PlayerActions : MonoBehaviour
                 {
                     ItemManager.Instance.PlayerTryGrabItem(stats);
                 }
+                else if(pl.GetKeyB())
+                {
+                    ItemManager.Instance.StopGrabbingItem(stats);
+                }
             }
         }
     }
