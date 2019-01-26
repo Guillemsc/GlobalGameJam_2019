@@ -10,9 +10,6 @@ public enum QuestType {
 
 public abstract class Quest : MonoBehaviour
 {
-    [Tooltip("In seconds")]
-    public float duration = 10f;
-
     [Tooltip("Text displayed on event panel")]
     public string description = "Event Text";
 
