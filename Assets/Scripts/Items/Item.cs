@@ -9,9 +9,11 @@ public enum ItemType
 
 public class Item : MonoBehaviour
 {
-    protected void Init(ItemType type)
+    protected void Init(ItemType type, CollisionDetector coll_detector)
     {
         this.type = type;
+
+        coll_detector.SuscribeOnTriggerEnter2D(CustomOnTriggerEnter2D);
     }
 
     public ItemType Type()
@@ -32,6 +34,11 @@ public class Item : MonoBehaviour
     public bool GetIsGrabbed()
     {
         return grabbed_by != null;
+    }
+
+    private void CustomOnTriggerEnter2D(Collider2D coll)
+    {
+        coll.gameObject.GetComponent<PlayerStats>();
     }
 
     public virtual void OnPlayerGrab(PlayerStats player)
