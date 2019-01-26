@@ -189,6 +189,8 @@ public class MatchManager : Singleton<MatchManager>
 
             EventMatchStart ev = new EventMatchStart(time_match, player_instances);
             EventManager.Instance.SendEvent(ev);
+
+            MusicManager.Instance.PlayMusic();
         }
     }
 
