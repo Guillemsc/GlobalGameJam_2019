@@ -57,6 +57,11 @@ public class Item : MonoBehaviour
 
     }
 
+    public virtual void OnPlayerUses()
+    {
+
+    }
+
     public virtual void OnPlayerThrows()
     {
 

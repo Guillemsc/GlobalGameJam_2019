@@ -17,15 +17,8 @@ public class ItemMagnet : Item
     }
 
 
-    // Start is called before the first frame update
-    void Start()
+    public override void OnPlayerGrab(PlayerStats player)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        base.OnPlayerGrab(player);
     }
 }
