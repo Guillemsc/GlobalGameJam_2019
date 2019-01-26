@@ -93,6 +93,23 @@ public class PlayersManager : Singleton<PlayersManager>
         return ret;
     }
 
+    public List<PlayerStats> GetAllPlayerInstances()
+    {
+        List<PlayerStats> ret = new List<PlayerStats>();
+
+        for(int i = 0; i < players.Count; ++i)
+        {
+            Player curr_player = players[i];
+
+            PlayerStats stats = curr_player.GetPlayerInstance();
+
+            if (stats != null)
+                ret.Add(stats);
+        }
+
+        return ret;
+    }
+
     public void SpawnPlayerInstance(Player assigned, Vector2 pos)
     {
         if (assigned != null)

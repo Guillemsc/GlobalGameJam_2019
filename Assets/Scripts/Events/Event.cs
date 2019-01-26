@@ -18,6 +18,10 @@ public enum GameEventType
 
     EVENT_START_QUEST,
     EVENT_END_QUEST,
+
+    EVENT_MAP_LOAD,
+    EVENT_MATCH_START,
+    EVENT_MATCH_FINISH,
 }
 
 public class GameEvent

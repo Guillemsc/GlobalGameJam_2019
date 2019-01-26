@@ -29,6 +29,21 @@ public class PlayerMovement : MonoBehaviour
         rigid_body = gameObject.GetComponent<Rigidbody2D>();
     }
 
+    public void SetMaxSpeed(float max_speed)
+    {
+        player_max_speed = max_speed;
+    }
+
+    public void SetAcceleration(float acceleration)
+    {
+        player_acceleration = acceleration;
+    }
+
+    public void SetDeceleration(float decelration)
+    {
+        player_deceleration = decelration;
+    }
+
     private void PlayerInput()
     {
         Player player = stats.GetPlayer();
