@@ -5,6 +5,7 @@ using UnityEngine;
 public enum ItemType
 {
     ITEM_MAGNET,
+    ITEM_GUN,
 }
 
 public class Item : MonoBehaviour
