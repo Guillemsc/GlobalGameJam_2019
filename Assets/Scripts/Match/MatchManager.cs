@@ -52,7 +52,6 @@ public class MatchManager : Singleton<MatchManager>
 
                     StartWaitBeforStartingMatch();
 
-                    temp_game_ui.SetActive(false);
                     game_ui.SetActive(true);
 
                     break;
@@ -214,9 +213,6 @@ public class MatchManager : Singleton<MatchManager>
 
     [SerializeField]
     private GameObject game_ui = null;
-
-    [SerializeField]
-    private GameObject temp_game_ui = null;
 
     [SerializeField]
     private TMPro.TextMeshProUGUI timer_before_match_text = null;
