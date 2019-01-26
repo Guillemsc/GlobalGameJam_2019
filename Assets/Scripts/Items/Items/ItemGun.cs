@@ -4,18 +4,27 @@ using UnityEngine;
 
 public class ItemGun : Item
 {
+    [SerializeField]
+    GameObject SpawnPosition;
+
+    Vector2 spawn_position;
+
     private void Awake()
     {
-      
+        spawn_position = SpawnPosition.GetComponent<Transform>().position;
     }
 
-    // Start is called before the first frame update
-    void Start() {
-
+    public override void OnPlayerGrab(PlayerStats player)
+    {
+        //base.OnPlayerGrab(player);
     }
 
-    // Update is called once per frame
-    void Update() {
+    public override void OnPlayerUses()
+    {
+        //if (!degradated)
+        {
 
+            GetComponent<AudioSource>().Play();
+        }
     }
 }

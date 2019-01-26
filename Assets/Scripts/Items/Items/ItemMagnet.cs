@@ -7,7 +7,6 @@ public class ItemMagnet : Item
     bool degradated = false;
     List<PlayerStats> collided_go;
 
-
     private void Awake()
     {
         InitCone();
