@@ -163,10 +163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1651dee2179467345af194096e122d30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystick_dead_val: 0.1
-  player_max_speed: 3
-  player_acceleration: 10
-  player_deceleration: 10
+  joystick_dead_val: 0.25
+  player_max_speed: 4.2
+  player_acceleration: 999
+  player_deceleration: 20
 --- !u!50 &4859665602390256171
 Rigidbody2D:
   serializedVersion: 4
