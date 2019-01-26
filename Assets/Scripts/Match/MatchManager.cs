@@ -35,19 +35,11 @@ public class MatchManager : Singleton<MatchManager>
 
         timer_before_match_text.gameObject.SetActive(false);
 
-        Button but = temp_game_ui.GetComponentInChildren<Button>();
-        but.onClick.AddListener(TempOnButtonLoadMap);
     }
 
     private void InitQueueEvent()
     {
         queue_context = QueueEventManager.Instance.CreateContext();
-    }
-
-    private void TempOnButtonLoadMap()
-    {
-        EventMapLoad ev = new EventMapLoad();
-        EventManager.Instance.SendEvent(ev);
     }
 
     private void OnEvent(GameEvent ev)
