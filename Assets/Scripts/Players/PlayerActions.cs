@@ -43,6 +43,7 @@ public class PlayerActions : MonoBehaviour
                     {
                         r_ev.item.gameObject.transform.parent = item_parent.transform;
                         r_ev.item.gameObject.transform.localPosition = new Vector3(0, 0, 0);
+                        r_ev.item.gameObject.transform.localEulerAngles = new Vector3(0, 0, 0);
                     }
 
                     break;

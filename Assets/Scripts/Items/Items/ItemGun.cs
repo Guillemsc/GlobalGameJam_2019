@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemGun : Item {
-    private void Awake() {
-        InitItem();
+public class ItemGun : Item
+{
+    private void Awake()
+    {
+     
     }
 
-    private void InitItem() {
-        CollisionDetector cd = gameObject.GetComponentInChildren<CollisionDetector>();
+    private void InitItem()
+    {
 
-        Init(ItemType.ITEM_GUN, cd);
     }
 
     // Start is called before the first frame update

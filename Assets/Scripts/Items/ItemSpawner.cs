@@ -45,7 +45,7 @@ public class ItemSpawner : MonoBehaviour
     {
         if (force_gun) 
         {
-            spawned_item = Instantiate<Item>(ItemManager.Instance.GetItemPrefabByItemType(ItemType.ITEM_GUN), transform.position, Quaternion.identity);
+            spawned_item = Instantiate(ItemManager.Instance.GetItemPrefabByItemType(ItemType.ITEM_GUN), transform.position, Quaternion.identity);
             ItemManager.Instance.AddToItemsInstances(spawned_item);
 
             return;

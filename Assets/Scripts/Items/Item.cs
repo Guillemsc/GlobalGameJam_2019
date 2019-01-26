@@ -10,13 +10,6 @@ public enum ItemType
 
 public class Item : MonoBehaviour
 {
-    protected void Init(ItemType type, CollisionDetector coll_detector)
-    {
-        this.type = type;
-
-        coll_detector.SuscribeOnTriggerEnter2D(CustomOnTriggerEnter2D);
-    }
-
     public ItemType Type()
     {
         return type;
@@ -62,6 +55,8 @@ public class Item : MonoBehaviour
 
     }
 
+    [SerializeField]
     private ItemType type = new ItemType();
+
     private PlayerStats grabbed_by = null;
 }

@@ -6,14 +6,12 @@ public class ItemMagnet : Item
 {
     private void Awake()
     {
-        InitItem();
+   
     }
 
     private void InitItem()
     {
-        CollisionDetector cd = gameObject.GetComponentInChildren<CollisionDetector>();
 
-        Init(ItemType.ITEM_MAGNET, cd);
     }
 
     // Start is called before the first frame update
