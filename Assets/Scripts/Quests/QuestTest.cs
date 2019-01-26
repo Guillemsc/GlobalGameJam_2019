@@ -7,7 +7,7 @@ public class QuestTest : Quest
     Timer timer = new Timer();
 
     private void Start() {
-        timer.Start();
+        
     }
 
     void Update() 
@@ -23,5 +23,6 @@ public class QuestTest : Quest
 
     public override void OnEnableQuest() {
         Debug.Log("Test Quest Start");
+        timer.Start();
     }
 }

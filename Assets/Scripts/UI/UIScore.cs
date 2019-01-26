@@ -1,24 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
-public class UIEventTime : MonoBehaviour
+public class UIScore : MonoBehaviour
 {
-    TMPro.TextMeshProUGUI time = null;
+
+    public TMPro.TextMeshProUGUI score = null;
+
     // Start is called before the first frame update
     void Start()
     {
-        time = GetComponent<TextMeshProUGUI>();
+        score = GetComponent<TMPro.TextMeshProUGUI>();
     }
 
     // Update is called once per frame
     void Update()
     {
         
-    }
-
-    public void SetTime(int time) {
-        this.time.text = time.ToString("D2");
     }
 }
