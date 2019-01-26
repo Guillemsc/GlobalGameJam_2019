@@ -65,20 +65,26 @@ public class House : MonoBehaviour
 
         if (!exists)
             items_around.Add(it);
+
+        RecalculateHousePoints();
     }
 
     private void RemoveItem(Item it)
     {
         items_around.Remove(it);
+
+        RecalculateHousePoints();
     }
 
-    private void CalculateHousePoints()
+    private void RecalculateHousePoints()
     {
         points = 0;
 
         for (int i = 0; i < items_around.Count; ++i)
         {
+            Item curr_item = items_around[i];
 
+            points += curr_item.GetPointsToGive();
         }
     }
 
