@@ -34,7 +34,10 @@ public class QuestManager : Singleton<QuestManager>
         {
             if (timer.ReadTime() > quest_start_duration[quest_index].x && quests[active_quest].gameObject.activeSelf == false)
             {
-                active_quest = Random.Range(0, quests.Count - 1);
+                if (quest_index == quests.Count - 1)
+                    active_quest = GetQuestIDByType(QuestType.QT_LACAJA);
+                else
+                    active_quest = Random.Range(0, quests.Count - 2);
 
                 quests[active_quest].SetActive(true);
                 quest_timer.Start();
@@ -64,6 +67,16 @@ public class QuestManager : Singleton<QuestManager>
 
     public int GetNextQuestRemainingTime() {
         return Mathf.CeilToInt(quest_start_duration[quest_index].x - quest_timer.ReadTime());
+    }
+
+    public int GetQuestIDByType(QuestType type) {
+        int i = 0;
+        foreach(Quest q in quests) {
+            if (q.quest_type == type)
+                return i;
+            i++;
+        }
+        return -1;
     }
 
     public void OnEvent(GameEvent ev) 
