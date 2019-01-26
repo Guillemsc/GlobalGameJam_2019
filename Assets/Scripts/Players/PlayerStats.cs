@@ -17,5 +17,22 @@ public class PlayerStats : MonoBehaviour
         return player;
     }
 
+    public void SetGrabbedItem(Item item)
+    {
+        grabbed_item = item;
+    }
+
+    public Item GetGrabbedItem()
+    {
+        return grabbed_item;
+    }
+
+    public bool GetHasGrabbedItem()
+    {
+        return grabbed_item != null;
+    }
+
     private Player player = null;
+
+    private Item grabbed_item = null;
 }
