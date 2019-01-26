@@ -9,6 +9,11 @@ public class House : MonoBehaviour
         InitEvents();
     }
 
+    private void Update()
+    {
+        UpdateCheckItemsInside();
+    }
+
     private void InitEvents()
     {
         EventManager.Instance.Suscribe(GameEventType.EVENT_ITEM_GRABBED, OnEvent);
@@ -21,11 +26,19 @@ public class House : MonoBehaviour
         {
             case GameEventType.EVENT_ITEM_GRABBED:
                 {
+                    EventItemGrabbed r_ev = (EventItemGrabbed)ev;
+
+                    TryRemoveItem(r_ev.item);
+
                     break;
                 }
 
             case GameEventType.EVENT_ITEM_DROPPED:
                 {
+                    EventItemDropped r_ev = (EventItemDropped)ev;
+
+                    TryAddItem(r_ev.item);
+
                     break;
                 }
         }
@@ -65,14 +78,51 @@ public class House : MonoBehaviour
         return ret;
     }
 
+    private void UpdateCheckItemsInside()
+    {
+        for(int i = 0; i < items_around.Count; ++i)
+        {
+            Item curr_item = items_around[i];
+
+            if(TryRemoveItem(curr_item))
+            {
+                break;
+            }
+        }
+    }
+
     private void TryAddItem(Item it)
     {
         if(it != null)
         {
-            float dist = Vector3.Distance(it.gameObject.transform.position, gameObject.transform.position);
-
-            //if (Vector3.Distance(it.gameObject.transform.position))
+            if (!it.GetInHouse())
+            {
+                if (ItemIsInsideRadious(it))
+                {
+                    AddItem(it);
+                }
+            }
         }
+    }
+
+    private bool TryRemoveItem(Item it)
+    {
+        bool ret = false;
+
+        if(it != null)
+        {
+            if(it.GetHouse() == this)
+            {
+                if(it.GetIsGrabbed() || !ItemIsInsideRadious(it))
+                {
+                    RemoveItem(it);
+
+                    ret = true;
+                }
+            }
+        }
+
+        return ret;
     }
 
     private void AddItem(Item it)
@@ -89,6 +139,9 @@ public class House : MonoBehaviour
 
         if (!exists)
         {
+            it.SetHouse(this);
+            it.transform.parent = gameObject.transform;
+
             items_around.Add(it);
 
             EventItemEntersHouse ev = new EventItemEntersHouse(it, this);
@@ -104,6 +157,9 @@ public class House : MonoBehaviour
         {
             if(items_around.Remove(it))
             {
+                it.SetHouse(null);
+                it.transform.parent = null;
+
                 EventItemLeavesHouse ev = new EventItemLeavesHouse(it, this);
                 EventManager.Instance.SendEvent(ev);
             }
