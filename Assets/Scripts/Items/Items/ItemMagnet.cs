@@ -8,16 +8,7 @@ public class ItemMagnet : Item
 
     private void Awake()
     {
-        InitItem();
-
         InitCone();
-    }
-
-    private void InitItem()
-    {
-        CircleCollider2D circle = gameObject.GetComponent<CircleCollider2D>();
-        
-        Init(circle);
     }
 
     private void InitCone()

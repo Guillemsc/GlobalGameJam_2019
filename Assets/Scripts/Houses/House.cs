@@ -6,14 +6,29 @@ public class House : MonoBehaviour
 {
     private void Awake()
     {
-        InitCollider();
+        InitEvents();
     }
 
-    private void InitCollider()
+    private void InitEvents()
     {
-        circle_collider = gameObject.GetComponent<CircleCollider2D>();
+        EventManager.Instance.Suscribe(GameEventType.EVENT_ITEM_GRABBED, OnEvent);
+        EventManager.Instance.Suscribe(GameEventType.EVENT_ITEM_DROPPED, OnEvent);
+    }
 
-        circle_collider.radius = HouseManager.Instance.GetHouseItemRadious();
+    private void OnEvent(GameEvent ev)
+    {
+        switch(ev.Type())
+        {
+            case GameEventType.EVENT_ITEM_GRABBED:
+                {
+                    break;
+                }
+
+            case GameEventType.EVENT_ITEM_DROPPED:
+                {
+                    break;
+                }
+        }
     }
 
     public void SetPlayerInstance(PlayerStats pl)
@@ -31,23 +46,32 @@ public class House : MonoBehaviour
         return points;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private bool ItemIsInsideRadious(Item it)
     {
-        Item it = collision.gameObject.GetComponent<Item>();
+        bool ret = false;
 
         if(it != null)
         {
-            AddItem(it);
+            float dist = Vector3.Distance(it.gameObject.transform.position, gameObject.transform.position);
+
+            dist = Mathf.Abs(dist);
+
+            if (dist <= HouseManager.Instance.GetHouseItemRadious())
+            {
+                ret = true;
+            }
         }
+
+        return ret;
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void TryAddItem(Item it)
     {
-        Item it = collision.gameObject.GetComponent<Item>();
-
-        if (it != null)
+        if(it != null)
         {
-            RemoveItem(it);
+            float dist = Vector3.Distance(it.gameObject.transform.position, gameObject.transform.position);
+
+            //if (Vector3.Distance(it.gameObject.transform.position))
         }
     }
 
@@ -101,7 +125,6 @@ public class House : MonoBehaviour
     }
 
     private PlayerStats player_instance = null;
-    private CircleCollider2D circle_collider = null;
 
     private int points = 0;
 
