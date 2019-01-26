@@ -37,8 +37,6 @@ public class ItemMagnet : Item
             ItemManager.Instance.StopGrabbingItem(ps);
             ItemManager.Instance.StartGrabbingItem(thief, item_to_get);
 
-            GetComponentInChildren<SpriteRenderer>().color = Color.red;
-
             GetComponent<AudioSource>().Play();
         }
     }

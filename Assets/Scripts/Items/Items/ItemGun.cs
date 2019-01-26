@@ -7,10 +7,12 @@ public class ItemGun : Item
 {
     [SerializeField]
     GameObject SpawnPosition;
-    [SerializeField]
-    GameObject Collision;
 
     Vector2 spawn_position;
+
+    bool is_projectile = false;
+    Vector2 dir_vec;
+    float speed = 10.0f;
 
     private void Awake()
     {
@@ -20,11 +22,18 @@ public class ItemGun : Item
 
     private void InitGun()
     {
-        CollisionDetector cd = Collision.GetComponent<CollisionDetector>();
-        cd.SuscribeOnCollisionEnter2D(CustomOnCollisionEnter2D);
+        CollisionDetector cd = GetComponent<CollisionDetector>();
+        cd.SuscribeOnTriggerEnter2D(CustomOnTriggerEnter2D);
     }
 
- 
+    private void Update()
+    {
+        if (is_projectile)
+        {
+            transform.position = new Vector2(transform.position.x + dir_vec.x, transform.position.y + dir_vec.y) * speed * Time.deltaTime;
+        }        
+    }
+
     public override void OnPlayerGrab(PlayerStats player)
     {
         //base.OnPlayerGrab(player);
@@ -34,14 +43,24 @@ public class ItemGun : Item
     {
         if (!destroyed)
         {
-            Collision.GetComponent<CircleCollider2D>().enabled = true;
+            ItemManager.Instance.StopGrabbingItem(GetComponent<PlayerStats>());
             GetComponent<AudioSource>().Play();
+
+            dir_vec = GetGrabbedBy().GetComponent<PlayerActions>().GetDirectionVector();
+            is_projectile = true;
         }
     }
 
-    private void CustomOnCollisionEnter2D(Collision2D coll)
+    private void CustomOnTriggerEnter2D(Collider2D coll)
     {
+        PlayerStats ps = coll.GetComponent<PlayerStats>();
 
-        //if (coll)
+        if (ps != null && ps != GetComponent<PlayerStats>())
+        {
+            ItemManager.Instance.StopGrabbingItem(ps);
+            GetComponent<AudioSource>().Play();
+            is_projectile = false;
+            dir_vec = Vector2.zero;
+        }
     }
 }
