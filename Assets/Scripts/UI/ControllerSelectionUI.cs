@@ -92,7 +92,7 @@ public class ControllerSelectionUI : Singleton<ControllerSelectionUI>
                     queue_context.PushEvent(new
                     QueueEventPosition(go_to_move,
                     go_to_move.gameObject.transform.position, place_to_move.gameObject.transform.position,
-                    0.2f, EasingFunctionsType.EXPO_IN));
+                    0.2f, EasingFunctionsType.EXPO_IN_OUT));
 
                     if (curr_player == red_player)
                     {
@@ -169,7 +169,7 @@ public class ControllerSelectionUI : Singleton<ControllerSelectionUI>
                         queue_context.PushEvent(new
                         QueueEventPosition(go_to_move,
                         go_to_move.transform.position, red_pos.gameObject.transform.position,
-                        0.2f, EasingFunctionsType.EXPO_IN));
+                        0.2f, EasingFunctionsType.EXPO_IN_OUT));
                     }
                 }
 
@@ -182,7 +182,7 @@ public class ControllerSelectionUI : Singleton<ControllerSelectionUI>
                         queue_context.PushEvent(new
                         QueueEventPosition(go_to_move,
                         go_to_move.transform.position, yellow_pos.gameObject.transform.position,
-                        0.2f, EasingFunctionsType.EXPO_IN));
+                        0.2f, EasingFunctionsType.EXPO_IN_OUT));
                     }
                 }
 
@@ -195,7 +195,7 @@ public class ControllerSelectionUI : Singleton<ControllerSelectionUI>
                         queue_context.PushEvent(new
                         QueueEventPosition(go_to_move,
                         go_to_move.transform.position, blue_pos.gameObject.transform.position,
-                        0.2f, EasingFunctionsType.EXPO_IN));
+                        0.2f, EasingFunctionsType.EXPO_IN_OUT));
                     }
                 }
             }
@@ -204,9 +204,16 @@ public class ControllerSelectionUI : Singleton<ControllerSelectionUI>
 
     private void CheckReady()
     {
-        if(red_ready && blue_ready && yellow_ready)
+        if(red_ready && blue_ready && yellow_ready || Input.GetKey("a"))
         {
             selecting_gamepads = false;
+
+            queue_context.PushEvent(new QueueEventFade(this.gameObject, 1, 0, 2, EasingFunctionsType.LINEAR));
+
+            queue_context.PushEvent(new QueueEventSetActive(this.gameObject, false));
+
+            EventMapLoad ev = new EventMapLoad();
+            EventManager.Instance.SendEvent(ev);
         }
     }
 
