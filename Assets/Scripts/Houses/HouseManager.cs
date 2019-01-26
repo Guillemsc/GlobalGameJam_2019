@@ -134,7 +134,7 @@ public class HouseManager : Singleton<HouseManager>
         houses.Clear();
     }
 
-    List<House> GetHousesOrderedByPoints()
+    public List<House> GetHousesOrderedByPoints()
     {
         List<House> ret = new List<House>();
 
@@ -166,6 +166,11 @@ public class HouseManager : Singleton<HouseManager>
         return ret;
     }
 
+    public float GetHouseItemRadious()
+    {
+        return house_item_radious;
+    }
+
     [SerializeField]
     private GameObject house_prefab = null;
 
@@ -177,6 +182,9 @@ public class HouseManager : Singleton<HouseManager>
 
     [SerializeField]
     private GameObject[] house_end_positions = null;
+
+    [SerializeField]
+    private float house_item_radious = 0.0f;
 
     private List<House> houses = new List<House>();
 

@@ -527,7 +527,7 @@ MonoBehaviour:
       editorAssetGUID: 27e9170ae35048d48a9b430712640511
       name: MAIN_MENU_UI
       _path: Assets/Scenes/MainScene/Subscenes/MAIN_MENU_UI.unity
-    loadInEditor: 1
+    loadInEditor: 0
     loadMethod: 0
   - scene:
       editorAssetGUID: 099a9501454f21e4bbb1cb0c1c38fedd

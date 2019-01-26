@@ -253,7 +253,7 @@ MonoBehaviour:
   - {x: 10, y: 10}
   - {x: 30, y: 15}
   quests:
-  - {fileID: 0}
+  - {fileID: 1453765818}
   - {fileID: 110151566}
 --- !u!4 &660527403
 Transform:

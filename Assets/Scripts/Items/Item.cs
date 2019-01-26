@@ -10,6 +10,13 @@ public enum ItemType
 
 public class Item : MonoBehaviour
 {
+    public void Init(CircleCollider2D coll)
+    {
+        circle_collider = coll;
+
+        circle_collider.isTrigger = true;
+    }
+
     public ItemType Type()
     {
         return type;
@@ -18,6 +25,11 @@ public class Item : MonoBehaviour
     public void SetGrabbedBy(PlayerStats set)
     {
         grabbed_by = set;
+
+        if (grabbed_by != null)
+            circle_collider.enabled = true;
+        else
+            circle_collider.enabled = false;
     }
 
     public PlayerStats GetGrabbedBy()
@@ -30,14 +42,9 @@ public class Item : MonoBehaviour
         return grabbed_by != null;
     }
 
-    private void CustomOnTriggerEnter2D(Collider2D coll)
+    public int GetPointsToGive()
     {
-        if (!GetIsGrabbed())
-        {
-            PlayerStats ps = coll.gameObject.GetComponent<PlayerStats>();
-
-
-        }
+        return points_to_give;
     }
 
     public virtual void OnPlayerGrab(PlayerStats player)
@@ -58,5 +65,10 @@ public class Item : MonoBehaviour
     [SerializeField]
     private ItemType type = new ItemType();
 
+    [SerializeField]
+    private int points_to_give = 0;
+
     private PlayerStats grabbed_by = null;
+
+    private CircleCollider2D circle_collider = null;
 }
