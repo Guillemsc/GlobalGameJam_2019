@@ -462,12 +462,6 @@ MonoBehaviour:
   _isMainScene: 1
   _sceneSetup:
   - scene:
-      editorAssetGUID: 1d19d0119f1f5e2449a726775a9fb2b9
-      name: MainScene
-      _path: Assets/Scenes/MainScene/MainScene.unity
-    loadInEditor: 1
-    loadMethod: 1
-  - scene:
       editorAssetGUID: 27e9170ae35048d48a9b430712640511
       name: MAIN_MENU_UI
       _path: Assets/Scenes/MainScene/Subscenes/MAIN_MENU_UI.unity
@@ -495,6 +489,12 @@ MonoBehaviour:
       editorAssetGUID: e1c0b28244e8b2346bb4e9ec235649b4
       name: GAME_UI
       _path: Assets/Scenes/MainScene/Subscenes/GAME_UI.unity
+    loadInEditor: 1
+    loadMethod: 0
+  - scene:
+      editorAssetGUID: 61fb2fbde776ba145b0307f2714cacda
+      name: PLAYERS
+      _path: Assets/Scenes/MainScene/Subscenes/PLAYERS.unity
     loadInEditor: 1
     loadMethod: 0
   - scene:
