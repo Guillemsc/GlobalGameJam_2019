@@ -101,7 +101,7 @@ public class ItemManager : Singleton<ItemManager>
         }
     }
 
-    private void StartGrabbingItem(PlayerStats ins, Item it)
+    public void StartGrabbingItem(PlayerStats ins, Item it)
     {
         if(ins != null && it != null)
         {

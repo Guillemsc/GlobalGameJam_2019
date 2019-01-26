@@ -26,10 +26,10 @@ public class Item : MonoBehaviour
     {
         grabbed_by = set;
 
-        if (grabbed_by != null)
-            circle_collider.enabled = true;
-        else
-            circle_collider.enabled = false;
+        //if (grabbed_by != null)
+        //    circle_collider.enabled = false;
+        //else
+        //    circle_collider.enabled = true;
     }
 
     public PlayerStats GetGrabbedBy()

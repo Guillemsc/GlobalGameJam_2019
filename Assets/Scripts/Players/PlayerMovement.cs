@@ -18,9 +18,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        PlayerInput();
+        if (movement_enabled)
+        {
+            PlayerInput();
 
-        MovePlayer();
+            MovePlayer();
+        }
 
         CapSpeed();
     }
@@ -33,6 +36,16 @@ public class PlayerMovement : MonoBehaviour
     private void InitRigidbody()
     {
         rigid_body = gameObject.GetComponent<Rigidbody2D>();
+    }
+
+    private void InitEvents()
+    {
+        
+    }
+
+    public void SetMovementEnabled(bool set)
+    {
+        movement_enabled = set;
     }
 
     public void SetMaxSpeed(float max_speed)
@@ -209,4 +222,5 @@ public class PlayerMovement : MonoBehaviour
     private float movement_angle = 0.0f;
 
     private float speed_delta = 0;
+    private bool movement_enabled = true;
 }
