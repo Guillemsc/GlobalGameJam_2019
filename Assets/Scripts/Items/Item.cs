@@ -39,7 +39,8 @@ public class Item : MonoBehaviour
         sr.sprite = hidden_sprite;
     }
 
-    public void SetBaseSprite() {
+    public void SetBaseSprite()
+    {
         sr.sprite = base_sprite;
     }
 

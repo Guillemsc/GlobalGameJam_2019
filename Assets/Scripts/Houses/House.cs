@@ -19,6 +19,8 @@ public class House : MonoBehaviour
     private void Update()
     {
         UpdateCheckItemsInside();
+
+        PrintDebug();
     }
 
     private void InitEvents()
@@ -49,6 +51,12 @@ public class House : MonoBehaviour
                     break;
                 }
         }
+    }
+
+    private void PrintDebug()
+    {
+        Debug.DrawLine(gameObject.transform.position, gameObject.transform.position + 
+            new Vector3(HouseManager.Instance.GetHouseItemRadious(), 0, 0));
     }
 
     public void SetPlayerInstance(PlayerStats pl)
@@ -90,7 +98,7 @@ public class House : MonoBehaviour
 
         if(it != null)
         {
-            float dist = Vector3.Distance(it.gameObject.transform.position, gameObject.transform.position);
+            float dist = Vector2.Distance(it.gameObject.transform.position, gameObject.transform.position);
 
             dist = Mathf.Abs(dist);
 
