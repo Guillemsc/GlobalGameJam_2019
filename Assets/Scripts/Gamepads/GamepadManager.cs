@@ -40,17 +40,16 @@ public class GamepadManager : Singleton<GamepadManager>
     {
         if (gamepads_names != null)
         {
+            ClearGamepads();
+
+            int gamepad_added_counter = 0;
             for (int i = 0; i < gamepads_names.Length; ++i)
             {
                 string curr_gamepad_name = gamepads_names[i];
 
-                if (curr_gamepad_name == "")
+                if (curr_gamepad_name != "")
                 {
-                    RemoveGamepad(i);
-                }
-                else
-                {
-                    AddGamepad(i, curr_gamepad_name);
+                    AddGamepad(gamepad_added_counter++, curr_gamepad_name);
                 }
             }
         }
@@ -71,17 +70,15 @@ public class GamepadManager : Singleton<GamepadManager>
         }
     }
 
-    private void RemoveGamepad(int index)
+    private void ClearGamepads()
     {
-        if (gamepads.ContainsKey(index))
+        foreach (KeyValuePair<int, Gamepad> to_remove in gamepads)
         {
-            Gamepad to_remove = gamepads[index];
-
-            gamepads.Remove(index);
-
-            EventGamepadRemoved ev = new EventGamepadRemoved(to_remove);
+            EventGamepadRemoved ev = new EventGamepadRemoved(to_remove.Value);
             EventManager.Instance.SendEvent(ev);
         }
+
+        gamepads.Clear();
     }
 
     private Dictionary<int, Gamepad> gamepads = new Dictionary<int, Gamepad>();
