@@ -14,7 +14,8 @@ public class PlayerStats : MonoBehaviour
     private GameObject animator = null;
 
 
-    void Start() {
+    void Start()
+    {
         red.SetActive(false);
         yellow.SetActive(false);
         blue.SetActive(false);
