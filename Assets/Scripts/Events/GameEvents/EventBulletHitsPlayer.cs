@@ -10,6 +10,6 @@ public class EventBulletHitsPlayer : GameEvent
         this.hit = hit;
     }
 
-    PlayerStats shooter = null;
-    PlayerStats hit = null;
+    public PlayerStats shooter = null;
+    public PlayerStats hit = null;
 }

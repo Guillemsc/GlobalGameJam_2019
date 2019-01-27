@@ -8,6 +8,7 @@ public class ItemGun : Item
     private void Awake()
     {
         InitGun();
+        InitEvents();
     }
 
     private void InitGun()
@@ -16,9 +17,24 @@ public class ItemGun : Item
         cd.SuscribeOnTriggerEnter2D(CustomOnTriggerEnter2D);
     }
 
-    private void Update()
-    { 
+    private void InitEvents()
+    {
+        EventManager.Instance.Suscribe(GameEventType.EVENT_BULLET_HITS_PLAYER, OnEvent);
+    }
 
+    private void OnEvent(GameEvent ev)
+    {
+        switch(ev.Type())
+        {
+            case GameEventType.EVENT_BULLET_HITS_PLAYER:
+                {
+                    EventBulletHitsPlayer r_ev = (EventBulletHitsPlayer)ev;
+
+                    ItemManager.Instance.DestroyItem(r_ev.hit.GetGrabbedItem());
+
+                    break;
+                }
+        }
     }
 
     public override void OnPlayerGrab(PlayerStats player)
@@ -28,7 +44,8 @@ public class ItemGun : Item
 
     public override void OnPlayerUses()
     {
-        ShootBullet();
+        if(!used)
+            ShootBullet();
     }
 
     private void CustomOnTriggerEnter2D(Collider2D coll)
@@ -38,7 +55,7 @@ public class ItemGun : Item
 
     private void ShootBullet()
     {
-        GameObject ins = Instantiate(bullet_prefab, gameObject.transform.position, Quaternion.identity);
+        GameObject ins = Instantiate(bullet_prefab, bullet_start_pos.transform.position, Quaternion.identity);
 
         GunBullet bull = ins.GetComponent<GunBullet>();
 
@@ -50,8 +67,10 @@ public class ItemGun : Item
             {
                 PlayerActions pa = owner.gameObject.GetComponent<PlayerActions>();
 
-                bull.SetMovementData(pa.GetInputAngle(), pa.GetInputDirectionVector(), bullet_speed);
+                bull.SetMovementData(pa.GetItemAngle(), pa.GetItemDirectionVector(), bullet_speed);
                 bull.SetShooter(owner);
+
+                used = true;
             }
         }
     }
@@ -60,5 +79,10 @@ public class ItemGun : Item
     private GameObject bullet_prefab = null;
 
     [SerializeField]
+    private GameObject bullet_start_pos = null;
+
+    [SerializeField]
     private float bullet_speed = 0.0f;
+
+    private bool used = false;
 }
