@@ -89,7 +89,7 @@ public class ControllerSelectionUI : Singleton<ControllerSelectionUI>
                             }
                     }
 
-                    queue_context.PushEvent(new
+                    queue_context.PushEventForced(new
                     QueueEventPosition(go_to_move,
                     go_to_move.gameObject.transform.position, place_to_move.gameObject.transform.position,
                     0.2f, EasingFunctionsType.EXPO_IN_OUT));
@@ -166,7 +166,7 @@ public class ControllerSelectionUI : Singleton<ControllerSelectionUI>
                     {
                         red_player = curr_player;
 
-                        queue_context.PushEvent(new
+                        queue_context.PushEventForced(new
                         QueueEventPosition(go_to_move,
                         go_to_move.transform.position, red_pos.gameObject.transform.position,
                         0.2f, EasingFunctionsType.EXPO_IN_OUT));
@@ -179,7 +179,7 @@ public class ControllerSelectionUI : Singleton<ControllerSelectionUI>
                     {
                         yellow_player = curr_player;
 
-                        queue_context.PushEvent(new
+                        queue_context.PushEventForced(new
                         QueueEventPosition(go_to_move,
                         go_to_move.transform.position, yellow_pos.gameObject.transform.position,
                         0.2f, EasingFunctionsType.EXPO_IN_OUT));
@@ -192,7 +192,7 @@ public class ControllerSelectionUI : Singleton<ControllerSelectionUI>
                     {
                         blue_player = curr_player;
 
-                        queue_context.PushEvent(new
+                        queue_context.PushEventForced(new
                         QueueEventPosition(go_to_move,
                         go_to_move.transform.position, blue_pos.gameObject.transform.position,
                         0.2f, EasingFunctionsType.EXPO_IN_OUT));
@@ -221,9 +221,9 @@ public class ControllerSelectionUI : Singleton<ControllerSelectionUI>
         {
             selecting_gamepads = false;
 
-            queue_context.PushEvent(new QueueEventFade(this.gameObject, 1, 0, 0.5f, EasingFunctionsType.EXPO_OUT));
+            queue_context.PushEventForced(new QueueEventFade(this.gameObject, 1, 0, 0.5f, EasingFunctionsType.EXPO_OUT));
 
-            queue_context.PushEvent(new QueueEventSetActive(this.gameObject, false));
+            queue_context.PushEventForced(new QueueEventSetActive(this.gameObject, false));
 
             if (cheating)
             {
