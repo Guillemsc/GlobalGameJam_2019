@@ -326,12 +326,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c5778ec545054bb98e2f7d263cde1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ranking_p1: {fileID: 0}
-  ranking_p2: {fileID: 0}
-  ranking_p3: {fileID: 0}
-  points_p1: {fileID: 0}
-  points_p2: {fileID: 0}
-  points_p3: {fileID: 0}
+  ranking_p1: {fileID: 1538788266}
+  ranking_p2: {fileID: 587201717}
+  ranking_p3: {fileID: 199036269}
+  points_p1: {fileID: 1812330441}
+  points_p2: {fileID: 25975679}
+  points_p3: {fileID: 687257610}
 --- !u!114 &50565335
 MonoBehaviour:
   m_ObjectHideFlags: 0
