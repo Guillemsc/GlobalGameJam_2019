@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class House : MonoBehaviour
 {
+    public Sprite B_house;
+    public Sprite R_house;
+    public Sprite Y_house;
+
     private void Awake()
     {
         InitEvents();
@@ -47,6 +51,18 @@ public class House : MonoBehaviour
     public void SetPlayerInstance(PlayerStats pl)
     {
         player_instance = pl;
+        switch (pl.GetPlayer().GetPlayerColour())
+        {
+            case PlayerColour.RED:
+                GetComponent<SpriteRenderer>().sprite = R_house;
+                break;
+            case PlayerColour.BLUE:
+                GetComponent<SpriteRenderer>().sprite = B_house;
+                break;
+            case PlayerColour.YELLOW:
+                GetComponent<SpriteRenderer>().sprite = Y_house;
+                break;
+        }
     }
 
     public PlayerStats GetPlayerInstance()
