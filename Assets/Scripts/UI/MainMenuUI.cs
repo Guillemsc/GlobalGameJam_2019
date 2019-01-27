@@ -32,11 +32,6 @@ public class MainMenuUI : Singleton<MainMenuUI>
         FadeOutToMainMenu();
     }
 
-    public void GoToCredits()
-    {
-
-    }
-
     private void FadeIn()
     {
         queue_context.PushEvent(new QueueEventSetActive(play_button, false));
@@ -88,6 +83,30 @@ public class MainMenuUI : Singleton<MainMenuUI>
         ControllerSelectionUI.Instance.SetSelectingGamepads(true);
     }
 
+    public void MoveToCredits()
+    {
+        queue_context.PushEvent(new QueueEventSetActive(credits_window, false));
+
+        queue_context.PushEvent(new
+        QueueEventScale(credits_window,
+        new Vector3(0, 0, 0), new Vector3(0, 0, 0), 0.1f, EasingFunctionsType.EXPO_IN), true);
+
+        queue_context.PushEvent(new QueueEventWaitTime(0.2f));
+
+        queue_context.PushEvent(new QueueEventSetActive(credits_window, true));
+
+        queue_context.PushEvent(new
+            QueueEventScale(credits_window,
+            new Vector3(0, 0, 0), new Vector3(2, 2, 2), 0.7f, EasingFunctionsType.BOUNCE));
+    }
+
+    public void MoveToMainMenu()
+    {
+        queue_context.PushEvent(new
+        QueueEventScale(credits_window,
+        new Vector3(2, 2, 2), new Vector3(0, 0, 0), 0.6f, EasingFunctionsType.QUAD_OUT));
+    }
+
     [SerializeField]
     private GameObject controller_menu = null;
 
@@ -96,6 +115,9 @@ public class MainMenuUI : Singleton<MainMenuUI>
 
     [SerializeField]
     private GameObject credits_button = null;
+
+    [SerializeField]
+    private GameObject credits_window = null;
 
     private QueueEventContext queue_context = null;
 }
