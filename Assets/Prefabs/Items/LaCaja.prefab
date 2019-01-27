@@ -145,6 +145,6 @@ MonoBehaviour:
   sr: {fileID: 0}
   destroyed: 0
   type: 2
-  points_to_give: 30
+  points_to_give: 200
   points_destroyed: 0
-  points_gain: 50
+  points_gain: 25
