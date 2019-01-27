@@ -59,7 +59,7 @@ public class ItemGun : Item
 
             if (ps != null && ps != GetComponent<PlayerStats>())
             {
-                ItemManager.Instance.StopGrabbingItem(ps);
+                //ItemManager.Instance.StopGrabbingItem(ps);
                 GetComponent<AudioSource>().Play();
                 is_projectile = false;
                 dir_vec = Vector2.zero;
