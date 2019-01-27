@@ -28,7 +28,7 @@ public class ItemGun : Item
 
     public override void OnPlayerUses()
     {
-
+        ShootBullet();
     }
 
     private void CustomOnTriggerEnter2D(Collider2D coll)
@@ -36,6 +36,29 @@ public class ItemGun : Item
 
     }
 
+    private void ShootBullet()
+    {
+        GameObject ins = Instantiate(bullet_prefab, gameObject.transform.position, Quaternion.identity);
+
+        GunBullet bull = ins.GetComponent<GunBullet>();
+
+        if(bull != null)
+        {
+            PlayerStats owner = GetGrabbedBy();
+
+            if(owner != null)
+            {
+                PlayerActions pa = owner.gameObject.GetComponent<PlayerActions>();
+
+                bull.SetMovementData(pa.GetInputAngle(), pa.GetInputDirectionVector(), bullet_speed);
+                bull.SetShooter(owner);
+            }
+        }
+    }
+
     [SerializeField]
     private GameObject bullet_prefab = null;
+
+    [SerializeField]
+    private float bullet_speed = 0.0f;
 }
