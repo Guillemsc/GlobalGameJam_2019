@@ -91,13 +91,7 @@ public class HouseManager : Singleton<HouseManager>
                 if (end_pos != null)
                 {
                     end_pos.transform.position = new Vector3(end_pos.transform.position.x, end_pos.transform.position.y,
-                        -5);
-
-                    GameObject line_renderer = Instantiate(line_renderer_prefab, Vector3.zero, Quaternion.identity);
-                    line_renderer.gameObject.transform.parent = curr_house.gameObject.transform;
-                    LineRenderer lr = line_renderer.GetComponent<LineRenderer>();
-                    lr.SetPosition(0, curr_house.gameObject.transform.position);
-                    lr.SetPosition(1, end_pos.transform.position);
+                        curr_house.transform.position.z);
 
                     queue_context.PushEvent(new
                         QueueEventPosition(curr_house.gameObject, curr_house.transform.position,
