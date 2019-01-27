@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8ec8cbb529e0054fababecbf9451eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Home Guide Start
+  description: Get that Star
   quest_type: 0
 --- !u!4 &110151567
 Transform:
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61572683231ba6f4683ba0673a7846f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Where are you going with those points?!
+  description: Cmon! Catch UP!
   quest_type: 2
 --- !u!4 &117612075
 Transform:
@@ -396,7 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2beba2cfd865d3d449789724dd8a4ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: All items are GUNS
+  description: GUNS Spawns
   quest_type: 1
 --- !u!4 &1453765819
 Transform:

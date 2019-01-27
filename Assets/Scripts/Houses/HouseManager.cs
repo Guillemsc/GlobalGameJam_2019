@@ -96,7 +96,6 @@ public class HouseManager : Singleton<HouseManager>
 
     private void StopHousesMovement()
     {
-        queue_context.ClearEvents();
         QueueEventManager.Instance.RemoveContext(queue_context);
         queue_context = QueueEventManager.Instance.CreateContext();
     }
