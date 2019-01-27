@@ -16,6 +16,12 @@ public class House : MonoBehaviour
         InitEvents();
     }
 
+    private void Start()
+    {
+        EventSetScore ev = new EventSetScore(player_instance, points);
+        EventManager.Instance.SendEvent(ev);
+    }
+
     private void Update()
     {
         UpdateCheckItemsInside();
@@ -211,9 +217,6 @@ public class House : MonoBehaviour
 
             points += curr_item.GetPointsToGive();
         }
-
-        EventSetScore ev = new EventSetScore(player_instance, points);
-        EventManager.Instance.SendEvent(ev);
     }
 
     private PlayerStats player_instance = null;
