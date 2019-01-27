@@ -35,4 +35,7 @@ public class ItemGun : Item
     {
 
     }
+
+    [SerializeField]
+    private GameObject bullet_prefab = null;
 }
