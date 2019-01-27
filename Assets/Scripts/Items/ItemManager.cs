@@ -159,7 +159,7 @@ public class ItemManager : Singleton<ItemManager>
 
             RemoveFromitemsInstances(it);
 
-            Destroy(it);
+            Destroy(it.gameObject);
         }
     }
 

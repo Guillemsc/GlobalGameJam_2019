@@ -28,7 +28,9 @@ public class ItemGun : Item
         {
             case GameEventType.EVENT_BULLET_HITS_PLAYER:
                 {
+                    EventBulletHitsPlayer r_ev = (EventBulletHitsPlayer)ev;
 
+                    ItemManager.Instance.DestroyItem(r_ev.hit.GetGrabbedItem());
 
                     break;
                 }
