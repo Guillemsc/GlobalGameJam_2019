@@ -6,12 +6,15 @@ using System.Threading;
 
 public class ItemBomb : Item
 {
-    List<PlayerStats> collided_go;
+    List<GameObject> collided_go;
+    bool has_exploded = false;
+
+    float speed = 1.5f;
 
     private void Awake()
     {
         InitBomb();
-        collided_go = new List<PlayerStats>();
+        collided_go = new List<GameObject>();
     }
 
     private void InitBomb()
@@ -23,7 +26,22 @@ public class ItemBomb : Item
 
     private void Update()
     {
-        
+        if (destroyed && !has_exploded)
+        {
+            sr.color = Color.white;
+
+            for (int i = 0; i < collided_go.Count; ++i)
+            {
+                Vector3 dir = collided_go[i].transform.position - transform.position;            
+                collided_go[i].transform.position += dir.normalized * speed * Time.deltaTime;
+            }
+        }      
+
+        if (has_exploded)
+        {
+            ItemManager.Instance.DestroyItem(this);
+
+        }
     }
 
     public override void OnPlayerGrab(PlayerStats player)
@@ -36,40 +54,32 @@ public class ItemBomb : Item
         if (!destroyed)
         {
             PlayerStats bombarder = GetGrabbedBy();
+            ItemManager.Instance.StopGrabbingItem(GetGrabbedBy());
 
-            ItemManager.Instance.StopGrabbingItem(bombarder);
-
+            GetComponentInChildren<Animator2D>().PlayAnimation("Explosion", 0.05F, false);
             StartCoroutine(PlayExplosion());
-
         }
     }
 
     IEnumerator PlayExplosion()
     {
-        yield return new WaitForSeconds(0.5F);
-        GetComponentInChildren<Animator2D>().PlayAnimation("Explosion", 0.05F, false);
-
-        for (int i = 0; i < collided_go.Count; ++i)
-        {
-            ItemManager.Instance.StopGrabbingItem(collided_go[i]);
-        }
-
-        ItemManager.Instance.RemoveFromitemsInstances(this);
+        yield return new WaitForSeconds(0.6F);
+        has_exploded = true;
     }
 
     private void CustomOnTriggerEnter2D(Collider2D coll)
     {
-        PlayerStats ps = coll.GetComponent<PlayerStats>();
+        GameObject ps = coll.gameObject;
 
-        if (ps != null)
+        if (ps.GetComponent<Item>() != null || ps.GetComponent<PlayerStats>() != null)
             collided_go.Add(ps);
     }
 
     private void CustomOnTriggerExit2D(Collider2D coll)
     {
-        PlayerStats ps = coll.GetComponent<PlayerStats>();
+        GameObject ps = coll.gameObject;
 
-        if (ps != null)
+        if (ps.GetComponent<Item>() != null || ps.GetComponent<PlayerStats>() != null)
             collided_go.Remove(ps);
     }
 }
