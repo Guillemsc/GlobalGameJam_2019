@@ -8,6 +8,7 @@ public class ItemBomb : Item
 {
     List<GameObject> collided_go;
     bool has_exploded = false;
+    bool wrenched = false;
 
     float speed = 1.5f;
 
@@ -26,7 +27,12 @@ public class ItemBomb : Item
 
     private void Update()
     {
-        if (destroyed && !has_exploded)
+        if (sr.color == Color.red)
+        {
+            wrenched = true;
+        }
+
+        if (destroyed && !has_exploded && !wrenched)
         {
             sr.color = Color.white;
 
