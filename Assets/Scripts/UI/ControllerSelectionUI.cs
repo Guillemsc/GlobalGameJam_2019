@@ -221,7 +221,7 @@ public class ControllerSelectionUI : Singleton<ControllerSelectionUI>
         {
             selecting_gamepads = false;
 
-            queue_context.PushEvent(new QueueEventFade(this.gameObject, 1, 0, 2, EasingFunctionsType.LINEAR));
+            queue_context.PushEvent(new QueueEventFade(this.gameObject, 1, 0, 0.5f, EasingFunctionsType.EXPO_OUT));
 
             queue_context.PushEvent(new QueueEventSetActive(this.gameObject, false));
 
