@@ -9,9 +9,20 @@ public class GamepadManager : Singleton<GamepadManager>
         InitInstance(this);
     }
 
+    private void Start()
+    {
+        detect.Start();
+        detect.AddTime(detect_time);
+    }
+
     private void Update()
     {
-        DetectGamepadsConnection();
+        if (detect.ReadRealTime() > detect_time)
+        {
+            DetectGamepadsConnection();
+
+            detect.Start();
+        }
     }
 
     private void DetectGamepadsConnection()
@@ -82,4 +93,7 @@ public class GamepadManager : Singleton<GamepadManager>
     }
 
     private Dictionary<int, Gamepad> gamepads = new Dictionary<int, Gamepad>();
+
+    private Timer detect = new Timer();
+    private float detect_time = 5.0f;
 }
