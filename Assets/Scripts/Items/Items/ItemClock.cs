@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class ItemClock : Item
 {
+    private AudioSource audio;
+    private PlayerStats player;
+
+    public float buff_duration = 2f;
+    public float buff_amount = 50f;
+
+    private Timer timer = new Timer();
+
     private void Awake()
     {
         InitClock();
@@ -11,13 +19,18 @@ public class ItemClock : Item
 
     private void InitClock()
     {
-        CollisionDetector cd = GetComponent<CollisionDetector>();
-        cd.SuscribeOnTriggerEnter2D(CustomOnTriggerEnter2D);
+        audio = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
-
+        if(destroyed) {
+            if(timer.ReadTime()>buff_duration) 
+            {
+                player.gameObject.GetComponent<PlayerMovement>().SubDeltaSpeed(buff_amount);
+                timer.Reset();
+            }
+        }
     }
 
     public override void OnPlayerGrab(PlayerStats player)
@@ -29,7 +42,11 @@ public class ItemClock : Item
     {
         if (!destroyed)
         {
-            
+            audio.PlayOneShot(audio.clip);
+
+            timer.Start();
+            player = GetGrabbedBy();
+            player.gameObject.GetComponent<PlayerMovement>().AddDeltaSpeed(buff_amount);
         }
     }
 

@@ -76,6 +76,14 @@ public class PlayerMovement : MonoBehaviour
         player_max_speed = max_speed;
     }
 
+    public void AddDeltaSpeed(float a) {
+        speed_delta += a;
+    }
+
+    public void SubDeltaSpeed(float a) {
+        speed_delta -= a;
+    }
+
     public void SetAcceleration(float acceleration)
     {
         player_acceleration = acceleration;

@@ -114,6 +114,8 @@ MonoBehaviour:
   type: 5
   points_to_give: 100
   points_destroyed: 50
+  buff_duration: 2
+  buff_amount: 1
 --- !u!58 &1178905323993676396
 CircleCollider2D:
   m_ObjectHideFlags: 0
