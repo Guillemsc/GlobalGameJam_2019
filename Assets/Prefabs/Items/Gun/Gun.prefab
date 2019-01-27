@@ -133,7 +133,8 @@ MonoBehaviour:
   type: 1
   points_to_give: 125
   points_destroyed: 50
-  SpawnPosition: {fileID: 0}
+  bullet_prefab: {fileID: 8135908084413690744, guid: fc21f20007c2f834493cc0205d5bb0b1,
+    type: 3}
 --- !u!58 &962319977289096642
 CircleCollider2D:
   m_ObjectHideFlags: 0

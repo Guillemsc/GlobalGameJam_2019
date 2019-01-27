@@ -30,6 +30,8 @@ public enum GameEventType
     EVENT_ITEM_DROPPED,
     EVENT_ITEM_ENTERS_HOUSE,
     EVENT_ITEM_LEAVES_HOUSE,
+
+    EVENT_BULLET_HITS_PLAYER,
 }
 
 public class GameEvent
