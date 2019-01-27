@@ -75,8 +75,12 @@ public class MainMenuUI : Singleton<MainMenuUI>
         QueueEventScale(credits_button,
         new Vector3(2, 2, 2), new Vector3(0, 0, 0), 0.3f, EasingFunctionsType.QUAD_OUT), true);
 
-        queue_context.PushEvent(new QueueEventSetActive(gameObject, false));
+        queue_context.PushEvent(new QueueEventFade(ControllerSelectionUI.Instance.gameObject, 0, 0, 0.01f, EasingFunctionsType.EXPO_IN));
         queue_context.LastPushedEventOnFinish(OnSelectingGamepadsLoad);
+
+        queue_context.PushEvent(new QueueEventFade(ControllerSelectionUI.Instance.gameObject, 0, 1, 1, EasingFunctionsType.EXPO_IN));
+
+        queue_context.PushEvent(new QueueEventSetActive(gameObject, false));
     }
 
     private void OnSelectingGamepadsLoad(QueueEvent ev)
