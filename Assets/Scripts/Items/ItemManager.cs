@@ -146,7 +146,7 @@ public class ItemManager : Singleton<ItemManager>
         }
     }
 
-    private void DestroyItem(Item it)
+    public void DestroyItem(Item it)
     {
         if(it != null)
         {
