@@ -18,7 +18,6 @@ public class HouseManager : Singleton<HouseManager>
     private void InitEvents()
     {
         EventManager.Instance.Suscribe(GameEventType.EVENT_MAP_LOAD, OnEvent);
-        EventManager.Instance.Suscribe(GameEventType.EVENT_MAP_UNLOAD, OnEvent);
 
         EventManager.Instance.Suscribe(GameEventType.EVENT_MATCH_START, OnEvent);
         EventManager.Instance.Suscribe(GameEventType.EVENT_MATCH_FINISH, OnEvent);
@@ -36,12 +35,6 @@ public class HouseManager : Singleton<HouseManager>
             case GameEventType.EVENT_MAP_LOAD:
                 {
                     SpawnHouses();
-
-                    break;
-                }
-            case GameEventType.EVENT_MAP_UNLOAD:
-                {
-                    DestroyHousesInstances();
 
                     break;
                 }
@@ -110,6 +103,8 @@ public class HouseManager : Singleton<HouseManager>
     private void StopHousesMovement()
     {
         queue_context.ClearEvents();
+        QueueEventManager.Instance.RemoveContext(queue_context);
+        queue_context = QueueEventManager.Instance.CreateContext();
     }
 
     private void SpawnHouseInstance(Vector2 pos)

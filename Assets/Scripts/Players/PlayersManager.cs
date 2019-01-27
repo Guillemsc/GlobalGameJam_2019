@@ -15,6 +15,7 @@ public class PlayersManager : Singleton<PlayersManager>
         EventManager.Instance.Suscribe(GameEventType.EVENT_GAMEPAD_REMOVED, OnEvent);
 
         EventManager.Instance.Suscribe(GameEventType.EVENT_HOUSES_SPAWNED, OnEvent);
+        EventManager.Instance.Suscribe(GameEventType.EVENT_MATCH_FINISH, OnEvent);
 
         AddPlayer();
         AddPlayer();
@@ -53,6 +54,11 @@ public class PlayersManager : Singleton<PlayersManager>
                     EventHousesSpawned c_ev = (EventHousesSpawned)ev;
 
                     SpawnPlayersOnHousePositions(c_ev.houses);
+
+                    break;
+                }
+            case GameEventType.EVENT_MATCH_FINISH:
+                {
 
                     break;
                 }
@@ -172,9 +178,7 @@ public class PlayersManager : Singleton<PlayersManager>
     {
         for(int i = 0; i < players.Count; ++i)
         {
-            Player curr_player = players[i];
-
-            DestroyPlayerInstance(curr_player);
+            DestroyPlayerInstance(players[i]);
         }
     }
 
@@ -186,6 +190,8 @@ public class PlayersManager : Singleton<PlayersManager>
         {
             EventPlayerDeSpawned ev = new EventPlayerDeSpawned(instance);
             EventManager.Instance.SendEvent(ev);
+
+            player.SetPlayerInstance(null);
 
             Destroy(instance.gameObject);
         }
