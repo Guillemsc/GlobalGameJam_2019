@@ -108,12 +108,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   base_sprite: {fileID: 0}
-  hidden_sprite: {fileID: 21300000, guid: cfbf07a9e9ab74c57addb9487483be25, type: 3}
+  hidden_sprite: {fileID: 21300000, guid: ed0917eee896645408114d9134ea526b, type: 3}
   sr: {fileID: 0}
   destroyed: 0
   type: 5
   points_to_give: 100
   points_destroyed: 50
+  buff_duration: 2
+  buff_amount: 1
 --- !u!58 &1178905323993676396
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -98,8 +98,8 @@ public class PlayerActions : MonoBehaviour
 
                     if (it != null) 
                     {
-                        it.OnPlayerUsesBase();
                         it.OnPlayerUses();
+                        it.OnPlayerUsesBase();
                     }
                 }
             }
