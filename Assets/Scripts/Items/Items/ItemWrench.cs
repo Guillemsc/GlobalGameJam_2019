@@ -35,6 +35,9 @@ public class ItemWrench : Item
         {
             ItemManager.Instance.StopGrabbingItem(GetGrabbedBy());
             GetComponent<AudioSource>().Play();
+
+            collided_go[0].GetGrabbedItem().destroyed = true;
+            collided_go[0].GetGrabbedItem().sr.color = Color.red;
         }
     }
 
