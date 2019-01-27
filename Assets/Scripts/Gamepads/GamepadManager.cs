@@ -13,16 +13,18 @@ public class GamepadManager : Singleton<GamepadManager>
     {
         detect.Start();
         detect.AddTime(detect_time);
+
+        DetectGamepadsConnection();
     }
 
     private void Update()
     {
-        if (detect.ReadRealTime() > detect_time)
-        {
-            DetectGamepadsConnection();
+        //if (detect.ReadRealTime() > detect_time)
+        //{
+        //    DetectGamepadsConnection();
 
-            detect.Start();
-        }
+        //    detect.Start();
+        //}
     }
 
     private void DetectGamepadsConnection()
