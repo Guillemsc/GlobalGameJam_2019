@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         SetMovementEnabled(false);
+        anim = stats.GetAnimator().GetComponent<Animator2D>();
     }
 
     private void Update()
@@ -34,6 +35,18 @@ public class PlayerMovement : MonoBehaviour
         CapSpeed();
 
         Flip();
+
+        //Animations
+        if(rigid_body.velocity.magnitude != 0f && !running) 
+        {
+            anim.PlayAnimation("Run",anim_speed*0.75f);
+            running = true;
+        }
+        else if(rigid_body.velocity.magnitude == 0f && running)
+        {
+            anim.PlayAnimation("Idle", anim_speed);
+            running = false;
+        }
     }
 
     private void InitPlayer()
@@ -192,16 +205,16 @@ public class PlayerMovement : MonoBehaviour
     {
         if(rigid_body.velocity.x < -0.1f) 
         {
-            Vector3 scale = transform.localScale;
+            Vector3 scale = stats.GetAnimator().transform.localScale;
             scale.x = 1;
-            transform.localScale = scale;
+            stats.GetAnimator().transform.localScale = scale;
             
         }
         else if (rigid_body.velocity.x > 0.1f) 
         {
-            Vector3 scale = transform.localScale;
+            Vector3 scale = stats.GetAnimator().transform.localScale;
             scale.x = -1;
-            transform.localScale = scale;
+            stats.GetAnimator().transform.localScale = scale;
         }
     }
 
@@ -252,6 +265,7 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerStats stats = null;
     private Rigidbody2D rigid_body = null;
+    private Animator2D anim = null;
 
     private Vector2 input = Vector2.zero;
     private float input_magnitude = 0.0f;
@@ -259,4 +273,8 @@ public class PlayerMovement : MonoBehaviour
 
     private float speed_delta = 0;
     private bool movement_enabled = true;
+    private bool running = true;
+
+    public float anim_speed = 1f;
+
 }
