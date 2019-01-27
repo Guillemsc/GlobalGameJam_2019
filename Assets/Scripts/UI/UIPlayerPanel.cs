@@ -7,11 +7,9 @@ public class UIPlayerPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < transform.childCount; i++) 
-        {
-            GameObject child = transform.GetChild(i).gameObject;
-            //child.GetComponent<UIPlayer>().SetPlayer(PlayersManager.Instance.GetPlayerByIndex(i)); 
-        }
+        transform.GetChild(0).GetComponent<UIPlayer>().SetPlayer(PlayersManager.Instance.GetPlayerByColour(PlayerColour.RED).GetPlayerInstance());
+        transform.GetChild(1).GetComponent<UIPlayer>().SetPlayer(PlayersManager.Instance.GetPlayerByColour(PlayerColour.YELLOW).GetPlayerInstance());
+        transform.GetChild(2).GetComponent<UIPlayer>().SetPlayer(PlayersManager.Instance.GetPlayerByColour(PlayerColour.BLUE).GetPlayerInstance());
     }
 
     // Update is called once per frame

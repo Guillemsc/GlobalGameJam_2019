@@ -42,9 +42,9 @@ public class UIPlayerScore : MonoBehaviour
         }
     }
 
-    public void AddScore(int amount) 
+    public void SetScore(int amount) 
     {
-        target_score += amount;
+        target_score = amount;
     }
 
     public void SubstractScore(int amount) 

@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class House : MonoBehaviour
 {
-    public Sprite B_house;
-    public Sprite R_house;
-    public Sprite Y_house;
+    public Sprite[] B_house;
+    public Sprite[] R_house;
+    public Sprite[] Y_house;
+
+    public SpriteRenderer back;
+    public SpriteRenderer area;
 
     private void Awake()
     {
@@ -54,13 +57,19 @@ public class House : MonoBehaviour
         switch (pl.GetPlayer().GetPlayerColour())
         {
             case PlayerColour.RED:
-                GetComponent<SpriteRenderer>().sprite = R_house;
+                GetComponent<SpriteRenderer>().sprite = R_house[0];
+                back.sprite = R_house[1];
+                area.sprite = R_house[2];
                 break;
             case PlayerColour.BLUE:
-                GetComponent<SpriteRenderer>().sprite = B_house;
+                GetComponent<SpriteRenderer>().sprite = B_house[0];
+                back.sprite = B_house[1];
+                area.sprite = B_house[2];
                 break;
             case PlayerColour.YELLOW:
-                GetComponent<SpriteRenderer>().sprite = Y_house;
+                GetComponent<SpriteRenderer>().sprite = Y_house[0];
+                back.sprite = Y_house[1];
+                area.sprite = Y_house[2];
                 break;
         }
     }
@@ -194,6 +203,9 @@ public class House : MonoBehaviour
 
             points += curr_item.GetPointsToGive();
         }
+
+        EventSetScore ev = new EventSetScore(player_instance, points);
+        EventManager.Instance.SendEvent(ev);
     }
 
     private PlayerStats player_instance = null;
