@@ -4,6 +4,38 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
+    
+    public GameObject red;
+    public GameObject yellow;
+    public GameObject blue;
+
+    public GameObject particles;
+
+    private GameObject animator = null;
+
+
+    void Start() {
+        red.SetActive(false);
+        yellow.SetActive(false);
+        blue.SetActive(false);
+
+        switch (player.GetPlayerColour()) {
+            case PlayerColour.RED:
+                animator = red;
+                break;
+            case PlayerColour.BLUE:
+                animator = yellow;
+                break;
+            case PlayerColour.YELLOW:
+                animator = blue;
+                break;
+            default:
+                break;
+        }
+        animator.SetActive(true);
+        particles.transform.SetParent(animator.transform);
+    }
+
     public void SetPlayer(Player pl)
     {
         player = pl;
@@ -35,6 +67,11 @@ public class PlayerStats : MonoBehaviour
     public bool GetHasGrabbedItem()
     {
         return grabbed_item != null;
+    }
+
+    public GameObject GetAnimator() 
+    {
+        return animator;
     }
 
     [SerializeField]
