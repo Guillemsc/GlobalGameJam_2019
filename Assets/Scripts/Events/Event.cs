@@ -13,7 +13,7 @@ public enum GameEventType
     EVENT_GAMEPAD_ADDED,
     EVENT_GAMEPAD_REMOVED,
 
-    EVENT_ADD_SCORE,
+    EVENT_SET_SCORE,
     EVENT_SUBSTRACT_SCORE,
 
     EVENT_START_QUEST,
@@ -30,6 +30,8 @@ public enum GameEventType
     EVENT_ITEM_DROPPED,
     EVENT_ITEM_ENTERS_HOUSE,
     EVENT_ITEM_LEAVES_HOUSE,
+
+    EVENT_BULLET_HITS_PLAYER,
 }
 
 public class GameEvent

@@ -64,9 +64,14 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
-    public Vector2 GetDirectionVector()
+    public Vector2 GetInputDirectionVector()
     {
         return input;
+    }
+
+    public float GetInputAngle()
+    {
+        return input_angle;
     }
 
     private void UpdateGrabInput()
