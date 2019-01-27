@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventAddScore : GameEvent
+public class EventSetScore : GameEvent
 {
-    public EventAddScore(PlayerStats player, int amount) : base(GameEventType.EVENT_ADD_SCORE) 
+    public EventSetScore(PlayerStats player, int amount) : base(GameEventType.EVENT_SET_SCORE) 
     {
         this.player = player;
         this.amount = amount;

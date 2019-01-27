@@ -194,6 +194,9 @@ public class House : MonoBehaviour
 
             points += curr_item.GetPointsToGive();
         }
+
+        EventSetScore ev = new EventSetScore(player_instance, points);
+        EventManager.Instance.SendEvent(ev);
     }
 
     private PlayerStats player_instance = null;

@@ -9,8 +9,7 @@ public class UIPlayer : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        EventManager.Instance.Suscribe(GameEventType.EVENT_ADD_SCORE, OnEvent);
-        EventManager.Instance.Suscribe(GameEventType.EVENT_SUBSTRACT_SCORE, OnEvent);
+        EventManager.Instance.Suscribe(GameEventType.EVENT_SET_SCORE, OnEvent);
     }
 
     // Update is called once per frame
@@ -29,25 +28,15 @@ public class UIPlayer : MonoBehaviour {
     public void OnEvent(GameEvent ev) 
     {
         switch (ev.Type()) {
-            case GameEventType.EVENT_ADD_SCORE: 
+            case GameEventType.EVENT_SET_SCORE: 
             { 
-                EventAddScore add_score = (EventAddScore)ev;
+                EventSetScore add_score = (EventSetScore)ev;
 
                 if (add_score.player != player)
                     break;
 
-                score.AddScore(add_score.amount);
+                score.SetScore(add_score.amount);
                
-                break;
-            }
-            case GameEventType.EVENT_SUBSTRACT_SCORE: 
-            {
-                EventSubstractScore sub_score = (EventSubstractScore)ev;
-
-                if (sub_score.player != player)
-                    break;
-
-                score.SubstractScore(sub_score.amount);
                 break;
             }
             default:

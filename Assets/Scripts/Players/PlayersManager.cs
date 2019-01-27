@@ -95,6 +95,22 @@ public class PlayersManager : Singleton<PlayersManager>
         return ret;
     }
 
+    public Player GetPlayerByColour(PlayerColour col) 
+    {
+        Player ret = null;
+
+        foreach (Player p in players) 
+        {
+            if (p.GetPlayerColour() == col)
+            {
+                ret = p;
+                break;
+            }
+        }
+
+        return ret;
+    }
+
     public List<PlayerStats> GetAllPlayerInstances()
     {
         List<PlayerStats> ret = new List<PlayerStats>();
