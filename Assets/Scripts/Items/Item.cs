@@ -115,6 +115,11 @@ public class Item : MonoBehaviour
 
     }
 
+    public bool GetIndestructible()
+    {
+        return indestructible;
+    }
+
     [SerializeField]
     private ItemType type = new ItemType();
 
@@ -123,6 +128,9 @@ public class Item : MonoBehaviour
 
     [SerializeField]
     private int points_destroyed = 0;
+
+    [SerializeField]
+    private bool indestructible = false;
 
     private PlayerStats grabbed_by = null;
     private House house = null;

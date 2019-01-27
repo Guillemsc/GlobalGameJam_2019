@@ -35,10 +35,18 @@ public class GunBullet : MonoBehaviour
             {
                 if(stats != shooter)
                 {
-                    EventBulletHitsPlayer ev = new EventBulletHitsPlayer(shooter, stats);
-                    EventManager.Instance.SendEvent(ev);
+                    if (stats.GetHasGrabbedItem())
+                    {
+                        Item it = stats.GetGrabbedItem();
 
-                    Destroy(gameObject);
+                        if (!it.GetIndestructible())
+                        {
+                            EventBulletHitsPlayer ev = new EventBulletHitsPlayer(shooter, stats);
+                            EventManager.Instance.SendEvent(ev);
+
+                            Destroy(gameObject);
+                        }
+                    }
                 }
             }
 

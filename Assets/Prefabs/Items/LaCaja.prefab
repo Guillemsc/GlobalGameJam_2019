@@ -147,4 +147,5 @@ MonoBehaviour:
   type: 2
   points_to_give: 200
   points_destroyed: 0
+  indestructible: 1
   points_gain: 25
