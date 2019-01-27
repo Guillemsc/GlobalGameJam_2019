@@ -146,6 +146,23 @@ public class ItemManager : Singleton<ItemManager>
         }
     }
 
+    private void DestroyItem(Item it)
+    {
+        if(it != null)
+        {
+            PlayerStats stats = it.GetGrabbedBy();
+
+            if(stats != null)
+            {
+                StopGrabbingItem(stats);
+            }
+
+            RemoveFromitemsInstances(it);
+
+            Destroy(it);
+        }
+    }
+
     private void UpdateItems()
     {
         for(int i = 0; i < item_instances.Count; ++i)
@@ -157,35 +174,43 @@ public class ItemManager : Singleton<ItemManager>
         }
     }
 
-    void HiddeItems() {
-        foreach(Item i in item_instances) {
+    void HiddeItems()
+    {
+        foreach(Item i in item_instances)
+        {
             if(!i.GetIsGrabbed())
                 i.SetHidden();
-                }
+        }
     }
 
     void ShowItems() {
-        foreach (Item i in item_instances) {
+        foreach (Item i in item_instances)
+        {
             i.SetBaseSprite();
         }
     }
 
-    public void OnEvent(GameEvent ev) {
+    public void OnEvent(GameEvent ev)
+    {
         switch (ev.Type()) {
-            case GameEventType.EVENT_START_QUEST: {
+            case GameEventType.EVENT_START_QUEST:
+                {
                     EventStartQuest start = (EventStartQuest)ev;
                     
-                    if(start.quest == QuestType.QT_HIDDEN) {
+                    if(start.quest == QuestType.QT_HIDDEN)
+                    {
                         hidden_items = true;
                         HiddeItems();
                     }
                 break;
                 }
-            case GameEventType.EVENT_END_QUEST: { 
+            case GameEventType.EVENT_END_QUEST:
+                { 
 
                 EventEndQuest end = (EventEndQuest)ev;
 
-                if (end.quest == QuestType.QT_HIDDEN) {
+                if (end.quest == QuestType.QT_HIDDEN)
+                    {
                     hidden_items = false;
                     ShowItems();
                 }

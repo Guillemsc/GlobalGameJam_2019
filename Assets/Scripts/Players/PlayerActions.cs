@@ -44,6 +44,8 @@ public class PlayerActions : MonoBehaviour
                         r_ev.item.gameObject.transform.parent = item_parent.transform;
                         r_ev.item.gameObject.transform.localPosition = new Vector3(0, 0, 0);
                         r_ev.item.gameObject.transform.localEulerAngles = new Vector3(0, 0, 0);
+
+                        has_item = true;
                     }
 
                     break;
@@ -54,7 +56,7 @@ public class PlayerActions : MonoBehaviour
 
                     if (r_ev.player == stats)
                     {
-
+                        has_item = false;
                     }
 
                     break;
@@ -64,14 +66,14 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
-    public Vector2 GetInputDirectionVector()
+    public Vector2 GetItemDirectionVector()
     {
-        return input;
+        return (item_parent.transform.position - gameObject.transform.position).normalized;
     }
 
-    public float GetInputAngle()
+    public float GetItemAngle()
     {
-        return input_angle;
+        return Utils.AngleFromTwoPoints(gameObject.transform.position, item_parent.transform.position); ;
     }
 
     private void UpdateGrabInput()
@@ -106,21 +108,24 @@ public class PlayerActions : MonoBehaviour
 
     private void RotationInput()
     {
-        Player player = stats.GetPlayer();
-
-        if (player != null)
+        if (has_item)
         {
-            input = new Vector2(0, 0);
-            input_magnitude = 0.0f;
+            Player player = stats.GetPlayer();
 
-            if (player.HasGamepad())
+            if (player != null)
             {
-                input.x = player.RightJoystickHorizontal();
-                input.y = -player.RightJoystickVertical();
+                input = new Vector2(0, 0);
+                input_magnitude = 0.0f;
 
-                input_angle = Utils.AngleFromTwoPoints(new Vector2(0, 0), input);
+                if (player.HasGamepad())
+                {
+                    input.x = player.RightJoystickHorizontal();
+                    input.y = -player.RightJoystickVertical();
 
-                input_magnitude = input.sqrMagnitude;
+                    input_angle = Utils.AngleFromTwoPoints(new Vector2(0, 0), input);
+
+                    input_magnitude = input.sqrMagnitude;
+                }
             }
         }
     }
@@ -144,4 +149,6 @@ public class PlayerActions : MonoBehaviour
     private Vector2 input = Vector2.zero;
     private float input_magnitude = 0.0f;
     private float input_angle = 0.0f;
+
+    private bool has_item = false;
 }
