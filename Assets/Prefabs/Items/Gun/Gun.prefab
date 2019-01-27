@@ -167,7 +167,7 @@ MonoBehaviour:
   bullet_prefab: {fileID: 8135908084413690744, guid: fc21f20007c2f834493cc0205d5bb0b1,
     type: 3}
   bullet_start_pos: {fileID: 4039165790352670908}
-  bullet_speed: 30
+  bullet_speed: 20
 --- !u!58 &962319977289096642
 CircleCollider2D:
   m_ObjectHideFlags: 0
